@@ -1,6 +1,6 @@
 __pycache__/
-clean/*
-Graph_Sampling/*
-GraphEmbedding/*
-time-split-samples/*
+clean/
+Graph_Sampling/
+GraphEmbedding/
+time-split-samples/
 clean.zip

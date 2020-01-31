@@ -26,7 +26,6 @@ from node2vec.edges import HadamardEmbedder
 import sys
 sys.path.append('./GraphEmbedding')
 from ge import Node2Vec, DeepWalk
-import Graph_Sampling 
 from utils import *
 from sampling import random_walk_sample, node_sampling
 
@@ -447,8 +446,7 @@ def train_test_node_sampling(train_path, test_path, method='combined', paths={},
     # Create Result Files
     if paths:
         print('Creating Results Files')
-        for key in paths.keys():
-            create_file(key)
+        list(map(create_file,paths.values()))
 
 
     df_train_full = read_file(train_path)

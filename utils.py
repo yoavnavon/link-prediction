@@ -85,12 +85,6 @@ def random_walk_stats(random_walks):
         stats[len(i)] += 1
     return stats
 
-def manual_haddamard(x,emb):
-    """
-    Computed haddamard between two embeddings.
-    """
-    return pd.Series(emb[x['Source']]*emb[x['Target']])
-    # return pd.Series(emb.get_vector(x['Source'])*emb.get_vector(x['Target']))
 
    
 def katz_similarity(katzDict,i,j):
@@ -162,4 +156,79 @@ def propflow(Graph, root, l):
     return np.mean(list(scores.values()))
 
 
+## Old Functions
 
+def test_features_on_size(file_paths, sample_sizes, sampling='time', save=False, p=1, q=1):
+    """
+    Reads data file, splits it in train/test, then test features
+    """
+    
+    global g
+    heuristic_results_path = file_paths[0]
+    node2vec_results_path = file_paths[1]
+    deepwalk_results_path = file_paths[2]
+    create_file(heuristic_results_path)
+    create_file(node2vec_results_path)
+    create_file(deepwalk_results_path)
+
+    df = read_file('clean/2008-07-30.txt.gz')
+    G = None
+    if sampling == 'node':
+        G = nx.from_pandas_edgelist(df, source='Source', target='Target',edge_attr='Date', create_using=nx.DiGraph())
+    
+    for sample_size in sample_sizes:
+        df_clean = sample_graph(df, sample_size, sampling, save, g=G)
+        g, df_train, df_test = create_train_test_split(df_clean)
+        df_train, df_test = negative_edge_sampling(g, df_train, df_test)
+        test_multiple_features(g, df_train, df_test, print_result=True) 
+
+
+def run_single_test(size=20000,sampling='time',save=False,file='', p=1, q=1):
+    global g
+    G = None
+    df = read_file(file)
+    if sampling == 'node':
+        G = nx.from_pandas_edgelist(df, source='Source', target='Target',edge_attr='Date', create_using=nx.DiGraph())
+    df_clean = sample_graph(df, size, sampling, save, g=G)
+    g, df_train, df_test = create_train_test_split(df_clean)
+    df_train, df_test = negative_edge_sampling(g, df_train, df_test)
+    test_multiple_features(g, df_train, df_test, print_result=True) 
+
+def run_node2vec_gridsearch(sample_size=20000,save=False, sampling='node'):
+    global g
+
+    df = read_file('clean/2008-07-29.txt.gz')
+    G = None
+    if sampling == 'node':
+        G = nx.from_pandas_edgelist(df, source='Source', target='Target',edge_attr='Date', create_using=nx.DiGraph())
+    
+    for p in [0.25,1,2]:
+        for q in [1]:
+            df_clean = sample_graph(df, sample_size, sampling, save, g=G)
+            g, df_train, df_test = create_train_test_split(df_clean)
+            df_train, df_test = negative_edge_sampling(g, df_train, df_test)
+            
+            df_node2vec_train, df_node2vec_test = get_node2vec(g, df_train, df_test,p=p,q=q)
+            print('Node2Vec p:{}, q:{}'.format(p,q))
+            size, xgb_results_n2v, rf_results_n2v = test_features(df_node2vec_train, df_node2vec_test, max_depth=20, gamma=4, scale_pos_weight=1, min_child_weight=1)
+            print_results('xgb', size, xgb_results_n2v)
+            print_results('rf', size, rf_results_n2v)
+
+def create_train_test_split(df_clean):
+    split = 0.5
+    # g = nx.from_pandas_edgelist(df_clean, source='Source', target='Target', create_using=nx.DiGraph())   #put dataframe to an edgelist
+    # wcc = max(nx.weakly_connected_components(g), key=len)
+    # g = g.subgraph(wcc)
+    # df_clean = df_clean[df_clean.apply(lambda x: g.has_edge(x['Source'],x['Target']),axis=1)] # reduce df with subgraph
+
+    print('Spliting')
+    df_train = df_clean.iloc[:int(len(df_clean)*split)]
+    df_test = df_clean.iloc[int(len(df_clean)*split):]
+    print('Creating Graph')
+    g = nx.from_pandas_edgelist(df_train, source='Source', target='Target', create_using=nx.DiGraph())
+    print(nx.info(g))
+    
+    print('Removing Unseen Nodes from Test')
+    mask = df_test['Source'].apply(g.has_node) & df_test['Target'].apply(g.has_node)
+    df_test = df_test[mask]
+    return g, df_train, df_test

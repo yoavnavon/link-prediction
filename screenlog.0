@@ -1,689 +1,0 @@
-kynavon26@crcfe02:~/link-prediction\(base) [ynavon26@crcfe02 link-prediction]$ logoutscreen -ls[1Pr[K[4Plscd ..at node_sampling_combined_large2_heuristic.csv  M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Pheuristic.csv 
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[Kcd resultsls[Kcd link-predictionexit[Kqrsh -q gpu -l gpu=1logout[Kscreen -Lrm screenlog.0[5Pscreen -L[3Plogoutqrsh -q gpu -l gpu=1
-Your job 676475 ("QLOGIN") has been submitted
-waiting for interactive job to be scheduled ...
-Your interactive job 676475 has been successfully scheduled.
-Establishing builtin session to host qa-1080ti-008.crc.nd.edu ...
-kynavon26@qa-1080ti-008:~\(base) [ynavon26@qa-1080ti-008 ~]$ conda link[K[K[K[K[Ka[K activate link-prediction
-kynavon26@qa-1080ti-008:~\(link-prediction) [ynavon26@qa-1080ti-008 ~]$ cd link-prediction
-kynavon26@qa-1080ti-008:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-008 link-prediction]$ python dynamobi-full.py
-  File "dynamobi-full.py", line 474
-    resume=False)
-         ^
-SyntaxError: invalid syntax
-kynavon26@qa-1080ti-008:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-008 link-prediction]$ python dynamobi-full.py
-INFO: Pandarallel will run on 12 workers.
-INFO: Pandarallel will use Memory file system to transfer data between the main process and workers.
-Creating Results Files
-Reading file: clean/2008-07-28.txt.gz
-Droping Duplicates
-Reading file: clean/2008-07-29.txt.gz
-Droping Duplicates
-Creating Graph
-Name: 
-Type: DiGraph
-Number of nodes: 113664
-Number of edges: 61866
-Average in degree:   0.5443
-Average out degree:   0.5443
-Removing Unseen Nodes from Test
-Negative Sampling
-size train: 123731
-size test: 686
-Heuristic Features
-kynavon26@crcfe02:~/link-prediction\(base) [ynavon26@crcfe02 link-prediction]$ logoutscreen -ls[1Pr[K[4Plscd ..at node_sampling_combined_large2_heuristic.csv  M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Pheuristic.csv 
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[Kcd resultsls[Kcd link-predictionexit[Kqrsh -q gpu -l gpu=1logout[Kqrsh -q gpu -l gpu=1
-Your job 676478 ("QLOGIN") has been submitted
-waiting for interactive job to be scheduled ...
-Your interactive job 676478 has been successfully scheduled.
-Establishing builtin session to host qa-1080ti-005.crc.nd.edu ...
-kynavon26@qa-1080ti-005:~\(base) [ynavon26@qa-1080ti-005 ~]$ XGBClassifier
-[[259  84]
- [ 87 256]]
-RandomForestClassifier
-[[259  84]
- [ 87 256]]
-Node2Vec Embeddings
-Preprocess transition probs...
-[Parallel(n_jobs=11)]: Using backend LokyBackend with 11 concurrent workers.
-conda activate link-prediction
-kynavon26@qa-1080ti-005:~\(link-prediction) [ynavon26@qa-1080ti-005 ~]$ cd link-prediction
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ python dynamobi-full.py
-INFO: Pandarallel will run on 12 workers.
-INFO: Pandarallel will use Memory file system to transfer data between the main process and workers.
-Reading file: clean/2008-07-28.txt.gz
-Droping Duplicates
-[Parallel(n_jobs=11)]: Done   4 out of  12 | elapsed:  1.3min remaining:  2.7min
-Reading file: clean/2008-07-29.txt.gz
-Droping Duplicates
-^CTraceback (most recent call last):
-  File "dynamobi-full.py", line 474, in <module>
-    resume=True)
-  File "dynamobi-full.py", line 416, in train_test_node_sampling
-    df_test_full = read_file(test_path)
-  File "dynamobi-full.py", line 64, in read_file
-    df['Source'] = df['Source'].astype(str)
-  File "/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/pandas/core/generic.py", line 5882, in astype
-    dtype=dtype, copy=copy, errors=errors, **kwargs
-  File "/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/pandas/core/internals/managers.py", line 581, in astype
-    return self.apply("astype", dtype=dtype, **kwargs)
-  File "/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/pandas/core/internals/managers.py", line 438, in apply
-    applied = getattr(b, f)(**kwargs)
-  File "/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/pandas/core/internals/blocks.py", line 559, in astype
-    return self._astype(dtype, copy=copy, errors=errors, values=values, **kwargs)
-  File "/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/pandas/core/internals/blocks.py", line 643, in _astype
-    values = astype_nansafe(vals1d, dtype, copy=True, **kwargs)
-  File "/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/pandas/core/dtypes/cast.py", line 656, in astype_nansafe
-    return lib.astype_str(arr.ravel(), skipna=skipna).reshape(arr.shape)
-  File "pandas/_libs/lib.pyx", line 580, in pandas._libs.lib.astype_str
-KeyboardInterrupt
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ python dynamobi-full.py[5Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clogout[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cscreen -ls[1Prls[4Plogout[K[K[K[K[K[Kscreen -ls[1Pr[K[4Plscd ..at node_sampling_combined_largge2_heuristic.csv M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cheur[7P[C[C[C[C[C[C[C[C[C[CM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd resultsls[Kcd link-predictionexit[Kqrsh -q gpu -l gpu=1logout[Kscreen -Lrm screenlog.0ls[Kscreen -lswiper[Kls[5Pquotascreen -rlscat screenlog.0ls[Kcd ..at node_sampling_combined_largge2_heuristic.csv M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd resultslink-prediction[12Plogoutpython dynamobi-full.pyconda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[12Pd
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cqrsh -q gpu -l gpu=1[2Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7Ppython dynamobi-full.py
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
-INFO: Pandarallel will run on 12 workers.
-INFO: Pandarallel will use Memory file system to transfer data between the main process and workers.
-Reading file: clean/2008-07-28.txt.gz
-[Parallel(n_jobs=11)]: Done  12 out of  12 | elapsed:  2.8min finished
-Learning embedding vectors...
-Droping Duplicates
-Reading file: clean/2008-07-29.txt.gz
-Droping Duplicates
-Creating Giant Graph
-Learning embedding vectors done!
-Node Sampling
-XGBClassifier
-[[208 135]
- [ 80 263]]
-RandomForestClassifier
-[[212 131]
- [ 60 283]]
-Deepwalk Embeddings
-[Parallel(n_jobs=11)]: Using backend LokyBackend with 11 concurrent workers.
-Creating Graph
-Name: 
-Type: DiGraph
-Number of nodes: 668312
-Number of edges: 534587
-Average in degree:   0.7999
-Average out degree:   0.7999
-Removing Unseen Nodes from Test
-Negative Sampling
-size train: 1069174
-size test: 200784
-Heuristic Features
-[Parallel(n_jobs=11)]: Done   4 out of  12 | elapsed:   36.5s remaining:  1.2min
-[Parallel(n_jobs=11)]: Done  12 out of  12 | elapsed:  1.4min finished
-Learning embedding vectors...
-XGBClassifier
-[[77297 23095]
- [ 9073 91319]]
-RandomForestClassifier
-[[77299 23093]
- [ 9258 91134]]
-Node2Vec Embeddings
-Preprocess transition probs...
-[Parallel(n_jobs=11)]: Using backend LokyBackend with 11 concurrent workers.
-Learning embedding vectors done!
-/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py:706: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  "timeout or by a memory leak.", UserWarning
-XGBClassifier
-[Parallel(n_jobs=11)]: Done   4 out of  12 | elapsed:  6.0min remaining: 12.0min
-[[200 143]
- [106 237]]
-RandomForestClassifier
-[[216 127]
- [115 228]]
-heuristic
-
-
-xgb
-123731 edges
-Precision: 0.7529
-Recall: 0.7464
-ROC AUC: 0.7507
-F1 Score: 0.7496
-Accuracy: 0.7507
-
-
-rf
-123731 edges
-Precision: 0.7529
-Recall: 0.7464
-ROC AUC: 0.7507
-F1 Score: 0.7496
-Accuracy: 0.7507
-node2vec
-
-
-xgb
-123731 edges
-Precision: 0.6608
-Recall: 0.7668
-ROC AUC: 0.6866
-F1 Score: 0.7099
-Accuracy: 0.6866
-
-
-rf
-123731 edges
-Precision: 0.6836
-Recall: 0.8251
-ROC AUC: 0.7216
-F1 Score: 0.7477
-Accuracy: 0.7216
-deepwalk
-
-
-xgb
-123731 edges
-Precision: 0.6237
-Recall: 0.691
-ROC AUC: 0.637
-F1 Score: 0.6556
-Accuracy: 0.637
-
-
-rf
-123731 edges
-Precision: 0.6423
-Recall: 0.6647
-ROC AUC: 0.6472
-F1 Score: 0.6533
-Accuracy: 0.6472
-Creating Graph
-Name: 
-Type: DiGraph
-Number of nodes: 646629
-Number of edges: 370857
-Average in degree:   0.5735
-Average out degree:   0.5735
-Removing Unseen Nodes from Test
-Negative Sampling
-size train: 741714
-size test: 28918
-Heuristic Features
-XGBClassifier
-[[10714  3745]
- [ 3740 10719]]
-RandomForestClassifier
-[[10714  3745]
- [ 3751 10708]]
-Node2Vec Embeddings
-Preprocess transition probs...
-[Parallel(n_jobs=11)]: Using backend LokyBackend with 11 concurrent workers.
-/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py:706: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  "timeout or by a memory leak.", UserWarning
-[Parallel(n_jobs=11)]: Done   4 out of  12 | elapsed:  5.4min remaining: 10.9min
-[Parallel(n_jobs=11)]: Done  12 out of  12 | elapsed: 14.1min finished
-Learning embedding vectors...
-[Parallel(n_jobs=11)]: Done  12 out of  12 | elapsed: 12.9min finished
-Learning embedding vectors...
-Learning embedding vectors done!
-Learning embedding vectors done!
-XGBClassifier
-terminate called after throwing an instance of 'thrust::system::system_error'
-  what():  parallel_for failed: out of memory
-Aborted
-kynavon26@qa-1080ti-005:~/link-prediction\/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/joblib/externals/loky/backend/resource_tracker.py:266: UserWarning: resource_tracker: There appear to be 6 leaked semlock objects to clean up at shutdown
-  (len(rtype_cache), rtype))
-(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ quota
-AFS quota using values reported by vos server for partition
-Quota for /afs/crc.nd.edu/user/y/ynavon26
-Volume Name                   Quota      Used %Used   Partition
-u.ynavon26                   100 GB     39 GB   39%         29%
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ htom[Kp
-(B)0[?1049h[1;20r[m[4l[?1h=[?25l[39;49m[?1000h[39;49m[m[H[J[1B  [36m1  [39m[0;1m[[30m         0.0%[39m][m    [36m7  [39m[0;1m[[0m[32m|||||||[31m100.0%[39m[0;1m][m   [36m13 [39m[0;1m[[30m         0.0%[39m][m    [36m19 [39m[0;1m[[30m         0.0%[39m][3;3H[0m[36m2  [39m[0;1m[[30m         0.0%[39m][m    [36m8  [39m[0;1m[[30m         0.0%[39m][m   [36m14 [39m[0;1m[[30m         0.0%[39m][m    [36m20 [39m[0;1m[[30m         0.0%[39m][4;3H[0m[36m3  [39m[0;1m[[30m         0.0%[39m][m    [36m9  [39m[0;1m[[30m         0.0%[39m][m   [36m15 [39m[0;1m[[30m         0.0%[39m][m    [36m21 [39m[0;1m[[30m         0.0%[39m][5;3H[0m[36m4  [39m[0;1m[[30m         0.0%[39m][m    [36m10 [39m[0;1m[[30m         0.0%[39m][m   [36m16 [39m[0;1m[[0m[32m|||||||[0;1m[30m 50.0%[39m][m    [36m22 [39m[0;1m[[30m         0.0%[39m][6;3H[0m[36m5  [39m[0;1m[[30m         0.0%[39m][m    [36m11 [39m[0;1m[[30m         0.0%[39m][m   [36m17 [39m[0;1m[[30m         0.0%[39m][m    [36m23 [39m[0;1m[[30m         0.0%[39m][7;3H[0m[36m6  [39m[0;1m[[30m         0.0%[39m][m    [36m12 [39m[0;1m[[30m         0.0%[39m][m   [36m18 [39m[0;1m[[30m         0.0%[39m][m    [36m24 [39m[0;1m[[30m         0.0%[39m][8;3H[0m[36mMem[39m[0;1m[[0m[32m|||||||||[33m||||||||||||[0;1m[30m    30.9G/126G[39m][m   [36mTasks: [0;1m[36m38[0m[36m, [0;1m[32m127[0m[32m thr[36m; [0;1m[32m1[0m[36m running[9;3HSwp[39m[0;1m[[30m                              0K/0K[39m][m   [36mLoad average: [39m[0;1m1.52 [36m2.21 [0m[36m2.15 [10;46HUptime: [0;1m[36m29 days, 08:01:50[2B[0m[30m[42m  PID USER      PRI  NI  VIRT   RES   SHR S [30m[46mCPU% [30m[42mMEM%   TIME+  Command                    [13;1H[30m[46m11294 ynavon26   20   0  119M  2064  1368 R 60.0  0.0  0:00.05 htop                       [14;5H[39;49m[m1 [0;1m[30mroot      [39m[m 20   0 [36m 186M  3[39m[m220 [36m 1[39m[m496 S  0.0  0.0  6:21.45 /usr/lib/systemd/systemd --[15;3H711 [0;1m[30mroot      [39m[m 20   0 [36m 145M 79[39m[m928 [36m79[39m[m540 S  0.0  0.1  1:02.01 /usr/lib/systemd/systemd-jo[16;3H755 [0;1m[30mroot      [39m[m 20   0 [36m44[39m[m996 [36m 1[39m[m208   448 S  0.0  0.0  0:13.32 /usr/lib/systemd/systemd-ud[17;2H1197 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.10 [32m/opt/sge/bin/lx-amd64/sge_s[18;2H[39m[m1198 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.12 [32m/opt/sge/bin/lx-amd64/sge_s[19;2H[39m[m1199 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.17 [32m/opt/sge/bin/lx-amd64/sge_s[20;1H[39m[mF1[30m[46mHelp  [39;49m[mF2[30m[46mSetup [39;49m[mF3[30m[46mSearch[39;49m[mF4[30m[46mFilter[39;49m[mF5[30m[46mTree  [39;49m[mF6[30m[46mSortBy[39;49m[mF7[30m[46mNice -[39;49m[mF8[30m[46mNice +[39;49m[mF9[30m[46mKill  [39;49m[mF10[30m[46mQuit          [Z [Z[1@ [H[39;49m[m[2;7H[31m||[6C[0;1m[30m11.2[2;30H[0m[31m|[0;1m[30m       1.3%[2;50H[0m[32m||||[31m||[0;1m[30m  34[2;72H[0m[32m|||[31m|[0;1m[30m    25[5;51H[0m[31m|[0;1m[30m       3.4[5;72H[0m[32m|[5;81H[0;1m[30m1.3[6;29H[0m[31m|[6;40H[0;1m[30m7[6;50H[0m[31m|[6;61H[0;1m[30m7[8;66H[32m2[9;62H[39m40 [36m2.17 [0m[36m2.14[10;70H[0;1m[36m1[3B[0m[30m[46m 8007 twaltz  [13;25H56.4G 29.0G  462M S 67.3 23.1 70h05:39 python conv4.py[14;2H[39;49m[m8618 [0;1m[30mtwaltz[14;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS 33.6 23.1 [0;1m[31m 5h[39m[m01:46 [32mpython conv4.py[39m[m[K[1B 8620 [0;1m[30mtwaltz[15;25H[31m56.4G 29.0G [0m[36m 462M [32mR [39m[m26.4 23.1 [0;1m[31m 6h[39m[m11:56 [32mpython conv4.py[39m[m[K[1B 8615 [0;1m[30mtwaltz[16;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  4.6 23.1 [0;1m[31m 6h[39m[m01:27 [32mpython conv4.py[39m[m[K[1B11294 ynavon26  [17;28H[36m9M  2[39m[m188 [36m 1[39m[m480 [32mR [39m[m 1.3[17;61H07 htop[K[18;3H201[18;46H1.3[18;59H2.40[1B 2428[19;26H[36m208M 31[39m[m580 [36m 2[39m[m476[6C7[6C[0;1m[31m 1h[39m[m49:14 /opt/sge/bin/lx-amd64/sge_e[1;1H[16;19r[16;1HM[1;20r[2;16H[0;1m[30m3.8[2;29H[0m[31m|[0;1m[30m [7C0.7[2;52H[0m[31m|[0;1m[30m     17.1[2;81H6.3[5;59H4.6[5;73H[0m[32m|[31m|[0;1m[30m     18.4[6;29H [6;40H0[6;50H [6;61H0[6;72H[0m[32m|[10C[0;1m[30m7[8;66H[32m1[10;70H[36m3[13;46H[0m[30m[46m6.6[13;61H40[14;4H[39;49m[m20[14;45H24.4[7C[0;1m[31m6h[39m[m11:5[15;5H2[15;43HS 18.5[15;58H32:29[1B 8618 [0;1m[30mtwaltz    [39m[m 20   0 [0;1m[31m56.4G 29.0G [0m[36m 462M [39m[mS 17.1 23.1 [0;1m[31m 5h[39m[m01:47 [32mpython conv4.py[18;62H[39m[m9[19;46H0.0[H[2;16H[0;1m[30m2.4[2;29H[0m[32m|[31m|[7C[0;1m[30m1.3[2;50H         0.0[2;72H         0.0[5;51H 	  3.3[5;74H[0m[32m|||[31m||[0;1m[30m 43.0[6;29H[0m[31m|[6;40H[0;1m[30m7[6;50H[0m[32m||[31m|[0;1m[30m     16.7[6;81H1.3[7;50H[0m[32m|[7;61H[0;1m[30m7[7;72H[0m[32m|[31m|	[0;1m[30m1.3[8;66H[32m2[10;70H[36m4[13;46H[0m[30m[46m7.9[13;62H1[14;5H[39;49m[m2[14;43H[32mR [39m[m43.5[14;58H32:30[15;4H19[15;46H7.8[7C[0;1m[31m5h[39m[m22:27[16;5H5[16;45H 4.0[7C[0;1m[31m6h[39m[m01:2[1B11294 ynavon26  [17;25H[36m 119M  2[39m[m204 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.11 htop[K[1B 8614 [0;1m[30mtwaltz    [18;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 19:11.61 [32mpython conv4.py[19;3H[39m[m816[19;26H[36m944M 32[39m[m864 [36m 2[39m[m624[6C7[6C[0;1m[31m 1h[39m[m03:11 /usr/bin/python /usr/bin/go[1;1H[2;16H[0;1m[30m1.9[2;29H[0m[31m|[0;1m[30m [7C0.7[5;29H[0m[32m|[5;40H[0;1m[30m7[5;51H[0m[31m|[7C[0;1m[30m4.0[5;81H2.5[6;51H[0m[31m|[0;1m[30m       1.3[6;81H2.0[7;51H[0m[32m|[31m|[0;1m[30m     17.2[7;72H  	0.0[8;66H[32m1[10;70H[36m6[13;46H[0m[30m[46m6.6[13;62H2[14;43H[39;49m[mS 41[14;62H1[15;4H34[15;46H6.5[7C[0;1m[31m7h[39m[m15:3[16;48H6[1B 8619 [0;1m[30mtwaltz    [17;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 5h[39m[m22:27 [32mpython conv4.py[1B[39m[m11294 ynavon26  [18;25H[36m 119M  2[39m[m204 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.13 htop[K[1B 2549[19;25H[36m24[39m[m904 [36m 5[39m[m756   50[19;55H28:55.66 condor_procd -A /var/condor[1;1H[2;18H[0;1m[30m8[2;29H[0m[32m|[31m|[7C[0;1m[30m1.3[2;50H[0m[32m||[31m|[0;1m[30m     16.4[2;72H[0m[32m|[31m|	[0;1m[30m3.3[3;72H[0m[32m|[10C[0;1m[30m7[4;29H[0m[32m|[31m|[7C[0;1m[30m6.6[4;50H[0m[32m||[31m|[0;1m[30m     17.1[5;7H[0m[32m|[5;18H[0;1m[30m7[5;29H [5;40H0[5;50H  	  0[5;74H[0m[31m|[0;1m[30m     11.3[6;50H  	  0.0[6;81H1.3[7;61H1[8;66H[32m2[9;62H[39m29 [36m2.14 [0m[36m2.13[10;70H[0;1m[36m7[13;46H[0m[30m[46m9.2[13;62H3[14;4H[39;49m[m34[14;45H17.1[7C[0;1m[31m7h[39m[m15:37[15;4H18[15;46H7.1[7C[0;1m[31m5h[39m[m01:4[16;5H6[16;45H17.1[16;58H58:20[17;4H22[17;43H[32mR [39m[m13.2[7C[0;1m[31m6h[39m[m32:31[1B 2428 [0;1m[30mroot      [18;26H[0m[36m208M 31[39m[m568 [36m 2[39m[m476 S  6.6[6C[0;1m[31m 1h[39m[m49:14 /opt/sge/bin/lx-amd64/sge_e[19;2H8615 [0;1m[30mtwaltz[19;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  4.0 23.1 [0;1m[31m 6h[39m[m01:27 [32mpython conv4.py[39m[m[K[H[2;7H[32m|[31m||[6C[0;1m[30m2.5[2;29H[0m[31m|[0;1m[30m [7C0.1[2;51H[0m[31m|[0;1m[30m       7.0[2;81H1.8[3;7H[0m[32m|[3;18H[0;1m[30m1[3;50H[0m[32m|[31m|[7C[0;1m[30m2.2[3;73H[0m[31m|	[0;1m[30m4.6[4;30H [7C0.1[4;59H3.4[4;72H[0m[32m|[31m|	[0;1m[30m4.3[5;7H[0m[31m|[5;18H[0;1m[30m1[5;50H[0m[32m|[5;61H[0;1m[30m3[5;73H[0m[31m|[0;1m[30m       9.5[6;40H5[6;50H[0m[32m|[31m|[7C[0;1m[30m4.4[6;73H[0m[32m|[31m|[0;1m[30m     13.8[7;51H[0m[31m|[0;1m[30m       4.6[7;72H[0m[32m|[31m|	[0;1m[30m1.5[9;62H[39m32 [36m2.12 [0m[36m2.12[10;67H[0;1m[36m2:09[13;43H[0m[30m[46mR 67.8[13;61H51[14;4H[39;49m[m22[14;46H4.0[7C[0;1m[31m6h[39m[m32:32[15;5H6[15;46H3.4[7C[0;1m[31m6h[39m[m58:21[16;5H7[16;46H1.3[7C[0;1m[31m3h[39m[m10:46[17;4H18[17;43HS  6.8[7C[0;1m[31m5h[39m[m01:48[1B 8619 [0;1m[30mtwaltz[18;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  6.7 23.1 [0;1m[31m 5h[39m[m22:28 [32mpython conv4.py[39m[m[K[19;4H20[19;48H8[19;58H11:5[H[19B[J[34h[?25h[?1000l[20;1H[?1049l[?1l>kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ aI(`I([2Phtopquotapython dynamobi-full.py[5Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cscreen -ls[1Pr[K[4Plscd ..at node_sampling_combined_largge2_heuristic.csv M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cheur[7P[C[C[C[C[C[C[C[C[C[CM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd resultsls[Kcd link-predictionexit[Kqrsh -q gpu -l gpu=1logout[Kscreen -Lrm screenlog.0ls[Kscreen -lswiper[Kls[5Pquotascreen -rlscat screenlog.0ls[Kcd ..at node_sampling_combined_largge2_heuristic.csv M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd resultslink-prediction[12Plogoutpython dynamobi-full.pyconda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[12Pd
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cqrsh -q gpu -l gpu=1logout[Kscreen -ls[1PL[Kcat node_sampling_combined_largge_node2vec.csv [C[C[C[1@heuristi[C[C[C[C[C[CM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cheur[6P[C[C[C[C[C[C[C[C[C[CM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd resultslink-predictionexit[Kscreen -ls[6Pexitpython dynamobi-full.py[13Pgit statuspush -u origin masterremote add origin https://ggithub.com/yoavnavon/link-prediction.gitM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Pcommit -m"init commit"
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cstatus[Kadd --all[3Pstatusrm node2vecdeepwalk[1Pgit status[2Pinit[5Ppwdython dynamobi-full.py[5Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[20Pscreen -ls
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cqrsh -q gpu -l gpu=1python dynamobi-full.py[5Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cqrsh -q gpu -l gpu=1exit[Kpython dynamobi-full.py[3Pcat[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@python[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cconda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[12Pd
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[Kscreen -lsqrsh -q gpu -l gpu=1exit[Kquotascreen -lspython dynamobi-full.py[13Pscreen -lspython dynamobi-full.py[5Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7Ppython dynamobi-full.py
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[Krm small*ls[Kcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cscreen -lsqrsh -q gpu -l gpu=1[11Pscreen lspython dynamobi-full.py[5Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cscreen -lsqrsh -q gpu -l gpu=1cat link-prediction/results/nodde_sample_heuristic.csv[C[C[C[C[C[C[C[C[C[C[1Pnode2vec.csvM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cpython dynamobi-full.py[5Pcd link-predictionls[Kpython dynamobi-full.pyconda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cat link-prediction/results/nodde_sample_deepwalk.csv[C[C[C[C[C[C[C[C[C[Cheuristic.csv[C[C[C[C[C[C[C[C[C[C[1Pnode2vec.csvM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clogout[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cscreen -lsS 31298 -X kill10197[C[C[C[C[C[C[C[Cls[K[Kqrsh -q gpu -l gpu=1exit[Kpython dynamobi-full.py[5Pcd link-predictionls[Kpython dynamobi-full.pyconda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccat link-prediction/results/ranndom_sample_3M_node2vec_.csv[C[C[C[C[C[C[C[C[C[C[C[C[3Pnode2vec_.csvM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccat results/random_sample_node22vec_.csvM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cheuristic_.csvM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cnode2[1Pvec_.csvM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccat link-prediction/results/ranndom_sample_node2vec_.csv[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Khtop
-(B)0[?1049h[1;20r[m[4l[?1h=[?25l[39;49m[?1000h[39;49m[m[H[J[1B  [36m1  [39m[0;1m[[30m         0.0%[39m][m    [36m7  [39m[0;1m[[30m         0.0%[39m][m   [36m13 [39m[0;1m[[30m         0.0%[39m][m    [36m19 [39m[0;1m[[30m         0.0%[39m][3;3H[0m[36m2  [39m[0;1m[[0m[31m|||||||100.0%[39m[0;1m][m    [36m8  [39m[0;1m[[30m         0.0%[39m][m   [36m14 [39m[0;1m[[30m         0.0%[39m][m    [36m20 [39m[0;1m[[30m         0.0%[39m][4;3H[0m[36m3  [39m[0;1m[[30m         0.0%[39m][m    [36m9  [39m[0;1m[[30m         0.0%[39m][m   [36m15 [39m[0;1m[[30m         0.0%[39m][m    [36m21 [39m[0;1m[[30m         0.0%[39m][5;3H[0m[36m4  [39m[0;1m[[30m         0.0%[39m][m    [36m10 [39m[0;1m[[30m         0.0%[39m][m   [36m16 [39m[0;1m[[30m         0.0%[39m][m    [36m22 [39m[0;1m[[30m         0.0%[39m][6;3H[0m[36m5  [39m[0;1m[[30m         0.0%[39m][m    [36m11 [39m[0;1m[[30m         0.0%[39m][m   [36m17 [39m[0;1m[[30m         0.0%[39m][m    [36m23 [39m[0;1m[[30m         0.0%[39m][7;3H[0m[36m6  [39m[0;1m[[30m         0.0%[39m][m    [36m12 [39m[0;1m[[30m         0.0%[39m][m   [36m18 [39m[0;1m[[30m         0.0%[39m][m    [36m24 [39m[0;1m[[30m         0.0%[39m][8;3H[0m[36mMem[39m[0;1m[[0m[32m|||||||||[33m||||||||||||[0;1m[30m    30.9G/126G[39m][m   [36mTasks: [0;1m[36m38[0m[36m, [0;1m[32m127[0m[32m thr[36m; [0;1m[32m1[0m[36m running[9;3HSwp[39m[0;1m[[30m                              0K/0K[39m][m   [36mLoad average: [39m[0;1m1.12 [36m2.05 [0m[36m2.10 [10;46HUptime: [0;1m[36m29 days, 08:02:20[2B[0m[30m[42m  PID USER      PRI  NI  VIRT   RES   SHR S [30m[46mCPU% [30m[42mMEM%   TIME+  Command                    [13;1H[30m[46m11320 ynavon26   20   0  119M  2060  1368 R 60.0  0.0  0:00.05 htop                       [14;5H[39;49m[m1 [0;1m[30mroot      [39m[m 20   0 [36m 186M  3[39m[m220 [36m 1[39m[m496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[15;3H711 [0;1m[30mroot      [39m[m 20   0 [36m 145M 79[39m[m928 [36m79[39m[m540 S  0.0  0.1  1:02.01 /usr/lib/systemd/systemd-jo[16;3H755 [0;1m[30mroot      [39m[m 20   0 [36m44[39m[m996 [36m 1[39m[m208   448 S  0.0  0.0  0:13.32 /usr/lib/systemd/systemd-ud[17;2H1197 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.10 [32m/opt/sge/bin/lx-amd64/sge_s[18;2H[39m[m1198 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.12 [32m/opt/sge/bin/lx-amd64/sge_s[19;2H[39m[m1199 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.19 [32m/opt/sge/bin/lx-amd64/sge_s[20;1H[39m[mF1[30m[46mHelp  [39;49m[mF2[30m[46mSetup [39;49m[mF3[30m[46mSearch[39;49m[mF4[30m[46mFilter[39;49m[mF5[30m[46mTree  [39;49m[mF6[30m[46mSortBy[39;49m[mF7[30m[46mNice -[39;49m[mF8[30m[46mNice +[39;49m[mF9[30m[46mKill  [39;49m[mF10[30m[46mQuit          [Z [Z[1@ [H[39;49m[m[9;62H[0;1m03 [36m2.01 [0m[36m2.09[10;70H[0;1m[36m1[3B[39m[m11320 ynavon26   20   0 [36m 119M  2[39m[m060 [36m 1[39m[m368 [32mR [39m[m60.0  0.0  0:00.05 htop[K[1B[30m[46m    1 root       20   0  186M  3220  1496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[1;1H[39;49m[m[2;50H[32m|[2;59H[0;1m[30m4.9[3;7H[0m[32m|[31m|[0;1m[30m       1.1%[3;50H[0m[32m|[3;61H[0;1m[30m5[4;7H[0m[31m|[4;18H[0;1m[30m5[4;50H[0m[32m|[4;59H[0;1m[30m1.1[4;72H[0m[32m|[31m|	[0;1m[30m8[5;29H[0m[31m|[5;40H[0;1m[30m5[5;50H[0m[32m|[5;61H[0;1m[30m5[5;72H[0m[32m|[10C[0;1m[30m5[6;29H[0m[31m|[6;40H[0;1m[30m5[6;72H[0m[32m|[31m|	[0;1m[30m1.6[7;29H[0m[31m||[6C[0;1m[30m13[7;50H[0m[32m|[7;61H[0;1m[30m5[7;72H[0m[32m|[10C[0;1m[30m5[10;70H[36m2[13;33H[39m[m184 [36m 1[39m[m480 [32mR [39m[m 1.1[13;62H7[1B    1 [0;1m[30mroot      [39m[m 20   0 [36m 186M  3[39m[m220 [36m 1[39m[m496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[15;1H[30m[46m  711 root       20   0  145M 79928 79540 S  0.0  0.1  1:02.01 /usr/lib/systemd/systemd-jo[1;1H[39;49m[m[14B  711 [0;1m[30mroot      [39m[m 20   0 [36m 145M 79[39m[m928 [36m79[39m[m540 S  0.0  0.1  1:02.01 /usr/lib/systemd/systemd-jo[16;1H[30m[46m  755 root       20   0 44996  1208   448 S  0.0  0.0  0:13.32 /usr/lib/systemd/systemd-ud[1;1H[39;49m[m[15B  755 [0;1m[30mroot      [39m[m 20   0 [36m44[39m[m996 [36m 1[39m[m208   448 S  0.0  0.0  0:13.32 /usr/lib/systemd/systemd-ud[17;1H[30m[46m 1197 root       20   0  110M 31596  2432 S  0.0  0.0  0:00.10 /opt/sge/bin/lx-amd64/sge_s[1;1H[39;49m[m[15B[30m[46m  755 root       20   0 44996  1208   448 S  0.0  0.0  0:13.32 /usr/lib/systemd/systemd-ud[17;1H[39;49m[m 1197 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.10 [32m/opt/sge/bin/lx-amd64/sge_s[1;1H[39m[m[10;70H[0;1m[36m3[5B[0m[30m[46m  711 root       20   0  145M 79928 79540 S  0.0  0.1  1:02.01 /usr/lib/systemd/systemd-jo[16;1H[39;49m[m  755 [0;1m[30mroot      [39m[m 20   0 [36m44[39m[m996 [36m 1[39m[m208   448 S  0.0  0.0  0:13.32 /usr/lib/systemd/systemd-ud[1;1H[13B[30m[46m    1 root       20   0  186M  3220  1496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[15;1H[39;49m[m  711 [0;1m[30mroot      [39m[m 20   0 [36m 145M 79[39m[m928 [36m79[39m[m540 S  0.0  0.1  1:02.01 /usr/lib/systemd/systemd-jo[1;1H[2;59H[0;1m[30m0.6[3;18H2[3;61H6[3;72H[0m[32m|[10C[0;1m[30m6[4;7H [4;18H0[4;50H [4;59H0.0[21C5[5;7H[0m[31m|[5;18H[0;1m[30m6[5;29H [5;40H0[5;59H5.3[5;72H 	0.0[6;29H [6;40H0[6;73H 	1.2[7;40H5[7;50H [7;61H0[21C6[6B[0m[30m[46m11320 ynavon26   20   0  119M  2184  1480 R  1.2  0.0  0:00.09 htop                       [14;1H[39;49m[m    1 [0;1m[30mroot      [39m[m 20   0 [36m 186M  3[39m[m220 [36m 1[39m[m496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[1;1H[10;70H[0;1m[36m4[3B[39m[m11320 ynavon26   20   0 [36m 119M  2[39m[m184 [36m 1[39m[m480 [32mR [39m[m 1.2  0.0  0:00.09 htop[K[1B[30m[46m    1 root       20   0  186M  3220  1496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[1;1H[39;49m[m[12B[30m[46m11320 ynavon26   20   0  119M  2184  1480 R  1.2  0.0  0:00.09 htop                       [14;1H[39;49m[m    1 [0;1m[30mroot      [39m[m 20   0 [36m 186M  3[39m[m220 [36m 1[39m[m496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[1;1H[2;51H[31m|[7C[0;1m[30m5.3[3;16H0.8[3;61H4[3;73H[0m[31m|	[0;1m[30m1.2[4;50H[0m[32m|[4;61H[0;1m[30m8[4;73H 	0.8[5;7H [5;18H0[5;59H2.7[6;29H[0m[31m|[6;40H[0;1m[30m8[6;50H[0m[32m|[6;59H[0;1m[30m2.7[7;40H3[42C8[10;70H[36m6[13;46H[0m[30m[46m0.8[13;61H11[19;48H[39;49m[m4[19;61H20[H[2;59H[0;1m[30m6.1[3;7H[0m[31m|[0;1m[30m [3;18H7[3;51H[0m[31m|[7C[0;1m[30m2.0[3;73H 	0.7[4;61H7[4;72H 	0.0[5;51H[0m[31m|[5;61H[0;1m[30m0[6;29H [6;40H0[6;59H3.3[6;81H0.7[7;37H 9.9[7;50H[0m[32m|[7;59H[0;1m[30m1.3[7;72H 	0.0[9;60H[39m0.94 [36m1.98 [0m[36m2.08[10;70H[0;1m[36m8[13;48H[0m[30m[46m7[13;62H2[19;48H[39;49m[m0[H[2;50H[0;1m[30m  	  0.0[3;7H[0m[32m|[31m|[7C[0;1m[30m1.3[3;51H 	  0.7[5;59H6.8[6;29H[0m[31m|[6;40H[0;1m[30m7[6;59H0.7[6;72H 	0.0[7;37H13.2[7;51H[0m[31m|[7C[0;1m[30m5.2[8;66H[32m3[10;70H[36m9[13;46H[0m[30m[46m1.3[13;62H4[H[39;49m[m[3;72H[0;1m[30m 	0.0[4;29H[0m[31m|[4;38H[0;1m[30m2[5;61H3[6;51H[0m[31m|[7C[0;1m[30m1.3[6;72H[0m[32m|[6;81H[0;1m[30m1.3[7;38H2.5[7;51H [7;61H9[7;72H[0m[32m|[10C[0;1m[30m7[10;69H[36m31[13;62H[0m[30m[46m6[H[39;49m[m[3;50H[0;1m[30m [3;61H0[3;72H[0m[32m|[10C[0;1m[30m7[4;29H [4;38H0[5;59H5.4[6;51H 	  2.0[7;38H3.9[7;61H3[7;72H 	0.0[8;66H[32m1[9;62H[39m87 [36m1.95 [0m[36m2.06[10;70H[0;1m[36m2[3B[0m[30m[46m 8007 twaltz  [13;25H56.4G 29.0G  462M S 18.5 23.1 70h05:55 python conv4.py[14;2H[39;49m[m8615 [0;1m[30mtwaltz[14;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  7.9 23.1 [0;1m[31m 6h[39m[m01:30 [32mpython conv4.py[39m[m[K[1B11320 ynavon26  [15;27H[36m19M  2[39m[m184 [36m 1[39m[m480 [32mR [39m[m 1.3  0.0  0:00.18 htop[K[1B 8622 [0;1m[30mtwaltz[16;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 6h[39m[m32:33 [32mpython conv4.py[39m[m[K[1B 8616 [0;1m[30mtwaltz[17;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 6h[39m[m58:21 [32mpython conv4.py[39m[m[K[1B 8618 [0;1m[30mtwaltz[18;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 5h[39m[m01:48 [32mpython conv4.py[39m[m[K[1B    1[19;27H[36m86M  3[39m[m220 [36m 1[39m[m496[19;56H6:21.46 /usr/lib/systemd/systemd --[1;1H[2;72H[32m|[2;81H[0;1m[30m2[3;50H[0m[32m|[3;61H[0;1m[30m7[3;72H 	0.0[5;50H  	  0.0[6;51H[0m[31m|[7C[0;1m[30m6.3[6;81H0.7[7;40H8[7;59H2.6[7;72H[0m[32m|[10C[0;1m[30m7[10;70H[36m4[13;46H[0m[30m[46m7.2[13;62H6[14;46H[39;49m[m9.2[15;61H20[16;4H16[16;58H58:21[17;5H9[17;46H1.3[7C[0;1m[31m5h[39m[m22:28[18;4H22[18;56H[0;1m[31m6h[39m[m32:33[1B 1159[19;27H[36m10M 31[39m[m596 [36m 2[39m[m432[6C7[7C0:03.42 /opt/sge/bin/lx-amd64/sge_s[1;1H[2;81H[0;1m[30m5.2[3;72H[0m[32m|[3;81H[0;1m[30m1.3[4;50H [4;61H0[6;59H8.2[6;73H[0m[31m|	[0;1m[30m1.3[7;38H1.2[7;50H [7;59H0.0[7;72H 	0.0[10;70H[36m5[13;46H[0m[30m[46m8.5[15;62H[39;49m[m2[16;46H0.7[17;4H22[17;46H0.7[7C[0;1m[31m6h[39m[m32:33[18;4H14[18;55H19:11.77[1B 8634 [0;1m[30mtwaltz[19;25H[31m56.4G 29.0G [0m[36m 462M 	[C[39m[m23.1 [0;1m[31m 7h[39m[m15:38 [32mpython conv4.py[39m[m[K[H[15;19r[15;1H[2L[1;20r[2;50H[32m|[31m|[7C[0;1m[30m5.3[2;81H4.0[3;7H[0m[31m|[0;1m[30m [7C0.7[3;50H [3;61H0[3;81H0.7[4;29H[0m[32m|[31m|[7C[0;1m[30m6.6[4;50H[0m[32m|[31m|[7C[0;1m[30m1.3[5;72H[0m[32m|[31m|	[0;1m[30m1.3[6;29H [6;40H0[6;59H3.4[6;72H  	0.0[7;40H8[7;50H[0m[32m|[7;61H[0;1m[30m7[7;72H[0m[32m|[10C[0;1m[30m7[8;66H[32m2[9;63H[39m8 [36m1.93[1B37[13;46H[0m[30m[46m9.1[14;43H[39;49m[32mR [39m[m10.6[1B 2428 [0;1m[30mroot      [39m[m 20   0 [36m 208M 31[39m[m576 [36m 2[39m[m476 S  6.6  0.0 [0;1m[31m 1h[39m[m49:14 /opt/sge/bin/lx-amd64/sge_e[16;2H8618 [0;1m[30mtwaltz    [39m[m 20   0 [0;1m[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 5h[39m[m01:48 [32mpython conv4.py[17;46H[39m[m0.7[17;62H3[H[2;59H[0;1m[30m9.0[2;81H5.9[3;7H[0m[32m|[31m|[7C[0;1m[30m1.3[4;29H  [7C0.0[4;51H 	  0.7[5;72H  	0.0[6;29H[0m[31m|[6;40H[0;1m[30m7[6;50H  	  0.0[6;72H[0m[32m|[10C[0;1m[30m7[7;38H4.5[7;72H[0m[31m|[10;70H[0;1m[36m8[13;45H[0m[30m[46m20.5[13;62H7[14;46H[39;49m[m1.2[1B 8634 [0;1m[30mtwaltz[15;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  2.0 23.1 [0;1m[31m 7h[39m[m15:38 [32mpython conv4.py[39m[m[K[1B11320 ynavon26  [16;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.25 htop[K[1B 8622 [0;1m[30mtwaltz    [17;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 6h[39m[m32:33 [32mpython conv4.py[18;5H[39m[m4[18;55H19:11.78[1B 2639 [0;1m[30mroot  [19;25H[0m[36m 944M 32[39m[m864 [36m 2[39m[m624 	  0.0 41:00.96 [32m/usr/bin/python /usr/bin/go[1;1H[39m[m[15;19r[15;1HM[1;20r[3;72H[31m|[4;7H[32m|[4;18H[0;1m[30m7[4;50H [4;61H0[5;72H[0m[32m|[10C[0;1m[30m7[6;29H [6;40H0[6;81H1.3[7;38H3.8[7;72H[0m[32m|[8;66H[0;1m[32m1[10;69H[36m40[14;43H[39m[mS 10.6[1B11320 ynavon26   20   0 [36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.27 htop[16;4H16[16;46H1.3[7C[0;1m[31m6h[39m[m58:21[1B 8617 [0;1m[30mtwaltz    [17;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 3h[39m[m10:47 [32mpython conv4.py[19;62H[39m[m9[H[2;7H[32m|[2;18H[0;1m[30m7[2;51H 	  0.7[2;81H4.6[3;7H[0m[31m|[0;1m[30m [7C0.7[3;50H[0m[32m|[31m|[7C[0;1m[30m7.5[3;72H[0m[32m|[4;7H[0;1m[30m [4;18H0[4;50H[0m[32m|[4;61H[0;1m[30m7[6;29H[0m[31m|[6;40H[0;1m[30m7[6;81H0.7[7;31H[0m[31m|[6C[0;1m[30m7[7;59H1.3[7;72H 	0.0[10;70H[36m1[13;45H[0m[30m[46m18[1B[39;49m[m 9.9[14;62H1[1B 8622 [0;1m[30mtwaltz    [15;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 6h[39m[m32:33 [32mpython conv4.py[16;5H[39m[m8[16;56H[0;1m[31m5h[39m[m01:48[17;4H34[17;56H[0;1m[31m7h[39m[m15:38[1B11320 ynavon26  [18;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.28 htop[K[19;5H7[19;55H[0;1m[31m 3h[39m[m10:47[H[2;7H[0;1m[30m [2;18H0[2;50H [2;61H0[2;73H[0m[31m|	[0;1m[30m6.5[3;7H[0m[32m|[31m|[7C[0;1m[30m1.3[3;59H6.2[7;31H [6C3.1[7;59H0.7[7;72H[0m[32m|[10C[0;1m[30m7[9;63H[39m1 [36m1.90 [0m[36m2.05[10;70H[0;1m[36m3[14;46H[39m[m7[1B11320 ynavon26  [15;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.30 htop[K[16;4H22[16;46H0.7[7C[0;1m[31m6h[39m[m32:33[17;4H18[17;46H0.7[7C[0;1m[31m5h[39m[m01:4[1B 8634 [0;1m[30mtwaltz    [18;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 7h[39m[m15:38 [32mpython conv4.py[H[39m[m[2;7H[31m||[6C[0;1m[30m11.1[2;50H[0m[32m|[2;61H[0;1m[30m7[2;73H 	5.3[3;59H2.0[3;72H 	0.0[5;50H[0m[32m|[31m|[7C[0;1m[30m3.3[7;30H [6C 6.0[7;59H1.3[10;70H[36m4[13;46H[0m[30m[46m7.8[13;62H8[14;46H[39;49m[m8.6[15;46H2.0[15;62H3[H[2;18H[0;1m[30m9[2;81H6.0[3;7H[0m[31m|[0;1m[30m [7C0.7[3;51H 	  0.7[4;7H[0m[32m|[4;18H[0;1m[30m7[4;59H1.3[4;72H[0m[32m|[31m|	[0;1m[30m6.1[5;50H  	  0.0[5;72H 	0.0[6;81H1.3[7;29H [7;38H0[7;59H0.7[7;72H 	0.0[10;70H[36m6[13;46H[0m[30m[46m8.5[15;46H[39;49m[m0.7[15;62H4[18;4H17[18;56H[0;1m[31m3h[39m[m10:47[19;5H6[19;56H[0;1m[31m6h[39m[m58:21[H[2;16H[0;1m[30m2.5[2;81H5.3[3;7H[0m[32m|[31m|[7C[0;1m[30m1.3[4;7H [4;18H0[4;59H0.7[4;81H8.2[6;81H0.7[7;50H [7;61H0[7;72H[0m[32m|[10C[0;1m[30m7[9;62H[39m74 [36m1.87 [0m[36m2.04[10;70H[0;1m[36m7[13;46H[0m[30m[46m9.1[14;46H[39;49m[m9.2[1B 8622 [0;1m[30mtwaltz    [15;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 6h[39m[m32:33 [32mpython conv4.py[16;4H[39m[m17[16;46H1.3[7C[0;1m[31m3h[39m[m10:47[17;5H6[17;46H1.3[7C[0;1m[31m6h[39m[m58:21[18;5H9[18;46H1.3[7C[0;1m[31m5h[39m[m22:28[1B11320 ynavon26  [19;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.35 htop[K[H[2;59H[0;1m[30m1.3[4;50H [4;61H0[4;73H 	2.7[5;50H[0m[32m|[5;61H[0;1m[30m7[5;72H[0m[32m|[10C[0;1m[30m7[6;29H [6;40H0[6;73H[0m[31m|	[0;1m[30m3.4[7;50H[0m[32m|[7;61H[0;1m[30m7[7;81H1.3[10;70H[36m9[13;46H[0m[30m[46m7.8[13;62H9[14;46H[39;49m[m8.6[1B11320 ynavon26  [15;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 2.0  0.0  0:00.38 htop[K[16;4H22[16;56H[0;1m[31m6h[39m[m32:33[17;5H7[17;46H0.7[7C[0;1m[31m3h[39m[m10:47[18;46H0.7[1B 8618 [0;1m[30mtwaltz    [19;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 5h[39m[m01:48 [32mpython conv4.py[H[39m[m[2;16H[0;1m[30m1.9[2;51H[0m[31m|[7C[0;1m[30m9.0[2;72H [2;81H0.0[3;16H2.0[3;72H[0m[32m|[3;81H[0;1m[30m5.9[4;50H[0m[32m|[4;59H[0;1m[30m1.3[4;72H [4;81H0.0[5;72H 	0.0[6;29H[0m[31m|[6;40H[0;1m[30m7[6;50H[0m[32m|[6;61H[0;1m[30m7[6;72H  	0.0[7;72H [7;81H0.0[10;69H[36m50[13;45H[0m[30m[46m21.1[14;45H[39;49m[m10[1B1.3[15;61H40[16;4H17[16;56H[0;1m[31m3h[39m[m10:47[17;4H22[17;56H[0;1m[31m6h[39m[m32:33[H[2;16H[0;1m[30m3.2[2;59H7.6[2;72H[0m[32m|[10C[0;1m[30m7[3;7H[0m[31m|[0;1m[30m [7C0.7[3;50H[0m[31m|[3;81H[0;1m[30m4.6[4;59H0.7[4;72H[0m[31m|[10C[0;1m[30m7[5;51H[0m[31m|[7C[0;1m[30m1.3[7;29H[0m[32m|[7;40H[0;1m[30m7[7;50H [7;61H0[8;66H[32m4[9;63H[39m6 [36m1.85 [0m[36m2.03[10;70H[0;1m[36m2[13;43H[0m[30m[46mR 18.5[14;45H[39;49m[m 9.9[14;62H2[1B 8617 [0;1m[30mtwaltz    [15;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 3h[39m[m10:47 [32mpython conv4.py[1B[39m[m11320 ynavon26  [16;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.41 htop[K[H[15;18r[15;1HM[1;20r[2;16H[0;1m[30m1.8[2;50H  	  0.0[3;7H[0m[32m|[31m|[7C[0;1m[30m1.3[3;50H[0m[32m|[31m|[7C[0;1m[30m6.2[3;81H0.7[4;72H 	0.0[5;7H[0m[32m|[5;18H[0;1m[30m7[5;51H 	  0.7[5;72H[0m[32m|[5;81H[0;1m[30m5.3[6;29H [6;40H0[6;59H1.3[7;29H [7;40H0[7;50H[0m[32m|[7;61H[0;1m[30m7[8;66H[32m1[10;70H[36m3[13;43H[0m[30m[46mS 17.8[14;46H[39;49m[m7[1B11320 ynavon26   20   0 [36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.43 htop[16;5H9[16;56H[0;1m[31m5h[39m[m22:28[1B 8617 [0;1m[30mtwaltz    [17;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 3h[39m[m10:47 [32mpython conv4.py[H[39m[m[2;16H[0;1m[30m3.2[2;73H[0m[31m|	[0;1m[30m1.3[3;61H8[3;72H 	0.0[4;7H[0m[32m|[4;18H[0;1m[30m7[4;50H[0m[31m|[5;7H|[5;59H[0;1m[30m1.3[6;29H[0m[31m|[6;40H[0;1m[30m7[6;59H0.7[7;51H[0m[31m|[7C[0;1m[30m1.3[8;66H[32m2[10;70H[36m5[13;48H[0m[30m[46m1[13;59H6:00[2B[39;49m[m5[16;46H0.7[H[2;16H[0;1m[30m4.6[2;72H  	0.0[3;59H3.4[3;72H[0m[32m|[10C[0;1m[30m7[4;7H [4;18H0[4;50H[0m[32m|[4;59H[0;1m[30m2.0[4;72H[0m[32m|[10C[0;1m[30m7[5;7H [5;18H0[5;29H[0m[32m|[31m|[7C[0;1m[30m1.3[5;50H [5;59H0.0[5;81H3[6;50H [6;61H0[6;72H[0m[32m|[6;81H[0;1m[30m2[7;51H 	  0.7[9;63H[39m0 [36m1.82 [0m[36m2.02[10;70H[0;1m[36m6[13;48H[0m[30m[46m2[2B[39;49m[m 2549 [0;1m[30mroot      [15;25H[0m[36m24[39m[m904 [36m 5[39m[m756   504 S  2.0[6C28:55.69 condor_procd -A /var/condor[16;1H11320 ynavon26  [16;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.47 htop[K[17;5H9[17;46H1.3[7C[0;1m[31m5h[39m[m22:28[18;4H17[18;46H1.3[7C[0;1m[31m3h[39m[m10:47[19;5H6[19;56H[0;1m[31m6h[39m[m58:21[H[2;18H[0;1m[30m4[2;72H[0m[32m|[10C[0;1m[30m7[3;8H [7C0.7[3;50H  	  0.0[3;81H1.3[4;51H[0m[31m|[7C[0;1m[30m7.5[5;29H  [7C0.0[5;50H[0m[32m|[5;61H[0;1m[30m7[5;72H [5;81H0.0[6;50H[0m[32m|[6;61H[0;1m[30m7[6;81H5.3[8;66H[32m1[10;70H[36m8[13;46H[0m[30m[46m9.1[14;46H[39;49m[m9.2[1B 8622 [0;1m[30mtwaltz[15;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 6h[39m[m32:33 [32mpython conv4.py[39m[m[K[1B 8618 [0;1m[30mtwaltz    [16;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 5h[39m[m01:48 [32mpython conv4.py[1B[39m[m11320 ynavon26  [17;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.48 htop[K[18;5H9[18;46H0.7[7C[0;1m[31m5h[39m[m22:28[19;5H7[19;56H[0;1m[31m3h[39m[m10:47[H[15;19r[15;1HM[1;20r[2;16H[0;1m[30m3.2[3;7H[0m[31m|[3;16H[0;1m[30m1.3[3;81H0.7[4;59H6.9[7;50H [7;61H0[8;66H[32m2[10;70H[36m9[13;43H[0m[30m[46mR 17.8[14;46H[39;49m[m8.6[1B 8616 [0;1m[30mtwaltz    [39m[m 20   0 [0;1m[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 6h[39m[m58:21 [32mpython conv4.py[16;46H[39m[m0.7[17;46H0.7[18;62H9[H[2;16H[0;1m[30m0.6[2;50H[0m[32m|[31m|[7C[0;1m[30m6.1[3;7H[0m[32m|[31m|[1B|[4;18H[0;1m[30m7[4;29H[0m[31m|[4;40H[0;1m[30m7[4;59H1.3[5;50H [5;61H0[6;59H1.3[7;50H[0m[32m|[7;61H[0;1m[30m7[8;66H[32m1[2B[36m3:01[13;43H[0m[30m[46mS[13;62H1[2B[39;49m[m11320 ynavon26  [15;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 2.0  0.0  0:00.52 htop[K[16;4H17[16;46H1.3[7C[0;1m[31m3h[39m[m10:47[17;5H9[17;58H22:2[1B 2428 [0;1m[30mroot      [18;26H[0m[36m208M 31[39m[m588 [36m 2[39m[m476 S [18;55H[0;1m[31m 1h[39m[m49:14 /opt/sge/bin/lx-amd64/sge_e[19;5H6[19;48H0[7C[0;1m[31m6h[39m[m58:21[H[2;16H[0;1m[30m2[2;59H7.4[3;7H[0m[31m|[0;1m[30m [7C0.7[3;73H[0m[31m|	[0;1m[30m1.3[4;7H [4;18H0[4;29H [4;40H0[4;50H  	  0.0[5;50H[0m[32m|[5;61H[0;1m[30m7[6;29H [6;40H0[6;59H0.7[6;73H[0m[32m|	[0;1m[30m9.9[9;62H[39m65 [36m1.79 [0m[36m2.01[10;70H[0;1m[36m2[13;45H[0m[30m[46m22.4[14;46H[39;49m[m7.9[15;46H1.3[15;62H4[16;5H9[16;56H[0;1m[31m5h[39m[m22:28[17;4H22[17;46H1.3[7C[0;1m[31m6h[39m[m32:33[1B 8617 [0;1m[30mtwaltz[18;25H[31m56.4G 29.0G [0m[36m 462M 	[C[39m[m23.1 [0;1m[31m 3h[39m[m10:47 [32mpython conv4.py[39m[m[K[19;48H7[H[2;18H[0;1m[30m5[2;59H3[2;72H 	0.0[3;7H[0m[32m|[31m|[7C[0;1m[30m2.0[3;50H[0m[32m|[3;61H[0;1m[30m7[3;73H[0m[32m|[31m|[0;1m[30m     17.1[4;72H 	0.0[5;50H [5;61H0[6;29H[0m[31m|[6;40H[0;1m[30m7[6;51H[0m[32m|[31m|[0;1m[30m     17.1[6;73H[0m[31m|	[0;1m[30m2.0[7;51H[0m[32m||[31m|[0;1m[30m    24.3[8;54H[36m6[8;66H[32m2[10;70H[36m4[13;45H[0m[30m[46m66.6[13;62H2[14;5H[39;49m[m8[14;43H[32mR [39m[m25.7[7C[0;1m[31m5h[39m[m01:49[1B 8622 [0;1m[30mtwaltz    [15;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS 17.8 23.1 [0;1m[31m 6h[39m[m32:33 [32mpython conv4.py[16;45H[39m[m17.1[16;62H9[17;4H15[17;46H4.6[17;58H01[1B11320 ynavon26  [18;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.55 htop[K[H[2;16H[0;1m[30m1.8[2;50H  	  0.0[3;7H[0m[31m|[0;1m[30m [7C0.7[3;51H[0m[31m|[7C[0;1m[30m4.6[3;73H        0.7[4;72H[0m[32m||[31m|[0;1m[30m     17.6[6;59H6.6[6;73H[0m[32m|[31m|[0;1m[30m     16.6[7;51H[0m[31m|[0;1m[30m       9[7;72H[0m[32m|[7;81H[0;1m[30m2[10;70H[36m6[13;46H[0m[30m[46m7.2[13;62H3[14;5H[39;49m[m7[14;43HS 17.8[7C[0;1m[31m3h[39m[m10:47[15;4H34[15;48H1[7C[0;1m[31m7h[39m[m15:38[16;46H6.5[17;5H8[17;46H8[17;56H[0;1m[31m5h[39m[m01:49[1B 8615 [0;1m[30mtwaltz    [18;25H[31m56.4G 29.0G [0m[36m 462M [32mR [39m[m 4.6 23.1 [0;1m[31m 6h[39m[m01:33 [32mpython conv4.py[1B[39m[m11320 ynavon26  [19;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.56 htop[K[H[2;16H[0;1m[30m3.9[2;72H[0m[32m||[31m|[0;1m[30m     17.2[3;7H[0m[32m|[3;61H[0;1m[30m0[3;73H[0m[32m|[31m|[0;1m[30m     16.6[4;50H[0m[32m|[4;61H[0;1m[30m7[4;72H         0.0[5;50H[0m[32m|[5;61H[0;1m[30m7[5;72H[0m[32m|[31m|	[0;1m[30m9.2[6;50H         0.0[6;73H        0.7[7;51H[0m[32m|[31m|[0;1m[30m     17.0[9;63H[39m0 [36m1.76 [0m[36m2.00[10;70H[0;1m[36m7[13;48H[0m[30m[46m9[13;62H4[14;4H[39;49m[m22[14;43H[32mR [39m[m27.7[7C[0;1m[31m6h[39m[m32:34[15;4H16[15;48H8[7C[0;1m[31m6h[39m[m58:22[16;5H8[16;46H7.1[16;58H01:4[17;5H5[17;46H4.0[7C[0;1m[31m6h[39m[m01:33[1B11320 ynavon26  [18;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 2.0  0.0  0:00.59 htop[K[1B 8634 [0;1m[30mtwaltz    [19;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 7h[39m[m15:38 [32mpython conv4.py[H[39m[m[2;16H[0;1m[30m2.5[2;29H[0m[32m|[31m|[7C[0;1m[30m1.3[2;50H[0m[32m|[2;59H[0;1m[30m2.6[2;72H[0m[31m|[0;1m[30m        0.7[3;8H[0m[31m|[7C[0;1m[30m4.6[3;59H5.3[3;73H        0.7[4;7H[0m[32m|[31m|[7C[0;1m[30m2[4;29H[0m[32m|[4;40H[0;1m[30m7[4;50H[0m[31m|[5;7H[32m|[31m|[7C[0;1m[30m1.3[5;81H7.9[6;7H[0m[32m|[31m|[7C[0;1m[30m4.6[6;50H[0m[32m|[6;61H[0;1m[30m7[6;72H 	0.0[7;7H[0m[31m|[7;18H[0;1m[30m7[7;61H9[7;73H[0m[32m|||[31m||[0;1m[30m  34.2[8;54H[36m8[8;66H[32m1[10;70H[36m9[13;46H[0m[30m[46m5.3[13;62H5[14;4H[39;49m[m34[14;43HS 33.6[7C[0;1m[31m7h[39m[m15:39[15;5H8[15;48H2[7C[0;1m[31m5h[39m[m01:49[16;4H22[16;45H 6.6[7C[0;1m[31m6h[39m[m32:34[17;46H5.3[1B 8614 [0;1m[30mtwaltz    [18;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 19:11.92 [32mpython conv4.py[1B[39m[m11320 ynavon26  [19;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.60 htop[K[H[2;16H[0;1m[30m1.3[2;29H  [7C0.0[2;59H1.3[2;72H 	0.0[3;7H[0m[31m|[0;1m[30m [7C0.7[3;50H  	  0.0[3;72H[0m[31m|[4;7H[0;1m[30m  [7C0[4;29H [4;40H0[4;50H [4;61H0[4;72H[0m[32m||||[31m||[0;1m[30m  34.2[5;7H  [7C0.0[5;50H [5;61H0[5;73H[0m[32m|[31m|[0;1m[30m     17.1[6;7H  [7C0.0[6;51H[0m[32m|[31m|[0;1m[30m     11.8[6;72H[0m[32m|[31m|	[0;1m[30m3.3[7;7H [7;18H0[7;51H        0.7[7;72H         0.0[8;66H[32m2[10;69H[36m10[13;45H[0m[30m[46m70.5[13;62H6[14;4H[39;49m[m16[14;56H[0;1m[31m6h[39m[m58:22[15;4H22[15;48H1[7C[0;1m[31m6h[39m[m32:34[16;4H19[16;43H[32mR [39m[m12.5[7C[0;1m[31m5h[39m[m22:29[17;46H4.0[1B11320 ynavon26  [18;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.62 htop[K[1B 8618 [0;1m[30mtwaltz    [19;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 5h[39m[m01:49 [32mpython conv4.py[H[39m[m[2;16H[0;1m[30m3.7[2;59H2.6[3;7H[0m[32m|[31m|[7C[0;1m[30m1.3[3;72H 	0.0[4;72H         0.0[5;50H[0m[32m|[5;61H[0;1m[30m7[6;51H[0m[31m|[0;1m[30m       4.6[6;73H 	3.4[7;51H[0m[32m|||[31m||[0;1m[30m  34.4[2B[39m55 [36m1.73 [0m[36m1.99[10;70H[0;1m[36m2[13;45H[0m[30m[46m62.6[13;62H7[14;5H[39;49m[m8[14;46H4.3[7C[0;1m[31m5h[39m[m01:50[15;46H5.8[16;43HS  4.0[17;43H[32mR [18;62H[39m[m4[19;5H4[19;55H19:11.93[H[2;16H[0;1m[30m1.8[2;51H[0m[31m|[7C[0;1m[30m7.2[3;7H[0m[31m|[0;1m[30m [7C0.7[3;72H[0m[32m||[31m|[0;1m[30m     16.6[5;50H [5;61H0[5;72H         0.0[6;29H [6;40H0[6;50H  	  0.0[6;72H [6;81H0.0[7;52H[0m[31m|[0;1m[30m     17.1[7;72H[0m[32m||||[31m|[0;1m[30m   31.6[8;66H[32m3[10;70H[36m3[13;45H[0m[30m[46m73.7[13;62H8[14;4H[39;49m[m34[14;43H[32mR [39m[m32[14;56H[0;1m[31m7h[39m[m15:39[15;4H18[15;46H7[15;56H[0;1m[31m5h[39m[m01:50[16;4H20[16;45H16.5[7C[0;1m[31m6h[39m[m11:57[17;43HS  5.3[18;62H6[19;5H6[19;55H[0;1m[31m 6h[39m[m58:22[H[2;18H[0;1m[30m3[2;51H 	  2.7[3;7H[0m[32m|[31m|[7C[0;1m[30m2.0[3;50H[0m[32m|[3;59H[0;1m[30m2.6[3;81H7.1[6;29H[0m[31m|[6;40H[0;1m[30m7[6;72H[0m[32m|[10C[0;1m[30m7[7;50H         0.0[7;77H[0m[31m|[0;1m[30m  38.8[8;66H[32m2[10;70H[36m5[13;45H[0m[30m[46m62.6[13;62H9[14;46H[39;49m[m8.9[14;61H40[15;4H20[15;48H1[7C[0;1m[31m6h[39m[m11:57[16;4H15[16;45H 4.6[16;58H01:33[1B11320 ynavon26  [17;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.68 htop[K[1B 8622 [0;1m[30mtwaltz    [18;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 6h[39m[m32:34 [32mpython conv4.py[19;5H[39m[m8[19;48H0[7C[0;1m[31m5h[39m[m01:50[H[19B[J[34h[?25h[?1000l[20;1H[?1049l[?1l>kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ free
-              total        used        free      shared  buff/cache   available
-Mem:      131735436    32077724    56412812      303532    43244900    98728060
-Swap:             0           0           0
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ free -m
-              total        used        free      shared  buff/cache   available
-Mem:         128647       31324       55091         296       42231       96415
-Swap:             0           0           0
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ free -m[Kg
-              total        used        free      shared  buff/cache   available
-Mem:            125          30          53           0          41          94
-Swap:             0           0           0
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ hotp[K[K[Ktop[K[K[K[Kls
-clean	   dynamobi-full.py  __pycache__  sampling.py  utils.py
-clean.zip  GraphEmbedding    results	  screenlog.0
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ cat screenlog.0
-kynavon26@crcfe02:~/link-prediction\(base) [ynavon26@crcfe02 link-prediction]$ logoutscreen -ls[1Pr[K[4Plscd ..at node_sampling_combined_large2_heuristic.csv  M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Pheuristic.csv 
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[Kcd resultsls[Kcd link-predictionexit[Kqrsh -q gpu -l gpu=1logout[Kscreen -Lrm screenlog.0[5Pscreen -L[3Plogoutqrsh -q gpu -l gpu=1
-Your job 676475 ("QLOGIN") has been submitted
-waiting for interactive job to be scheduled ...
-Your interactive job 676475 has been successfully scheduled.
-Establishing builtin session to host qa-1080ti-008.crc.nd.edu ...
-kynavon26@qa-1080ti-008:~\(base) [ynavon26@qa-1080ti-008 ~]$ conda link[K[K[K[K[Ka[K activate link-prediction
-kynavon26@qa-1080ti-008:~\(link-prediction) [ynavon26@qa-1080ti-008 ~]$ cd link-prediction
-kynavon26@qa-1080ti-008:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-008 link-prediction]$ python dynamobi-full.py
-  File "dynamobi-full.py", line 474
-    resume=False)
-         ^
-SyntaxError: invalid syntax
-kynavon26@qa-1080ti-008:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-008 link-prediction]$ python dynamobi-full.py
-INFO: Pandarallel will run on 12 workers.
-INFO: Pandarallel will use Memory file system to transfer data between the main process and workers.
-Creating Results Files
-Reading file: clean/2008-07-28.txt.gz
-Droping Duplicates
-Reading file: clean/2008-07-29.txt.gz
-Droping Duplicates
-Creating Graph
-Name: 
-Type: DiGraph
-Number of nodes: 113664
-Number of edges: 61866
-Average in degree:   0.5443
-Average out degree:   0.5443
-Removing Unseen Nodes from Test
-Negative Sampling
-size train: 123731
-size test: 686
-Heuristic Features
-kynavon26@crcfe02:~/link-prediction\(base) [ynavon26@crcfe02 link-prediction]$ logoutscreen -ls[1Pr[K[4Plscd ..at node_sampling_combined_large2_heuristic.csv  M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6Pheuristic.csv 
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[Kcd resultsls[Kcd link-predictionexit[Kqrsh -q gpu -l gpu=1logout[Kqrsh -q gpu -l gpu=1
-Your job 676478 ("QLOGIN") has been submitted
-waiting for interactive job to be scheduled ...
-Your interactive job 676478 has been successfully scheduled.
-Establishing builtin session to host qa-1080ti-005.crc.nd.edu ...
-kynavon26@qa-1080ti-005:~\(base) [ynavon26@qa-1080ti-005 ~]$ XGBClassifier
-[[259  84]
- [ 87 256]]
-RandomForestClassifier
-[[259  84]
- [ 87 256]]
-Node2Vec Embeddings
-Preprocess transition probs...
-[Parallel(n_jobs=11)]: Using backend LokyBackend with 11 concurrent workers.
-conda activate link-prediction
-kynavon26@qa-1080ti-005:~\(link-prediction) [ynavon26@qa-1080ti-005 ~]$ cd link-prediction
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ python dynamobi-full.py
-INFO: Pandarallel will run on 12 workers.
-INFO: Pandarallel will use Memory file system to transfer data between the main process and workers.
-Reading file: clean/2008-07-28.txt.gz
-Droping Duplicates
-[Parallel(n_jobs=11)]: Done   4 out of  12 | elapsed:  1.3min remaining:  2.7min
-Reading file: clean/2008-07-29.txt.gz
-Droping Duplicates
-^CTraceback (most recent call last):
-  File "dynamobi-full.py", line 474, in <module>
-    resume=True)
-  File "dynamobi-full.py", line 416, in train_test_node_sampling
-    df_test_full = read_file(test_path)
-  File "dynamobi-full.py", line 64, in read_file
-    df['Source'] = df['Source'].astype(str)
-  File "/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/pandas/core/generic.py", line 5882, in astype
-    dtype=dtype, copy=copy, errors=errors, **kwargs
-  File "/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/pandas/core/internals/managers.py", line 581, in astype
-    return self.apply("astype", dtype=dtype, **kwargs)
-  File "/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/pandas/core/internals/managers.py", line 438, in apply
-    applied = getattr(b, f)(**kwargs)
-  File "/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/pandas/core/internals/blocks.py", line 559, in astype
-    return self._astype(dtype, copy=copy, errors=errors, values=values, **kwargs)
-  File "/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/pandas/core/internals/blocks.py", line 643, in _astype
-    values = astype_nansafe(vals1d, dtype, copy=True, **kwargs)
-  File "/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/pandas/core/dtypes/cast.py", line 656, in astype_nansafe
-    return lib.astype_str(arr.ravel(), skipna=skipna).reshape(arr.shape)
-  File "pandas/_libs/lib.pyx", line 580, in pandas._libs.lib.astype_str
-KeyboardInterrupt
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ python dynamobi-full.py[5Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clogout[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cscreen -ls[1Prls[4Plogout[K[K[K[K[K[Kscreen -ls[1Pr[K[4Plscd ..at node_sampling_combined_largge2_heuristic.csv M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cheur[7P[C[C[C[C[C[C[C[C[C[CM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd resultsls[Kcd link-predictionexit[Kqrsh -q gpu -l gpu=1logout[Kscreen -Lrm screenlog.0ls[Kscreen -lswiper[Kls[5Pquotascreen -rlscat screenlog.0ls[Kcd ..at node_sampling_combined_largge2_heuristic.csv M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd resultslink-prediction[12Plogoutpython dynamobi-full.pyconda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[12Pd
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cqrsh -q gpu -l gpu=1[2Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7Ppython dynamobi-full.py
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
-INFO: Pandarallel will run on 12 workers.
-INFO: Pandarallel will use Memory file system to transfer data between the main process and workers.
-Reading file: clean/2008-07-28.txt.gz
-[Parallel(n_jobs=11)]: Done  12 out of  12 | elapsed:  2.8min finished
-Learning embedding vectors...
-Droping Duplicates
-Reading file: clean/2008-07-29.txt.gz
-Droping Duplicates
-Creating Giant Graph
-Learning embedding vectors done!
-Node Sampling
-XGBClassifier
-[[208 135]
- [ 80 263]]
-RandomForestClassifier
-[[212 131]
- [ 60 283]]
-Deepwalk Embeddings
-[Parallel(n_jobs=11)]: Using backend LokyBackend with 11 concurrent workers.
-Creating Graph
-Name: 
-Type: DiGraph
-Number of nodes: 668312
-Number of edges: 534587
-Average in degree:   0.7999
-Average out degree:   0.7999
-Removing Unseen Nodes from Test
-Negative Sampling
-size train: 1069174
-size test: 200784
-Heuristic Features
-[Parallel(n_jobs=11)]: Done   4 out of  12 | elapsed:   36.5s remaining:  1.2min
-[Parallel(n_jobs=11)]: Done  12 out of  12 | elapsed:  1.4min finished
-Learning embedding vectors...
-XGBClassifier
-[[77297 23095]
- [ 9073 91319]]
-RandomForestClassifier
-[[77299 23093]
- [ 9258 91134]]
-Node2Vec Embeddings
-Preprocess transition probs...
-[Parallel(n_jobs=11)]: Using backend LokyBackend with 11 concurrent workers.
-Learning embedding vectors done!
-/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py:706: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  "timeout or by a memory leak.", UserWarning
-XGBClassifier
-[Parallel(n_jobs=11)]: Done   4 out of  12 | elapsed:  6.0min remaining: 12.0min
-[[200 143]
- [106 237]]
-RandomForestClassifier
-[[216 127]
- [115 228]]
-heuristic
-
-
-xgb
-123731 edges
-Precision: 0.7529
-Recall: 0.7464
-ROC AUC: 0.7507
-F1 Score: 0.7496
-Accuracy: 0.7507
-
-
-rf
-123731 edges
-Precision: 0.7529
-Recall: 0.7464
-ROC AUC: 0.7507
-F1 Score: 0.7496
-Accuracy: 0.7507
-node2vec
-
-
-xgb
-123731 edges
-Precision: 0.6608
-Recall: 0.7668
-ROC AUC: 0.6866
-F1 Score: 0.7099
-Accuracy: 0.6866
-
-
-rf
-123731 edges
-Precision: 0.6836
-Recall: 0.8251
-ROC AUC: 0.7216
-F1 Score: 0.7477
-Accuracy: 0.7216
-deepwalk
-
-
-xgb
-123731 edges
-Precision: 0.6237
-Recall: 0.691
-ROC AUC: 0.637
-F1 Score: 0.6556
-Accuracy: 0.637
-
-
-rf
-123731 edges
-Precision: 0.6423
-Recall: 0.6647
-ROC AUC: 0.6472
-F1 Score: 0.6533
-Accuracy: 0.6472
-Creating Graph
-Name: 
-Type: DiGraph
-Number of nodes: 646629
-Number of edges: 370857
-Average in degree:   0.5735
-Average out degree:   0.5735
-Removing Unseen Nodes from Test
-Negative Sampling
-size train: 741714
-size test: 28918
-Heuristic Features
-XGBClassifier
-[[10714  3745]
- [ 3740 10719]]
-RandomForestClassifier
-[[10714  3745]
- [ 3751 10708]]
-Node2Vec Embeddings
-Preprocess transition probs...
-[Parallel(n_jobs=11)]: Using backend LokyBackend with 11 concurrent workers.
-/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py:706: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  "timeout or by a memory leak.", UserWarning
-[Parallel(n_jobs=11)]: Done   4 out of  12 | elapsed:  5.4min remaining: 10.9min
-[Parallel(n_jobs=11)]: Done  12 out of  12 | elapsed: 14.1min finished
-Learning embedding vectors...
-[Parallel(n_jobs=11)]: Done  12 out of  12 | elapsed: 12.9min finished
-Learning embedding vectors...
-Learning embedding vectors done!
-Learning embedding vectors done!
-XGBClassifier
-terminate called after throwing an instance of 'thrust::system::system_error'
-  what():  parallel_for failed: out of memory
-Aborted
-kynavon26@qa-1080ti-005:~/link-prediction\/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/joblib/externals/loky/backend/resource_tracker.py:266: UserWarning: resource_tracker: There appear to be 6 leaked semlock objects to clean up at shutdown
-  (len(rtype_cache), rtype))
-(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ quota
-AFS quota using values reported by vos server for partition
-Quota for /afs/crc.nd.edu/user/y/ynavon26
-Volume Name                   Quota      Used %Used   Partition
-u.ynavon26                   100 GB     39 GB   39%         29%
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ htom[Kp
-(B)0[?1049h[1;20r[m[4l[?1h=[?25l[39;49m[?1000h[39;49m[m[H[J[1B  [36m1  [39m[0;1m[[30m         0.0%[39m][m    [36m7  [39m[0;1m[[0m[32m|||||||[31m100.0%[39m[0;1m][m   [36m13 [39m[0;1m[[30m         0.0%[39m][m    [36m19 [39m[0;1m[[30m         0.0%[39m][3;3H[0m[36m2  [39m[0;1m[[30m         0.0%[39m][m    [36m8  [39m[0;1m[[30m         0.0%[39m][m   [36m14 [39m[0;1m[[30m         0.0%[39m][m    [36m20 [39m[0;1m[[30m         0.0%[39m][4;3H[0m[36m3  [39m[0;1m[[30m         0.0%[39m][m    [36m9  [39m[0;1m[[30m         0.0%[39m][m   [36m15 [39m[0;1m[[30m         0.0%[39m][m    [36m21 [39m[0;1m[[30m         0.0%[39m][5;3H[0m[36m4  [39m[0;1m[[30m         0.0%[39m][m    [36m10 [39m[0;1m[[30m         0.0%[39m][m   [36m16 [39m[0;1m[[0m[32m|||||||[0;1m[30m 50.0%[39m][m    [36m22 [39m[0;1m[[30m         0.0%[39m][6;3H[0m[36m5  [39m[0;1m[[30m         0.0%[39m][m    [36m11 [39m[0;1m[[30m         0.0%[39m][m   [36m17 [39m[0;1m[[30m         0.0%[39m][m    [36m23 [39m[0;1m[[30m         0.0%[39m][7;3H[0m[36m6  [39m[0;1m[[30m         0.0%[39m][m    [36m12 [39m[0;1m[[30m         0.0%[39m][m   [36m18 [39m[0;1m[[30m         0.0%[39m][m    [36m24 [39m[0;1m[[30m         0.0%[39m][8;3H[0m[36mMem[39m[0;1m[[0m[32m|||||||||[33m||||||||||||[0;1m[30m    30.9G/126G[39m][m   [36mTasks: [0;1m[36m38[0m[36m, [0;1m[32m127[0m[32m thr[36m; [0;1m[32m1[0m[36m running[9;3HSwp[39m[0;1m[[30m                              0K/0K[39m][m   [36mLoad average: [39m[0;1m1.52 [36m2.21 [0m[36m2.15 [10;46HUptime: [0;1m[36m29 days, 08:01:50[2B[0m[30m[42m  PID USER      PRI  NI  VIRT   RES   SHR S [30m[46mCPU% [30m[42mMEM%   TIME+  Command                    [13;1H[30m[46m11294 ynavon26   20   0  119M  2064  1368 R 60.0  0.0  0:00.05 htop                       [14;5H[39;49m[m1 [0;1m[30mroot      [39m[m 20   0 [36m 186M  3[39m[m220 [36m 1[39m[m496 S  0.0  0.0  6:21.45 /usr/lib/systemd/systemd --[15;3H711 [0;1m[30mroot      [39m[m 20   0 [36m 145M 79[39m[m928 [36m79[39m[m540 S  0.0  0.1  1:02.01 /usr/lib/systemd/systemd-jo[16;3H755 [0;1m[30mroot      [39m[m 20   0 [36m44[39m[m996 [36m 1[39m[m208   448 S  0.0  0.0  0:13.32 /usr/lib/systemd/systemd-ud[17;2H1197 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.10 [32m/opt/sge/bin/lx-amd64/sge_s[18;2H[39m[m1198 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.12 [32m/opt/sge/bin/lx-amd64/sge_s[19;2H[39m[m1199 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.17 [32m/opt/sge/bin/lx-amd64/sge_s[20;1H[39m[mF1[30m[46mHelp  [39;49m[mF2[30m[46mSetup [39;49m[mF3[30m[46mSearch[39;49m[mF4[30m[46mFilter[39;49m[mF5[30m[46mTree  [39;49m[mF6[30m[46mSortBy[39;49m[mF7[30m[46mNice -[39;49m[mF8[30m[46mNice +[39;49m[mF9[30m[46mKill  [39;49m[mF10[30m[46mQuit          [Z [Z[1@ [H[39;49m[m[2;7H[31m||[6C[0;1m[30m11.2[2;30H[0m[31m|[0;1m[30m       1.3%[2;50H[0m[32m||||[31m||[0;1m[30m  34[2;72H[0m[32m|||[31m|[0;1m[30m    25[5;51H[0m[31m|[0;1m[30m       3.4[5;72H[0m[32m|[5;81H[0;1m[30m1.3[6;29H[0m[31m|[6;40H[0;1m[30m7[6;50H[0m[31m|[6;61H[0;1m[30m7[8;66H[32m2[9;62H[39m40 [36m2.17 [0m[36m2.14[10;70H[0;1m[36m1[3B[0m[30m[46m 8007 twaltz  [13;25H56.4G 29.0G  462M S 67.3 23.1 70h05:39 python conv4.py[14;2H[39;49m[m8618 [0;1m[30mtwaltz[14;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS 33.6 23.1 [0;1m[31m 5h[39m[m01:46 [32mpython conv4.py[39m[m[K[1B 8620 [0;1m[30mtwaltz[15;25H[31m56.4G 29.0G [0m[36m 462M [32mR [39m[m26.4 23.1 [0;1m[31m 6h[39m[m11:56 [32mpython conv4.py[39m[m[K[1B 8615 [0;1m[30mtwaltz[16;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  4.6 23.1 [0;1m[31m 6h[39m[m01:27 [32mpython conv4.py[39m[m[K[1B11294 ynavon26  [17;28H[36m9M  2[39m[m188 [36m 1[39m[m480 [32mR [39m[m 1.3[17;61H07 htop[K[18;3H201[18;46H1.3[18;59H2.40[1B 2428[19;26H[36m208M 31[39m[m580 [36m 2[39m[m476[6C7[6C[0;1m[31m 1h[39m[m49:14 /opt/sge/bin/lx-amd64/sge_e[1;1H[16;19r[16;1HM[1;20r[2;16H[0;1m[30m3.8[2;29H[0m[31m|[0;1m[30m [7C0.7[2;52H[0m[31m|[0;1m[30m     17.1[2;81H6.3[5;59H4.6[5;73H[0m[32m|[31m|[0;1m[30m     18.4[6;29H [6;40H0[6;50H [6;61H0[6;72H[0m[32m|[10C[0;1m[30m7[8;66H[32m1[10;70H[36m3[13;46H[0m[30m[46m6.6[13;61H40[14;4H[39;49m[m20[14;45H24.4[7C[0;1m[31m6h[39m[m11:5[15;5H2[15;43HS 18.5[15;58H32:29[1B 8618 [0;1m[30mtwaltz    [39m[m 20   0 [0;1m[31m56.4G 29.0G [0m[36m 462M [39m[mS 17.1 23.1 [0;1m[31m 5h[39m[m01:47 [32mpython conv4.py[18;62H[39m[m9[19;46H0.0[H[2;16H[0;1m[30m2.4[2;29H[0m[32m|[31m|[7C[0;1m[30m1.3[2;50H         0.0[2;72H         0.0[5;51H 	  3.3[5;74H[0m[32m|||[31m||[0;1m[30m 43.0[6;29H[0m[31m|[6;40H[0;1m[30m7[6;50H[0m[32m||[31m|[0;1m[30m     16.7[6;81H1.3[7;50H[0m[32m|[7;61H[0;1m[30m7[7;72H[0m[32m|[31m|	[0;1m[30m1.3[8;66H[32m2[10;70H[36m4[13;46H[0m[30m[46m7.9[13;62H1[14;5H[39;49m[m2[14;43H[32mR [39m[m43.5[14;58H32:30[15;4H19[15;46H7.8[7C[0;1m[31m5h[39m[m22:27[16;5H5[16;45H 4.0[7C[0;1m[31m6h[39m[m01:2[1B11294 ynavon26  [17;25H[36m 119M  2[39m[m204 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.11 htop[K[1B 8614 [0;1m[30mtwaltz    [18;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 19:11.61 [32mpython conv4.py[19;3H[39m[m816[19;26H[36m944M 32[39m[m864 [36m 2[39m[m624[6C7[6C[0;1m[31m 1h[39m[m03:11 /usr/bin/python /usr/bin/go[1;1H[2;16H[0;1m[30m1.9[2;29H[0m[31m|[0;1m[30m [7C0.7[5;29H[0m[32m|[5;40H[0;1m[30m7[5;51H[0m[31m|[7C[0;1m[30m4.0[5;81H2.5[6;51H[0m[31m|[0;1m[30m       1.3[6;81H2.0[7;51H[0m[32m|[31m|[0;1m[30m     17.2[7;72H  	0.0[8;66H[32m1[10;70H[36m6[13;46H[0m[30m[46m6.6[13;62H2[14;43H[39;49m[mS 41[14;62H1[15;4H34[15;46H6.5[7C[0;1m[31m7h[39m[m15:3[16;48H6[1B 8619 [0;1m[30mtwaltz    [17;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 5h[39m[m22:27 [32mpython conv4.py[1B[39m[m11294 ynavon26  [18;25H[36m 119M  2[39m[m204 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.13 htop[K[1B 2549[19;25H[36m24[39m[m904 [36m 5[39m[m756   50[19;55H28:55.66 condor_procd -A /var/condor[1;1H[2;18H[0;1m[30m8[2;29H[0m[32m|[31m|[7C[0;1m[30m1.3[2;50H[0m[32m||[31m|[0;1m[30m     16.4[2;72H[0m[32m|[31m|	[0;1m[30m3.3[3;72H[0m[32m|[10C[0;1m[30m7[4;29H[0m[32m|[31m|[7C[0;1m[30m6.6[4;50H[0m[32m||[31m|[0;1m[30m     17.1[5;7H[0m[32m|[5;18H[0;1m[30m7[5;29H [5;40H0[5;50H  	  0[5;74H[0m[31m|[0;1m[30m     11.3[6;50H  	  0.0[6;81H1.3[7;61H1[8;66H[32m2[9;62H[39m29 [36m2.14 [0m[36m2.13[10;70H[0;1m[36m7[13;46H[0m[30m[46m9.2[13;62H3[14;4H[39;49m[m34[14;45H17.1[7C[0;1m[31m7h[39m[m15:37[15;4H18[15;46H7.1[7C[0;1m[31m5h[39m[m01:4[16;5H6[16;45H17.1[16;58H58:20[17;4H22[17;43H[32mR [39m[m13.2[7C[0;1m[31m6h[39m[m32:31[1B 2428 [0;1m[30mroot      [18;26H[0m[36m208M 31[39m[m568 [36m 2[39m[m476 S  6.6[6C[0;1m[31m 1h[39m[m49:14 /opt/sge/bin/lx-amd64/sge_e[19;2H8615 [0;1m[30mtwaltz[19;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  4.0 23.1 [0;1m[31m 6h[39m[m01:27 [32mpython conv4.py[39m[m[K[H[2;7H[32m|[31m||[6C[0;1m[30m2.5[2;29H[0m[31m|[0;1m[30m [7C0.1[2;51H[0m[31m|[0;1m[30m       7.0[2;81H1.8[3;7H[0m[32m|[3;18H[0;1m[30m1[3;50H[0m[32m|[31m|[7C[0;1m[30m2.2[3;73H[0m[31m|	[0;1m[30m4.6[4;30H [7C0.1[4;59H3.4[4;72H[0m[32m|[31m|	[0;1m[30m4.3[5;7H[0m[31m|[5;18H[0;1m[30m1[5;50H[0m[32m|[5;61H[0;1m[30m3[5;73H[0m[31m|[0;1m[30m       9.5[6;40H5[6;50H[0m[32m|[31m|[7C[0;1m[30m4.4[6;73H[0m[32m|[31m|[0;1m[30m     13.8[7;51H[0m[31m|[0;1m[30m       4.6[7;72H[0m[32m|[31m|	[0;1m[30m1.5[9;62H[39m32 [36m2.12 [0m[36m2.12[10;67H[0;1m[36m2:09[13;43H[0m[30m[46mR 67.8[13;61H51[14;4H[39;49m[m22[14;46H4.0[7C[0;1m[31m6h[39m[m32:32[15;5H6[15;46H3.4[7C[0;1m[31m6h[39m[m58:21[16;5H7[16;46H1.3[7C[0;1m[31m3h[39m[m10:46[17;4H18[17;43HS  6.8[7C[0;1m[31m5h[39m[m01:48[1B 8619 [0;1m[30mtwaltz[18;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  6.7 23.1 [0;1m[31m 5h[39m[m22:28 [32mpython conv4.py[39m[m[K[19;4H20[19;48H8[19;58H11:5[H[19B[J[34h[?25h[?1000l[20;1H[?1049l[?1l>kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ aI(`I([2Phtopquotapython dynamobi-full.py[5Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cscreen -ls[1Pr[K[4Plscd ..at node_sampling_combined_largge2_heuristic.csv M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cheur[7P[C[C[C[C[C[C[C[C[C[CM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd resultsls[Kcd link-predictionexit[Kqrsh -q gpu -l gpu=1logout[Kscreen -Lrm screenlog.0ls[Kscreen -lswiper[Kls[5Pquotascreen -rlscat screenlog.0ls[Kcd ..at node_sampling_combined_largge2_heuristic.csv M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd resultslink-prediction[12Plogoutpython dynamobi-full.pyconda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[12Pd
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cqrsh -q gpu -l gpu=1logout[Kscreen -ls[1PL[Kcat node_sampling_combined_largge_node2vec.csv [C[C[C[1@heuristi[C[C[C[C[C[CM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cheur[6P[C[C[C[C[C[C[C[C[C[CM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd resultslink-predictionexit[Kscreen -ls[6Pexitpython dynamobi-full.py[13Pgit statuspush -u origin masterremote add origin https://ggithub.com/yoavnavon/link-prediction.gitM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Pcommit -m"init commit"
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cstatus[Kadd --all[3Pstatusrm node2vecdeepwalk[1Pgit status[2Pinit[5Ppwdython dynamobi-full.py[5Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[20Pscreen -ls
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cqrsh -q gpu -l gpu=1python dynamobi-full.py[5Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cqrsh -q gpu -l gpu=1exit[Kpython dynamobi-full.py[3Pcat[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3@python[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cconda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[12Pd
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[Kscreen -lsqrsh -q gpu -l gpu=1exit[Kquotascreen -lspython dynamobi-full.py[13Pscreen -lspython dynamobi-full.py[5Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7Ppython dynamobi-full.py
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cls[Krm small*ls[Kcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cscreen -lsqrsh -q gpu -l gpu=1[11Pscreen lspython dynamobi-full.py[5Pcd link-predictiononda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cscreen -lsqrsh -q gpu -l gpu=1cat link-prediction/results/nodde_sample_heuristic.csv[C[C[C[C[C[C[C[C[C[C[1Pnode2vec.csvM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cpython dynamobi-full.py[5Pcd link-predictionls[Kpython dynamobi-full.pyconda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cat link-prediction/results/nodde_sample_deepwalk.csv[C[C[C[C[C[C[C[C[C[Cheuristic.csv[C[C[C[C[C[C[C[C[C[C[1Pnode2vec.csvM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clogout[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cscreen -lsS 31298 -X kill10197[C[C[C[C[C[C[C[Cls[K[Kqrsh -q gpu -l gpu=1exit[Kpython dynamobi-full.py[5Pcd link-predictionls[Kpython dynamobi-full.pyconda activate link-prediction M[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccat link-prediction/results/ranndom_sample_3M_node2vec_.csv[C[C[C[C[C[C[C[C[C[C[C[C[3Pnode2vec_.csvM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccat results/random_sample_node22vec_.csvM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cheuristic_.csvM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cnode2[1Pvec_.csvM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cexit[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccat link-prediction/results/ranndom_sample_node2vec_.csv[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
-[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Khtop
-(B)0[?1049h[1;20r[m[4l[?1h=[?25l[39;49m[?1000h[39;49m[m[H[J[1B  [36m1  [39m[0;1m[[30m         0.0%[39m][m    [36m7  [39m[0;1m[[30m         0.0%[39m][m   [36m13 [39m[0;1m[[30m         0.0%[39m][m    [36m19 [39m[0;1m[[30m         0.0%[39m][3;3H[0m[36m2  [39m[0;1m[[0m[31m|||||||100.0%[39m[0;1m][m    [36m8  [39m[0;1m[[30m         0.0%[39m][m   [36m14 [39m[0;1m[[30m         0.0%[39m][m    [36m20 [39m[0;1m[[30m         0.0%[39m][4;3H[0m[36m3  [39m[0;1m[[30m         0.0%[39m][m    [36m9  [39m[0;1m[[30m         0.0%[39m][m   [36m15 [39m[0;1m[[30m         0.0%[39m][m    [36m21 [39m[0;1m[[30m         0.0%[39m][5;3H[0m[36m4  [39m[0;1m[[30m         0.0%[39m][m    [36m10 [39m[0;1m[[30m         0.0%[39m][m   [36m16 [39m[0;1m[[30m         0.0%[39m][m    [36m22 [39m[0;1m[[30m         0.0%[39m][6;3H[0m[36m5  [39m[0;1m[[30m         0.0%[39m][m    [36m11 [39m[0;1m[[30m         0.0%[39m][m   [36m17 [39m[0;1m[[30m         0.0%[39m][m    [36m23 [39m[0;1m[[30m         0.0%[39m][7;3H[0m[36m6  [39m[0;1m[[30m         0.0%[39m][m    [36m12 [39m[0;1m[[30m         0.0%[39m][m   [36m18 [39m[0;1m[[30m         0.0%[39m][m    [36m24 [39m[0;1m[[30m         0.0%[39m][8;3H[0m[36mMem[39m[0;1m[[0m[32m|||||||||[33m||||||||||||[0;1m[30m    30.9G/126G[39m][m   [36mTasks: [0;1m[36m38[0m[36m, [0;1m[32m127[0m[32m thr[36m; [0;1m[32m1[0m[36m running[9;3HSwp[39m[0;1m[[30m                              0K/0K[39m][m   [36mLoad average: [39m[0;1m1.12 [36m2.05 [0m[36m2.10 [10;46HUptime: [0;1m[36m29 days, 08:02:20[2B[0m[30m[42m  PID USER      PRI  NI  VIRT   RES   SHR S [30m[46mCPU% [30m[42mMEM%   TIME+  Command                    [13;1H[30m[46m11320 ynavon26   20   0  119M  2060  1368 R 60.0  0.0  0:00.05 htop                       [14;5H[39;49m[m1 [0;1m[30mroot      [39m[m 20   0 [36m 186M  3[39m[m220 [36m 1[39m[m496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[15;3H711 [0;1m[30mroot      [39m[m 20   0 [36m 145M 79[39m[m928 [36m79[39m[m540 S  0.0  0.1  1:02.01 /usr/lib/systemd/systemd-jo[16;3H755 [0;1m[30mroot      [39m[m 20   0 [36m44[39m[m996 [36m 1[39m[m208   448 S  0.0  0.0  0:13.32 /usr/lib/systemd/systemd-ud[17;2H1197 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.10 [32m/opt/sge/bin/lx-amd64/sge_s[18;2H[39m[m1198 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.12 [32m/opt/sge/bin/lx-amd64/sge_s[19;2H[39m[m1199 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.19 [32m/opt/sge/bin/lx-amd64/sge_s[20;1H[39m[mF1[30m[46mHelp  [39;49m[mF2[30m[46mSetup [39;49m[mF3[30m[46mSearch[39;49m[mF4[30m[46mFilter[39;49m[mF5[30m[46mTree  [39;49m[mF6[30m[46mSortBy[39;49m[mF7[30m[46mNice -[39;49m[mF8[30m[46mNice +[39;49m[mF9[30m[46mKill  [39;49m[mF10[30m[46mQuit          [Z [Z[1@ [H[39;49m[m[9;62H[0;1m03 [36m2.01 [0m[36m2.09[10;70H[0;1m[36m1[3B[39m[m11320 ynavon26   20   0 [36m 119M  2[39m[m060 [36m 1[39m[m368 [32mR [39m[m60.0  0.0  0:00.05 htop[K[1B[30m[46m    1 root       20   0  186M  3220  1496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[1;1H[39;49m[m[2;50H[32m|[2;59H[0;1m[30m4.9[3;7H[0m[32m|[31m|[0;1m[30m       1.1%[3;50H[0m[32m|[3;61H[0;1m[30m5[4;7H[0m[31m|[4;18H[0;1m[30m5[4;50H[0m[32m|[4;59H[0;1m[30m1.1[4;72H[0m[32m|[31m|	[0;1m[30m8[5;29H[0m[31m|[5;40H[0;1m[30m5[5;50H[0m[32m|[5;61H[0;1m[30m5[5;72H[0m[32m|[10C[0;1m[30m5[6;29H[0m[31m|[6;40H[0;1m[30m5[6;72H[0m[32m|[31m|	[0;1m[30m1.6[7;29H[0m[31m||[6C[0;1m[30m13[7;50H[0m[32m|[7;61H[0;1m[30m5[7;72H[0m[32m|[10C[0;1m[30m5[10;70H[36m2[13;33H[39m[m184 [36m 1[39m[m480 [32mR [39m[m 1.1[13;62H7[1B    1 [0;1m[30mroot      [39m[m 20   0 [36m 186M  3[39m[m220 [36m 1[39m[m496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[15;1H[30m[46m  711 root       20   0  145M 79928 79540 S  0.0  0.1  1:02.01 /usr/lib/systemd/systemd-jo[1;1H[39;49m[m[14B  711 [0;1m[30mroot      [39m[m 20   0 [36m 145M 79[39m[m928 [36m79[39m[m540 S  0.0  0.1  1:02.01 /usr/lib/systemd/systemd-jo[16;1H[30m[46m  755 root       20   0 44996  1208   448 S  0.0  0.0  0:13.32 /usr/lib/systemd/systemd-ud[1;1H[39;49m[m[15B  755 [0;1m[30mroot      [39m[m 20   0 [36m44[39m[m996 [36m 1[39m[m208   448 S  0.0  0.0  0:13.32 /usr/lib/systemd/systemd-ud[17;1H[30m[46m 1197 root       20   0  110M 31596  2432 S  0.0  0.0  0:00.10 /opt/sge/bin/lx-amd64/sge_s[1;1H[39;49m[m[15B[30m[46m  755 root       20   0 44996  1208   448 S  0.0  0.0  0:13.32 /usr/lib/systemd/systemd-ud[17;1H[39;49m[m 1197 [0;1m[30mroot      [39m[m 20   0 [36m 110M 31[39m[m596 [36m 2[39m[m432 S  0.0  0.0  0:00.10 [32m/opt/sge/bin/lx-amd64/sge_s[1;1H[39m[m[10;70H[0;1m[36m3[5B[0m[30m[46m  711 root       20   0  145M 79928 79540 S  0.0  0.1  1:02.01 /usr/lib/systemd/systemd-jo[16;1H[39;49m[m  755 [0;1m[30mroot      [39m[m 20   0 [36m44[39m[m996 [36m 1[39m[m208   448 S  0.0  0.0  0:13.32 /usr/lib/systemd/systemd-ud[1;1H[13B[30m[46m    1 root       20   0  186M  3220  1496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[15;1H[39;49m[m  711 [0;1m[30mroot      [39m[m 20   0 [36m 145M 79[39m[m928 [36m79[39m[m540 S  0.0  0.1  1:02.01 /usr/lib/systemd/systemd-jo[1;1H[2;59H[0;1m[30m0.6[3;18H2[3;61H6[3;72H[0m[32m|[10C[0;1m[30m6[4;7H [4;18H0[4;50H [4;59H0.0[21C5[5;7H[0m[31m|[5;18H[0;1m[30m6[5;29H [5;40H0[5;59H5.3[5;72H 	0.0[6;29H [6;40H0[6;73H 	1.2[7;40H5[7;50H [7;61H0[21C6[6B[0m[30m[46m11320 ynavon26   20   0  119M  2184  1480 R  1.2  0.0  0:00.09 htop                       [14;1H[39;49m[m    1 [0;1m[30mroot      [39m[m 20   0 [36m 186M  3[39m[m220 [36m 1[39m[m496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[1;1H[10;70H[0;1m[36m4[3B[39m[m11320 ynavon26   20   0 [36m 119M  2[39m[m184 [36m 1[39m[m480 [32mR [39m[m 1.2  0.0  0:00.09 htop[K[1B[30m[46m    1 root       20   0  186M  3220  1496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[1;1H[39;49m[m[12B[30m[46m11320 ynavon26   20   0  119M  2184  1480 R  1.2  0.0  0:00.09 htop                       [14;1H[39;49m[m    1 [0;1m[30mroot      [39m[m 20   0 [36m 186M  3[39m[m220 [36m 1[39m[m496 S  0.0  0.0  6:21.46 /usr/lib/systemd/systemd --[1;1H[2;51H[31m|[7C[0;1m[30m5.3[3;16H0.8[3;61H4[3;73H[0m[31m|	[0;1m[30m1.2[4;50H[0m[32m|[4;61H[0;1m[30m8[4;73H 	0.8[5;7H [5;18H0[5;59H2.7[6;29H[0m[31m|[6;40H[0;1m[30m8[6;50H[0m[32m|[6;59H[0;1m[30m2.7[7;40H3[42C8[10;70H[36m6[13;46H[0m[30m[46m0.8[13;61H11[19;48H[39;49m[m4[19;61H20[H[2;59H[0;1m[30m6.1[3;7H[0m[31m|[0;1m[30m [3;18H7[3;51H[0m[31m|[7C[0;1m[30m2.0[3;73H 	0.7[4;61H7[4;72H 	0.0[5;51H[0m[31m|[5;61H[0;1m[30m0[6;29H [6;40H0[6;59H3.3[6;81H0.7[7;37H 9.9[7;50H[0m[32m|[7;59H[0;1m[30m1.3[7;72H 	0.0[9;60H[39m0.94 [36m1.98 [0m[36m2.08[10;70H[0;1m[36m8[13;48H[0m[30m[46m7[13;62H2[19;48H[39;49m[m0[H[2;50H[0;1m[30m  	  0.0[3;7H[0m[32m|[31m|[7C[0;1m[30m1.3[3;51H 	  0.7[5;59H6.8[6;29H[0m[31m|[6;40H[0;1m[30m7[6;59H0.7[6;72H 	0.0[7;37H13.2[7;51H[0m[31m|[7C[0;1m[30m5.2[8;66H[32m3[10;70H[36m9[13;46H[0m[30m[46m1.3[13;62H4[H[39;49m[m[3;72H[0;1m[30m 	0.0[4;29H[0m[31m|[4;38H[0;1m[30m2[5;61H3[6;51H[0m[31m|[7C[0;1m[30m1.3[6;72H[0m[32m|[6;81H[0;1m[30m1.3[7;38H2.5[7;51H [7;61H9[7;72H[0m[32m|[10C[0;1m[30m7[10;69H[36m31[13;62H[0m[30m[46m6[H[39;49m[m[3;50H[0;1m[30m [3;61H0[3;72H[0m[32m|[10C[0;1m[30m7[4;29H [4;38H0[5;59H5.4[6;51H 	  2.0[7;38H3.9[7;61H3[7;72H 	0.0[8;66H[32m1[9;62H[39m87 [36m1.95 [0m[36m2.06[10;70H[0;1m[36m2[3B[0m[30m[46m 8007 twaltz  [13;25H56.4G 29.0G  462M S 18.5 23.1 70h05:55 python conv4.py[14;2H[39;49m[m8615 [0;1m[30mtwaltz[14;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  7.9 23.1 [0;1m[31m 6h[39m[m01:30 [32mpython conv4.py[39m[m[K[1B11320 ynavon26  [15;27H[36m19M  2[39m[m184 [36m 1[39m[m480 [32mR [39m[m 1.3  0.0  0:00.18 htop[K[1B 8622 [0;1m[30mtwaltz[16;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 6h[39m[m32:33 [32mpython conv4.py[39m[m[K[1B 8616 [0;1m[30mtwaltz[17;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 6h[39m[m58:21 [32mpython conv4.py[39m[m[K[1B 8618 [0;1m[30mtwaltz[18;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 5h[39m[m01:48 [32mpython conv4.py[39m[m[K[1B    1[19;27H[36m86M  3[39m[m220 [36m 1[39m[m496[19;56H6:21.46 /usr/lib/systemd/systemd --[1;1H[2;72H[32m|[2;81H[0;1m[30m2[3;50H[0m[32m|[3;61H[0;1m[30m7[3;72H 	0.0[5;50H  	  0.0[6;51H[0m[31m|[7C[0;1m[30m6.3[6;81H0.7[7;40H8[7;59H2.6[7;72H[0m[32m|[10C[0;1m[30m7[10;70H[36m4[13;46H[0m[30m[46m7.2[13;62H6[14;46H[39;49m[m9.2[15;61H20[16;4H16[16;58H58:21[17;5H9[17;46H1.3[7C[0;1m[31m5h[39m[m22:28[18;4H22[18;56H[0;1m[31m6h[39m[m32:33[1B 1159[19;27H[36m10M 31[39m[m596 [36m 2[39m[m432[6C7[7C0:03.42 /opt/sge/bin/lx-amd64/sge_s[1;1H[2;81H[0;1m[30m5.2[3;72H[0m[32m|[3;81H[0;1m[30m1.3[4;50H [4;61H0[6;59H8.2[6;73H[0m[31m|	[0;1m[30m1.3[7;38H1.2[7;50H [7;59H0.0[7;72H 	0.0[10;70H[36m5[13;46H[0m[30m[46m8.5[15;62H[39;49m[m2[16;46H0.7[17;4H22[17;46H0.7[7C[0;1m[31m6h[39m[m32:33[18;4H14[18;55H19:11.77[1B 8634 [0;1m[30mtwaltz[19;25H[31m56.4G 29.0G [0m[36m 462M 	[C[39m[m23.1 [0;1m[31m 7h[39m[m15:38 [32mpython conv4.py[39m[m[K[H[15;19r[15;1H[2L[1;20r[2;50H[32m|[31m|[7C[0;1m[30m5.3[2;81H4.0[3;7H[0m[31m|[0;1m[30m [7C0.7[3;50H [3;61H0[3;81H0.7[4;29H[0m[32m|[31m|[7C[0;1m[30m6.6[4;50H[0m[32m|[31m|[7C[0;1m[30m1.3[5;72H[0m[32m|[31m|	[0;1m[30m1.3[6;29H [6;40H0[6;59H3.4[6;72H  	0.0[7;40H8[7;50H[0m[32m|[7;61H[0;1m[30m7[7;72H[0m[32m|[10C[0;1m[30m7[8;66H[32m2[9;63H[39m8 [36m1.93[1B37[13;46H[0m[30m[46m9.1[14;43H[39;49m[32mR [39m[m10.6[1B 2428 [0;1m[30mroot      [39m[m 20   0 [36m 208M 31[39m[m576 [36m 2[39m[m476 S  6.6  0.0 [0;1m[31m 1h[39m[m49:14 /opt/sge/bin/lx-amd64/sge_e[16;2H8618 [0;1m[30mtwaltz    [39m[m 20   0 [0;1m[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 5h[39m[m01:48 [32mpython conv4.py[17;46H[39m[m0.7[17;62H3[H[2;59H[0;1m[30m9.0[2;81H5.9[3;7H[0m[32m|[31m|[7C[0;1m[30m1.3[4;29H  [7C0.0[4;51H 	  0.7[5;72H  	0.0[6;29H[0m[31m|[6;40H[0;1m[30m7[6;50H  	  0.0[6;72H[0m[32m|[10C[0;1m[30m7[7;38H4.5[7;72H[0m[31m|[10;70H[0;1m[36m8[13;45H[0m[30m[46m20.5[13;62H7[14;46H[39;49m[m1.2[1B 8634 [0;1m[30mtwaltz[15;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  2.0 23.1 [0;1m[31m 7h[39m[m15:38 [32mpython conv4.py[39m[m[K[1B11320 ynavon26  [16;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.25 htop[K[1B 8622 [0;1m[30mtwaltz    [17;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 6h[39m[m32:33 [32mpython conv4.py[18;5H[39m[m4[18;55H19:11.78[1B 2639 [0;1m[30mroot  [19;25H[0m[36m 944M 32[39m[m864 [36m 2[39m[m624 	  0.0 41:00.96 [32m/usr/bin/python /usr/bin/go[1;1H[39m[m[15;19r[15;1HM[1;20r[3;72H[31m|[4;7H[32m|[4;18H[0;1m[30m7[4;50H [4;61H0[5;72H[0m[32m|[10C[0;1m[30m7[6;29H [6;40H0[6;81H1.3[7;38H3.8[7;72H[0m[32m|[8;66H[0;1m[32m1[10;69H[36m40[14;43H[39m[mS 10.6[1B11320 ynavon26   20   0 [36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.27 htop[16;4H16[16;46H1.3[7C[0;1m[31m6h[39m[m58:21[1B 8617 [0;1m[30mtwaltz    [17;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 3h[39m[m10:47 [32mpython conv4.py[19;62H[39m[m9[H[2;7H[32m|[2;18H[0;1m[30m7[2;51H 	  0.7[2;81H4.6[3;7H[0m[31m|[0;1m[30m [7C0.7[3;50H[0m[32m|[31m|[7C[0;1m[30m7.5[3;72H[0m[32m|[4;7H[0;1m[30m [4;18H0[4;50H[0m[32m|[4;61H[0;1m[30m7[6;29H[0m[31m|[6;40H[0;1m[30m7[6;81H0.7[7;31H[0m[31m|[6C[0;1m[30m7[7;59H1.3[7;72H 	0.0[10;70H[36m1[13;45H[0m[30m[46m18[1B[39;49m[m 9.9[14;62H1[1B 8622 [0;1m[30mtwaltz    [15;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 6h[39m[m32:33 [32mpython conv4.py[16;5H[39m[m8[16;56H[0;1m[31m5h[39m[m01:48[17;4H34[17;56H[0;1m[31m7h[39m[m15:38[1B11320 ynavon26  [18;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.28 htop[K[19;5H7[19;55H[0;1m[31m 3h[39m[m10:47[H[2;7H[0;1m[30m [2;18H0[2;50H [2;61H0[2;73H[0m[31m|	[0;1m[30m6.5[3;7H[0m[32m|[31m|[7C[0;1m[30m1.3[3;59H6.2[7;31H [6C3.1[7;59H0.7[7;72H[0m[32m|[10C[0;1m[30m7[9;63H[39m1 [36m1.90 [0m[36m2.05[10;70H[0;1m[36m3[14;46H[39m[m7[1B11320 ynavon26  [15;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.30 htop[K[16;4H22[16;46H0.7[7C[0;1m[31m6h[39m[m32:33[17;4H18[17;46H0.7[7C[0;1m[31m5h[39m[m01:4[1B 8634 [0;1m[30mtwaltz    [18;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 7h[39m[m15:38 [32mpython conv4.py[H[39m[m[2;7H[31m||[6C[0;1m[30m11.1[2;50H[0m[32m|[2;61H[0;1m[30m7[2;73H 	5.3[3;59H2.0[3;72H 	0.0[5;50H[0m[32m|[31m|[7C[0;1m[30m3.3[7;30H [6C 6.0[7;59H1.3[10;70H[36m4[13;46H[0m[30m[46m7.8[13;62H8[14;46H[39;49m[m8.6[15;46H2.0[15;62H3[H[2;18H[0;1m[30m9[2;81H6.0[3;7H[0m[31m|[0;1m[30m [7C0.7[3;51H 	  0.7[4;7H[0m[32m|[4;18H[0;1m[30m7[4;59H1.3[4;72H[0m[32m|[31m|	[0;1m[30m6.1[5;50H  	  0.0[5;72H 	0.0[6;81H1.3[7;29H [7;38H0[7;59H0.7[7;72H 	0.0[10;70H[36m6[13;46H[0m[30m[46m8.5[15;46H[39;49m[m0.7[15;62H4[18;4H17[18;56H[0;1m[31m3h[39m[m10:47[19;5H6[19;56H[0;1m[31m6h[39m[m58:21[H[2;16H[0;1m[30m2.5[2;81H5.3[3;7H[0m[32m|[31m|[7C[0;1m[30m1.3[4;7H [4;18H0[4;59H0.7[4;81H8.2[6;81H0.7[7;50H [7;61H0[7;72H[0m[32m|[10C[0;1m[30m7[9;62H[39m74 [36m1.87 [0m[36m2.04[10;70H[0;1m[36m7[13;46H[0m[30m[46m9.1[14;46H[39;49m[m9.2[1B 8622 [0;1m[30mtwaltz    [15;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 6h[39m[m32:33 [32mpython conv4.py[16;4H[39m[m17[16;46H1.3[7C[0;1m[31m3h[39m[m10:47[17;5H6[17;46H1.3[7C[0;1m[31m6h[39m[m58:21[18;5H9[18;46H1.3[7C[0;1m[31m5h[39m[m22:28[1B11320 ynavon26  [19;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.35 htop[K[H[2;59H[0;1m[30m1.3[4;50H [4;61H0[4;73H 	2.7[5;50H[0m[32m|[5;61H[0;1m[30m7[5;72H[0m[32m|[10C[0;1m[30m7[6;29H [6;40H0[6;73H[0m[31m|	[0;1m[30m3.4[7;50H[0m[32m|[7;61H[0;1m[30m7[7;81H1.3[10;70H[36m9[13;46H[0m[30m[46m7.8[13;62H9[14;46H[39;49m[m8.6[1B11320 ynavon26  [15;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 2.0  0.0  0:00.38 htop[K[16;4H22[16;56H[0;1m[31m6h[39m[m32:33[17;5H7[17;46H0.7[7C[0;1m[31m3h[39m[m10:47[18;46H0.7[1B 8618 [0;1m[30mtwaltz    [19;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 5h[39m[m01:48 [32mpython conv4.py[H[39m[m[2;16H[0;1m[30m1.9[2;51H[0m[31m|[7C[0;1m[30m9.0[2;72H [2;81H0.0[3;16H2.0[3;72H[0m[32m|[3;81H[0;1m[30m5.9[4;50H[0m[32m|[4;59H[0;1m[30m1.3[4;72H [4;81H0.0[5;72H 	0.0[6;29H[0m[31m|[6;40H[0;1m[30m7[6;50H[0m[32m|[6;61H[0;1m[30m7[6;72H  	0.0[7;72H [7;81H0.0[10;69H[36m50[13;45H[0m[30m[46m21.1[14;45H[39;49m[m10[1B1.3[15;61H40[16;4H17[16;56H[0;1m[31m3h[39m[m10:47[17;4H22[17;56H[0;1m[31m6h[39m[m32:33[H[2;16H[0;1m[30m3.2[2;59H7.6[2;72H[0m[32m|[10C[0;1m[30m7[3;7H[0m[31m|[0;1m[30m [7C0.7[3;50H[0m[31m|[3;81H[0;1m[30m4.6[4;59H0.7[4;72H[0m[31m|[10C[0;1m[30m7[5;51H[0m[31m|[7C[0;1m[30m1.3[7;29H[0m[32m|[7;40H[0;1m[30m7[7;50H [7;61H0[8;66H[32m4[9;63H[39m6 [36m1.85 [0m[36m2.03[10;70H[0;1m[36m2[13;43H[0m[30m[46mR 18.5[14;45H[39;49m[m 9.9[14;62H2[1B 8617 [0;1m[30mtwaltz    [15;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 3h[39m[m10:47 [32mpython conv4.py[1B[39m[m11320 ynavon26  [16;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.41 htop[K[H[15;18r[15;1HM[1;20r[2;16H[0;1m[30m1.8[2;50H  	  0.0[3;7H[0m[32m|[31m|[7C[0;1m[30m1.3[3;50H[0m[32m|[31m|[7C[0;1m[30m6.2[3;81H0.7[4;72H 	0.0[5;7H[0m[32m|[5;18H[0;1m[30m7[5;51H 	  0.7[5;72H[0m[32m|[5;81H[0;1m[30m5.3[6;29H [6;40H0[6;59H1.3[7;29H [7;40H0[7;50H[0m[32m|[7;61H[0;1m[30m7[8;66H[32m1[10;70H[36m3[13;43H[0m[30m[46mS 17.8[14;46H[39;49m[m7[1B11320 ynavon26   20   0 [36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.43 htop[16;5H9[16;56H[0;1m[31m5h[39m[m22:28[1B 8617 [0;1m[30mtwaltz    [17;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 3h[39m[m10:47 [32mpython conv4.py[H[39m[m[2;16H[0;1m[30m3.2[2;73H[0m[31m|	[0;1m[30m1.3[3;61H8[3;72H 	0.0[4;7H[0m[32m|[4;18H[0;1m[30m7[4;50H[0m[31m|[5;7H|[5;59H[0;1m[30m1.3[6;29H[0m[31m|[6;40H[0;1m[30m7[6;59H0.7[7;51H[0m[31m|[7C[0;1m[30m1.3[8;66H[32m2[10;70H[36m5[13;48H[0m[30m[46m1[13;59H6:00[2B[39;49m[m5[16;46H0.7[H[2;16H[0;1m[30m4.6[2;72H  	0.0[3;59H3.4[3;72H[0m[32m|[10C[0;1m[30m7[4;7H [4;18H0[4;50H[0m[32m|[4;59H[0;1m[30m2.0[4;72H[0m[32m|[10C[0;1m[30m7[5;7H [5;18H0[5;29H[0m[32m|[31m|[7C[0;1m[30m1.3[5;50H [5;59H0.0[5;81H3[6;50H [6;61H0[6;72H[0m[32m|[6;81H[0;1m[30m2[7;51H 	  0.7[9;63H[39m0 [36m1.82 [0m[36m2.02[10;70H[0;1m[36m6[13;48H[0m[30m[46m2[2B[39;49m[m 2549 [0;1m[30mroot      [15;25H[0m[36m24[39m[m904 [36m 5[39m[m756   504 S  2.0[6C28:55.69 condor_procd -A /var/condor[16;1H11320 ynavon26  [16;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.47 htop[K[17;5H9[17;46H1.3[7C[0;1m[31m5h[39m[m22:28[18;4H17[18;46H1.3[7C[0;1m[31m3h[39m[m10:47[19;5H6[19;56H[0;1m[31m6h[39m[m58:21[H[2;18H[0;1m[30m4[2;72H[0m[32m|[10C[0;1m[30m7[3;8H [7C0.7[3;50H  	  0.0[3;81H1.3[4;51H[0m[31m|[7C[0;1m[30m7.5[5;29H  [7C0.0[5;50H[0m[32m|[5;61H[0;1m[30m7[5;72H [5;81H0.0[6;50H[0m[32m|[6;61H[0;1m[30m7[6;81H5.3[8;66H[32m1[10;70H[36m8[13;46H[0m[30m[46m9.1[14;46H[39;49m[m9.2[1B 8622 [0;1m[30mtwaltz[15;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 6h[39m[m32:33 [32mpython conv4.py[39m[m[K[1B 8618 [0;1m[30mtwaltz    [16;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 5h[39m[m01:48 [32mpython conv4.py[1B[39m[m11320 ynavon26  [17;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.48 htop[K[18;5H9[18;46H0.7[7C[0;1m[31m5h[39m[m22:28[19;5H7[19;56H[0;1m[31m3h[39m[m10:47[H[15;19r[15;1HM[1;20r[2;16H[0;1m[30m3.2[3;7H[0m[31m|[3;16H[0;1m[30m1.3[3;81H0.7[4;59H6.9[7;50H [7;61H0[8;66H[32m2[10;70H[36m9[13;43H[0m[30m[46mR 17.8[14;46H[39;49m[m8.6[1B 8616 [0;1m[30mtwaltz    [39m[m 20   0 [0;1m[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 6h[39m[m58:21 [32mpython conv4.py[16;46H[39m[m0.7[17;46H0.7[18;62H9[H[2;16H[0;1m[30m0.6[2;50H[0m[32m|[31m|[7C[0;1m[30m6.1[3;7H[0m[32m|[31m|[1B|[4;18H[0;1m[30m7[4;29H[0m[31m|[4;40H[0;1m[30m7[4;59H1.3[5;50H [5;61H0[6;59H1.3[7;50H[0m[32m|[7;61H[0;1m[30m7[8;66H[32m1[2B[36m3:01[13;43H[0m[30m[46mS[13;62H1[2B[39;49m[m11320 ynavon26  [15;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 2.0  0.0  0:00.52 htop[K[16;4H17[16;46H1.3[7C[0;1m[31m3h[39m[m10:47[17;5H9[17;58H22:2[1B 2428 [0;1m[30mroot      [18;26H[0m[36m208M 31[39m[m588 [36m 2[39m[m476 S [18;55H[0;1m[31m 1h[39m[m49:14 /opt/sge/bin/lx-amd64/sge_e[19;5H6[19;48H0[7C[0;1m[31m6h[39m[m58:21[H[2;16H[0;1m[30m2[2;59H7.4[3;7H[0m[31m|[0;1m[30m [7C0.7[3;73H[0m[31m|	[0;1m[30m1.3[4;7H [4;18H0[4;29H [4;40H0[4;50H  	  0.0[5;50H[0m[32m|[5;61H[0;1m[30m7[6;29H [6;40H0[6;59H0.7[6;73H[0m[32m|	[0;1m[30m9.9[9;62H[39m65 [36m1.79 [0m[36m2.01[10;70H[0;1m[36m2[13;45H[0m[30m[46m22.4[14;46H[39;49m[m7.9[15;46H1.3[15;62H4[16;5H9[16;56H[0;1m[31m5h[39m[m22:28[17;4H22[17;46H1.3[7C[0;1m[31m6h[39m[m32:33[1B 8617 [0;1m[30mtwaltz[18;25H[31m56.4G 29.0G [0m[36m 462M 	[C[39m[m23.1 [0;1m[31m 3h[39m[m10:47 [32mpython conv4.py[39m[m[K[19;48H7[H[2;18H[0;1m[30m5[2;59H3[2;72H 	0.0[3;7H[0m[32m|[31m|[7C[0;1m[30m2.0[3;50H[0m[32m|[3;61H[0;1m[30m7[3;73H[0m[32m|[31m|[0;1m[30m     17.1[4;72H 	0.0[5;50H [5;61H0[6;29H[0m[31m|[6;40H[0;1m[30m7[6;51H[0m[32m|[31m|[0;1m[30m     17.1[6;73H[0m[31m|	[0;1m[30m2.0[7;51H[0m[32m||[31m|[0;1m[30m    24.3[8;54H[36m6[8;66H[32m2[10;70H[36m4[13;45H[0m[30m[46m66.6[13;62H2[14;5H[39;49m[m8[14;43H[32mR [39m[m25.7[7C[0;1m[31m5h[39m[m01:49[1B 8622 [0;1m[30mtwaltz    [15;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS 17.8 23.1 [0;1m[31m 6h[39m[m32:33 [32mpython conv4.py[16;45H[39m[m17.1[16;62H9[17;4H15[17;46H4.6[17;58H01[1B11320 ynavon26  [18;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.55 htop[K[H[2;16H[0;1m[30m1.8[2;50H  	  0.0[3;7H[0m[31m|[0;1m[30m [7C0.7[3;51H[0m[31m|[7C[0;1m[30m4.6[3;73H        0.7[4;72H[0m[32m||[31m|[0;1m[30m     17.6[6;59H6.6[6;73H[0m[32m|[31m|[0;1m[30m     16.6[7;51H[0m[31m|[0;1m[30m       9[7;72H[0m[32m|[7;81H[0;1m[30m2[10;70H[36m6[13;46H[0m[30m[46m7.2[13;62H3[14;5H[39;49m[m7[14;43HS 17.8[7C[0;1m[31m3h[39m[m10:47[15;4H34[15;48H1[7C[0;1m[31m7h[39m[m15:38[16;46H6.5[17;5H8[17;46H8[17;56H[0;1m[31m5h[39m[m01:49[1B 8615 [0;1m[30mtwaltz    [18;25H[31m56.4G 29.0G [0m[36m 462M [32mR [39m[m 4.6 23.1 [0;1m[31m 6h[39m[m01:33 [32mpython conv4.py[1B[39m[m11320 ynavon26  [19;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.56 htop[K[H[2;16H[0;1m[30m3.9[2;72H[0m[32m||[31m|[0;1m[30m     17.2[3;7H[0m[32m|[3;61H[0;1m[30m0[3;73H[0m[32m|[31m|[0;1m[30m     16.6[4;50H[0m[32m|[4;61H[0;1m[30m7[4;72H         0.0[5;50H[0m[32m|[5;61H[0;1m[30m7[5;72H[0m[32m|[31m|	[0;1m[30m9.2[6;50H         0.0[6;73H        0.7[7;51H[0m[32m|[31m|[0;1m[30m     17.0[9;63H[39m0 [36m1.76 [0m[36m2.00[10;70H[0;1m[36m7[13;48H[0m[30m[46m9[13;62H4[14;4H[39;49m[m22[14;43H[32mR [39m[m27.7[7C[0;1m[31m6h[39m[m32:34[15;4H16[15;48H8[7C[0;1m[31m6h[39m[m58:22[16;5H8[16;46H7.1[16;58H01:4[17;5H5[17;46H4.0[7C[0;1m[31m6h[39m[m01:33[1B11320 ynavon26  [18;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 2.0  0.0  0:00.59 htop[K[1B 8634 [0;1m[30mtwaltz    [19;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 7h[39m[m15:38 [32mpython conv4.py[H[39m[m[2;16H[0;1m[30m2.5[2;29H[0m[32m|[31m|[7C[0;1m[30m1.3[2;50H[0m[32m|[2;59H[0;1m[30m2.6[2;72H[0m[31m|[0;1m[30m        0.7[3;8H[0m[31m|[7C[0;1m[30m4.6[3;59H5.3[3;73H        0.7[4;7H[0m[32m|[31m|[7C[0;1m[30m2[4;29H[0m[32m|[4;40H[0;1m[30m7[4;50H[0m[31m|[5;7H[32m|[31m|[7C[0;1m[30m1.3[5;81H7.9[6;7H[0m[32m|[31m|[7C[0;1m[30m4.6[6;50H[0m[32m|[6;61H[0;1m[30m7[6;72H 	0.0[7;7H[0m[31m|[7;18H[0;1m[30m7[7;61H9[7;73H[0m[32m|||[31m||[0;1m[30m  34.2[8;54H[36m8[8;66H[32m1[10;70H[36m9[13;46H[0m[30m[46m5.3[13;62H5[14;4H[39;49m[m34[14;43HS 33.6[7C[0;1m[31m7h[39m[m15:39[15;5H8[15;48H2[7C[0;1m[31m5h[39m[m01:49[16;4H22[16;45H 6.6[7C[0;1m[31m6h[39m[m32:34[17;46H5.3[1B 8614 [0;1m[30mtwaltz    [18;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 19:11.92 [32mpython conv4.py[1B[39m[m11320 ynavon26  [19;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 0.7  0.0  0:00.60 htop[K[H[2;16H[0;1m[30m1.3[2;29H  [7C0.0[2;59H1.3[2;72H 	0.0[3;7H[0m[31m|[0;1m[30m [7C0.7[3;50H  	  0.0[3;72H[0m[31m|[4;7H[0;1m[30m  [7C0[4;29H [4;40H0[4;50H [4;61H0[4;72H[0m[32m||||[31m||[0;1m[30m  34.2[5;7H  [7C0.0[5;50H [5;61H0[5;73H[0m[32m|[31m|[0;1m[30m     17.1[6;7H  [7C0.0[6;51H[0m[32m|[31m|[0;1m[30m     11.8[6;72H[0m[32m|[31m|	[0;1m[30m3.3[7;7H [7;18H0[7;51H        0.7[7;72H         0.0[8;66H[32m2[10;69H[36m10[13;45H[0m[30m[46m70.5[13;62H6[14;4H[39;49m[m16[14;56H[0;1m[31m6h[39m[m58:22[15;4H22[15;48H1[7C[0;1m[31m6h[39m[m32:34[16;4H19[16;43H[32mR [39m[m12.5[7C[0;1m[31m5h[39m[m22:29[17;46H4.0[1B11320 ynavon26  [18;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.62 htop[K[1B 8618 [0;1m[30mtwaltz    [19;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  0.7 23.1 [0;1m[31m 5h[39m[m01:49 [32mpython conv4.py[H[39m[m[2;16H[0;1m[30m3.7[2;59H2.6[3;7H[0m[32m|[31m|[7C[0;1m[30m1.3[3;72H 	0.0[4;72H         0.0[5;50H[0m[32m|[5;61H[0;1m[30m7[6;51H[0m[31m|[0;1m[30m       4.6[6;73H 	3.4[7;51H[0m[32m|||[31m||[0;1m[30m  34.4[2B[39m55 [36m1.73 [0m[36m1.99[10;70H[0;1m[36m2[13;45H[0m[30m[46m62.6[13;62H7[14;5H[39;49m[m8[14;46H4.3[7C[0;1m[31m5h[39m[m01:50[15;46H5.8[16;43HS  4.0[17;43H[32mR [18;62H[39m[m4[19;5H4[19;55H19:11.93[H[2;16H[0;1m[30m1.8[2;51H[0m[31m|[7C[0;1m[30m7.2[3;7H[0m[31m|[0;1m[30m [7C0.7[3;72H[0m[32m||[31m|[0;1m[30m     16.6[5;50H [5;61H0[5;72H         0.0[6;29H [6;40H0[6;50H  	  0.0[6;72H [6;81H0.0[7;52H[0m[31m|[0;1m[30m     17.1[7;72H[0m[32m||||[31m|[0;1m[30m   31.6[8;66H[32m3[10;70H[36m3[13;45H[0m[30m[46m73.7[13;62H8[14;4H[39;49m[m34[14;43H[32mR [39m[m32[14;56H[0;1m[31m7h[39m[m15:39[15;4H18[15;46H7[15;56H[0;1m[31m5h[39m[m01:50[16;4H20[16;45H16.5[7C[0;1m[31m6h[39m[m11:57[17;43HS  5.3[18;62H6[19;5H6[19;55H[0;1m[31m 6h[39m[m58:22[H[2;18H[0;1m[30m3[2;51H 	  2.7[3;7H[0m[32m|[31m|[7C[0;1m[30m2.0[3;50H[0m[32m|[3;59H[0;1m[30m2.6[3;81H7.1[6;29H[0m[31m|[6;40H[0;1m[30m7[6;72H[0m[32m|[10C[0;1m[30m7[7;50H         0.0[7;77H[0m[31m|[0;1m[30m  38.8[8;66H[32m2[10;70H[36m5[13;45H[0m[30m[46m62.6[13;62H9[14;46H[39;49m[m8.9[14;61H40[15;4H20[15;48H1[7C[0;1m[31m6h[39m[m11:57[16;4H15[16;45H 4.6[16;58H01:33[1B11320 ynavon26  [17;25H[36m 119M  2[39m[m200 [36m 1[39m[m496 [32mR [39m[m 1.3  0.0  0:00.68 htop[K[1B 8622 [0;1m[30mtwaltz    [18;25H[31m56.4G 29.0G [0m[36m 462M [39m[mS  1.3 23.1 [0;1m[31m 6h[39m[m32:34 [32mpython conv4.py[19;5H[39m[m8[19;48H0[7C[0;1m[31m5h[39m[m01:50[H[19B[J[34h[?25h[?1000l[20;1H[?1049l[?1l>kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ free
-              total        used        free      shared  buff/cache   available
-Mem:      131735436    32077724    56412812      303532    43244900    98728060
-Swap:             0           0           0
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ free -m
-              total        used        free      shared  buff/cache   available
-Mem:         128647       31324       55091         296       42231       96415
-Swap:             0           0           0
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ free -m[Kg
-              total        used        free      shared  buff/cache   available
-Mem:            125          30          53           0          41          94
-Swap:             0           0           0
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ hotp[K[K[Ktop[K[K[Kkynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ XGBClassifier
-python dynamobi-ful.[Kl.py
-[[ 9901  4558]
- [ 3033 11426]]
-RandomForestClassifier
-INFO: Pandarallel will run on 12 workers.
-INFO: Pandarallel will use Memory file system to transfer data between the main process and workers.
-Reading file: clean/2008-07-28.txt.gz
-Droping Duplicates
-[[10253  4206]
- [ 3334 11125]]
-Deepwalk Embeddings
-[Parallel(n_jobs=11)]: Using backend LokyBackend with 11 concurrent workers.
-Reading file: clean/2008-07-29.txt.gz
-Droping Duplicates
-Creating Giant Graph
-[Parallel(n_jobs=11)]: Done   4 out of  12 | elapsed:  3.5min remaining:  6.9min
-Node Sampling
-Creating Graph
-Name: 
-Type: DiGraph
-Number of nodes: 669085
-Number of edges: 534771
-Average in degree:   0.7993
-Average out degree:   0.7993
-Removing Unseen Nodes from Test
-Negative Sampling
-size train: 1069541
-size test: 200372
-Node2Vec Embeddings
-Preprocess transition probs...
-[Parallel(n_jobs=11)]: Using backend LokyBackend with 11 concurrent workers.
-[Parallel(n_jobs=11)]: Done  12 out of  12 | elapsed:  8.2min finished
-Learning embedding vectors...
-/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py:706: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  "timeout or by a memory leak.", UserWarning
-[Parallel(n_jobs=11)]: Done   4 out of  12 | elapsed:  5.4min remaining: 10.8min
-[Parallel(n_jobs=11)]: Done  12 out of  12 | elapsed: 11.9min finished
-Learning embedding vectors...
-Learning embedding vectors done!
-Learning embedding vectors done!
-XGBClassifier
-terminate called after throwing an instance of 'thrust::system::system_error'
-  what():  parallel_for failed: out of memory
-/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/joblib/externals/loky/backend/resource_tracker.py:266: UserWarning: resource_tracker: There appear to be 6 leaked semlock objects to clean up at shutdown
-  (len(rtype_cache), rtype))
-Aborted
-kynavon26@qa-1080ti-005:~/link-prediction\(link-prediction) [ynavon26@qa-1080ti-005 link-prediction]$ XGBClassifier
-[[10537  3922]
- [ 5737  8722]]
-RandomForestClassifier
-[[11491  2968]
- [ 6494  7965]]
-heuristic
-
-
-xgb
-741714 edges
-Precision: 0.7411
-Recall: 0.7413
-ROC AUC: 0.7412
-F1 Score: 0.7412
-Accuracy: 0.7412
-
-
-rf
-741714 edges
-Precision: 0.7409
-Recall: 0.7406
-ROC AUC: 0.7408
-F1 Score: 0.7407
-Accuracy: 0.7408
-node2vec
-
-
-xgb
-741714 edges
-Precision: 0.7148
-Recall: 0.7902
-ROC AUC: 0.7375
-F1 Score: 0.7506
-Accuracy: 0.7375
-
-
-rf
-741714 edges
-Precision: 0.7257
-Recall: 0.7694
-ROC AUC: 0.7393
-F1 Score: 0.7469
-Accuracy: 0.7393
-deepwalk
-
-
-xgb
-741714 edges
-Precision: 0.6898
-Recall: 0.6032
-ROC AUC: 0.666
-F1 Score: 0.6436
-Accuracy: 0.666
-
-
-rf
-741714 edges
-Precision: 0.7285
-Recall: 0.5509
-ROC AUC: 0.6728
-F1 Score: 0.6274
-Accuracy: 0.6728
-Creating Graph
-Name: 
-Type: DiGraph
-Number of nodes: 1135532
-Number of edges: 680947
-Average in degree:   0.5997
-Average out degree:   0.5997
-Removing Unseen Nodes from Test
-Negative Sampling
-size train: 1361893
-size test: 100540
-Heuristic Features
-XGBClassifier
-[[36856 13414]
- [14061 36209]]
-RandomForestClassifier
-[[36858 13412]
- [14076 36194]]
-Node2Vec Embeddings
-Preprocess transition probs...
-[Parallel(n_jobs=11)]: Using backend LokyBackend with 11 concurrent workers.
-/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py:706: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  "timeout or by a memory leak.", UserWarning
-[Parallel(n_jobs=11)]: Done   4 out of  12 | elapsed: 11.1min remaining: 22.1min
-[Parallel(n_jobs=11)]: Done  12 out of  12 | elapsed: 25.2min finished
-Learning embedding vectors...
-^[[A    Learning embedding vectors done!
-XGBClassifier
-[[37529 12741]
- [12935 37335]]
-RandomForestClassifier
-[[39005 11265]
- [14807 35463]]
-Deepwalk Embeddings
-[Parallel(n_jobs=11)]: Using backend LokyBackend with 11 concurrent workers.
-/afs/crc.nd.edu/user/y/ynavon26/miniconda3/envs/link-prediction/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py:706: UserWarning: A worker stopped while some jobs were given to the executor. This can be caused by a too short worker timeout or by a memory leak.
-  "timeout or by a memory leak.", UserWarning
-[Parallel(n_jobs=11)]: Done   4 out of  12 | elapsed:  6.0min remaining: 12.0min
-[Parallel(n_jobs=11)]: Done  12 out of  12 | elapsed: 13.5min finished

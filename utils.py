@@ -50,13 +50,11 @@ def run_model_test(model,train_x, train_y, test_x, test_y, class_weights=None):
     roc_auc = roc_auc_score(test_y, predicted)
     accuracy = accuracy_score(test_y, predicted)
     f1 = f1_score(test_y, predicted)
+    # if modell == 'RandomForestClassifier':
+    #     print(train_x.columns)
+    #     print(model.feature_importances_)
     return precision, recall, roc_auc, accuracy, f1
 
-    # print('precision = {} '.format(str(precision_score(test_y, predicted))))
-    # print('recall = {} '.format(str(recall_score(test_y, predicted))))
-    # print('roc_auc = {} '.format(str(roc_auc_score(test_y, y_pred_prob))))
-    # print('accuracy = {} '.format(str(accuracy_score(test_y, predicted))))
-    # print('f1_score = {} '.format(str(f1_score(test_y, predicted))))
 
 def get_randomwalk(g, node, path_length):
     random_walk = [str(node)]

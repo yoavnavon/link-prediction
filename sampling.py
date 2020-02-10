@@ -34,16 +34,7 @@ def new_init_node(nodes, g):
         init_node = random.choice(nodes)
     return init_node
 
-
-def node_sampling(g, size):
-    print('Node Sampling')
-    nodes = list(g.nodes())
-    edges = set()
-    while len(edges) < size:
-        sampled_nodes = random.sample(nodes,100)
-        for node in sampled_nodes:
-            edges.update(g.edges(node))
-
+def edges_to_df(g, edges):
     subgraph = g.edge_subgraph(edges)
     df = nx.to_pandas_edgelist(subgraph, source='Source', target='Target')
     df = df.drop_duplicates(subset=['Source','Target'])
@@ -53,3 +44,42 @@ def node_sampling(g, size):
     df['Target'] = df['Target'].astype(str)
     df = df[['Date', 'Source', 'Target','Class']]
     return df
+
+def node_sampling(g, size):
+    print('Node Sampling')
+    nodes = list(g.nodes())
+    edges = set()
+    while len(edges) < size:
+        sampled_nodes = random.sample(nodes,1000)
+        edges.update(g.out_edges(sampled_nodes))
+        edges.update(g.in_edges(sampled_nodes))
+    return edges_to_df(g,edges)
+
+def traverse_sampling(g,size,method='bfs'):
+    index = 0 if method == 'bfs' else -1
+    nodes = list(g.nodes())
+    root = random.choice(nodes)
+    sampled_edges = set()
+    sampled_nodes = set(root)
+    node_list = [root]
+    while len(sampled_edges) < size:
+        if node_list:
+            node = node_list.pop(index)
+            edges = g.edges(node)
+            new_nodes = [t for s,t in edges if s not in sampled_nodes]
+            sampled_nodes.update(new_nodes)
+            node_list += new_nodes
+            sampled_edges.update(edges)
+        else:
+            node_list.append(random.choice(nodes))
+    return edges_to_df(g,sampled_edges)
+
+
+def bfs_sampling(g, size):
+    print('BFS Sampling')
+    return traverse_sampling(g,size,method='bfs')
+    
+
+def dfs_sampling(g, size):
+    print('DFS Sampling')
+    return traverse_sampling(g,size,method='dfs')

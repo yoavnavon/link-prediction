@@ -6,4 +6,5 @@ time-split-samples/
 clean.zip
 
 *.zip
-data/
+*.gz
+*.edges

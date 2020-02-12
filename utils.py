@@ -119,41 +119,7 @@ def move_class_col(dfr, column_to_move):
     dfr = dfr[cols+[column_to_move]] 
     return dfr
 
-def propflow(Graph, root, l):
-    scores = {}
-    
-    n1 = root
-    found = [n1]
-    newSearch = [n1]
-    scores[n1]=1.0
-    
-    for currentDegree in range(0,l+1):
-        oldSearch = list(newSearch)
-        newSearch = []
-        while len(oldSearch) != 0:
-            n2 = oldSearch.pop()
-            nodeInput = scores[n2]
-            sumOutput = 0.0
-            #Node2 = Graph.GetNI(n2)
-            for n3 in Graph.edges(n2):
-                if Graph.get_edge_data(n2,n3) is None:
-                    continue
-                else:
-                    sumOutput += Graph.get_edge_data(n2,n3)["weight"]
-            flow = 0.0
-            for n3 in Graph.edges(n2):
-                wij = Graph.get_edge_data(n2,n3)
-                if Graph.get_edge_data(n2,n3) is None:
-                    flow = 0
-                else:
-                    flow = nodeInput * (wij*1.0/sumOutput)
-                if n3 not in scores:
-                    scores[n3]=0.0
-                scores[n3] += flow
-                if n3 not in found:
-                    found.append(n3)
-                    newSearch.append(n3)
-    return np.mean(list(scores.values()))
+
 
 
 ## Old Functions
@@ -216,11 +182,7 @@ def run_node2vec_gridsearch(sample_size=20000,save=False, sampling='node'):
 
 def create_train_test_split(df_clean):
     split = 0.5
-    # g = nx.from_pandas_edgelist(df_clean, source='Source', target='Target', create_using=nx.DiGraph())   #put dataframe to an edgelist
-    # wcc = max(nx.weakly_connected_components(g), key=len)
-    # g = g.subgraph(wcc)
-    # df_clean = df_clean[df_clean.apply(lambda x: g.has_edge(x['Source'],x['Target']),axis=1)] # reduce df with subgraph
-
+    
     print('Spliting')
     df_train = df_clean.iloc[:int(len(df_clean)*split)]
     df_test = df_clean.iloc[int(len(df_clean)*split):]

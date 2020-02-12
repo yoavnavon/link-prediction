@@ -20,13 +20,15 @@ def get_heuristics(g, df_train, df_test):
     df_trad = df_trad_train.append(df_trad_test)
 
     # print('propflow')
-    # df_trad['propflow']= df_trad.apply(prop, axis=1) 
-    # df_trad['shortest_path_all_nodes']= df_trad.apply(shortest_path_all_nodes, axis=1) 
+    # df_trad['propflow']= df_trad.Source.apply(lambda x: propflow(g, x,5)) 
+    # print('shortest path ')
+    # df_trad['shortest_path_all_nodes']= df_trad.Source.apply(lambda x: len(list(nx.single_source_shortest_path(g, x, cutoff=None)))-1) 
     
-    # d = nx.katz_centrality(g)
-    # temp = pd.DataFrame.from_dict(d, orient='index', columns = ['katz']) #move dict of degrees to dataframe
-    # temp['Source'] = temp.index #add index as source
-    # df_trad= pd.merge(df_trad,temp, how='left', on= 'Source')  #merge frames
+    print('katz')
+    d = nx.katz_centrality(g)
+    temp = pd.DataFrame.from_dict(d, orient='index', columns = ['katz']) #move dict of degrees to dataframe
+    temp['Source'] = temp.index #add index as source
+    df_trad= pd.merge(df_trad,temp, how='left', on= 'Source')  #merge frames
     print('degree')
     df_trad['in_degree_i_to_j'] = df_trad.Source.apply(g.in_degree) 
     df_trad['out_degree_i_to_j']= df_trad.Source.apply(g.out_degree) 
@@ -92,6 +94,42 @@ def max_flow( x):
 def prop(x):
     l = 5
     return propflow(g, x['Source'],l)
+
+def propflow(Graph, root, l):
+    scores = {}
+    
+    n1 = root
+    found = [n1]
+    newSearch = [n1]
+    scores[n1]=1.0
+    
+    for currentDegree in range(0,l+1):
+        oldSearch = list(newSearch)
+        newSearch = []
+        while len(oldSearch) != 0:
+            n2 = oldSearch.pop()
+            nodeInput = scores[n2]
+            sumOutput = 0.0
+            #Node2 = Graph.GetNI(n2)
+            for n3 in Graph.edges(n2):
+                if Graph.get_edge_data(n2,n3) is None:
+                    continue
+                else:
+                    sumOutput += Graph.get_edge_data(n2,n3)["weight"]
+            flow = 0.0
+            for n3 in Graph.edges(n2):
+                wij = Graph.get_edge_data(n2,n3)
+                if Graph.get_edge_data(n2,n3) is None:
+                    flow = 0
+                else:
+                    flow = nodeInput * (wij*1.0/sumOutput)
+                if n3 not in scores:
+                    scores[n3]=0.0
+                scores[n3] += flow
+                if n3 not in found:
+                    found.append(n3)
+                    newSearch.append(n3)
+    return np.mean(list(scores.values()))
 
 def similarity(graph, i, j, method):
     if method == "common_neighbors":

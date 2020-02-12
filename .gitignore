@@ -4,3 +4,6 @@ Graph_Sampling/
 GraphEmbedding/
 time-split-samples/
 clean.zip
+
+*.zip
+data/

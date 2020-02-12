@@ -13,7 +13,6 @@ def random_walk_sample(g,size):
             node = init_node
             steps = 0
         neighbors = list(nx.neighbors(g, node))
-        #print(neighbors)
         if not neighbors:
             node = init_node
             steps += 1
@@ -52,7 +51,7 @@ def node_sampling(g, size):
     while len(edges) < size:
         sampled_nodes = random.sample(nodes,1000)
         edges.update(g.out_edges(sampled_nodes))
-        edges.update(g.in_edges(sampled_nodes))
+        # edges.update(g.in_edges(sampled_nodes))
     return edges_to_df(g,edges)
 
 def traverse_sampling(g,size,method='bfs'):

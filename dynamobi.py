@@ -68,6 +68,8 @@ def read_file(path):
 def negative_edge_sampling(g, df_train, df_test):
     # Sample negative edges
     nodes = list(g.nodes())
+    # source = list(df_train.Source.values[:(len(df_train)//2)]) + random.choices(nodes, k=len(df_train)//2)
+    # target = random.choices(nodes, k=len(df_train)//2) + list(df_train.Target.values[:(len(df_train)//2)])
     source = random.choices(nodes, k=len(df_train))
     target = random.choices(nodes, k=len(df_train))
     train_non_edges = set()
@@ -80,8 +82,11 @@ def negative_edge_sampling(g, df_train, df_test):
             continue
         train_non_edges.add((s,t))
 
+    # source = list(df_test.Source.values[:(len(df_test)//2)]) + random.choices(nodes, k=len(df_test)//2)
+    # target = random.choices(nodes, k=len(df_test)//2) + list(df_test.Target.values[:(len(df_test)//2)])
     source = random.choices(nodes, k=len(df_test))
     target = random.choices(nodes, k=len(df_test))
+
     test_non_edges = set()
     for s,t in zip(source,target):
         if s == t:
@@ -193,24 +198,26 @@ def test_multiple_features(g, df_train, df_test, print_result=False, paths={}, h
             print_results('xgb', size//2, xgb)
             print_results('rf', size//2, rf)
 
-def train_test_split(data, train_day, test_day, wcc=False):
-    df_train = data[data.Date.dt.day == train_day]
-    df_test = data[data.Date.dt.day == test_day]
-
-    g = nx.from_pandas_edgelist(df_train, source='Source', target='Target', create_using=nx.DiGraph())   #put dataframe to an edgelist
+def create_train_graph(df_train, wcc=False):
+    g = nx.from_pandas_edgelist(df_train, source='Source', target='Target', create_using=nx.DiGraph()) 
     if wcc:
         wcc = max(nx.weakly_connected_components(g), key=len)
         g = g.subgraph(wcc)
         df_train = df_train[df_train.apply(lambda x: g.has_edge(x['Source'],x['Target']),axis=1)] # reduce df with subgraph
 
     print(nx.info(g))
-    
+    return g, df_train
+
+
+def filter_test(df_train, df_test, wcc=False):    
+    g, df_train = create_train_graph(df_train, wcc=wcc)
+
     # Remove unseen nodes from test
     mask = df_test['Source'].apply(g.has_node) & df_test['Target'].apply(g.has_node)
     df_test = df_test[mask]
     return g, df_train, df_test
 
-def train_test_sampling(train_path, test_path, method='combined',sampling='node', paths={}, print_result=False, sample_sizes=[], resume=False):
+def train_test_sampling(train_path, test_path, method='combined',sampling='node', paths={}, print_result=False, sample_sizes=[], resume=False, wcc=False,test_ratio=1):
     """
     Train and Test features on different data files.
     """
@@ -243,9 +250,16 @@ def train_test_sampling(train_path, test_path, method='combined',sampling='node'
             df_train = sample_graph(df_train_full,sample_size,sampling,False)
             df_test = sample_graph(df_test_full,sample_size,sampling,False)
         else:
-            df_sample = sample_graph(df_data,sample_size,sampling,False,g=G)
-            g, df_train, df_test = train_test_split(df_sample, train_day, test_day, wcc=True)
-        
+            if method == 'combined':
+                df_sample = sample_graph(df_data,sample_size,sampling,False,g=G)
+                df_train = df_sample[df_sample.Date.dt.day == train_day]
+                df_test = df_sample[df_sample.Date.dt.day == test_day]
+                g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
+            elif method == 'separate':
+                df_train = sample_graph(df_train_full,sample_size,sampling,False,g=G)
+                df_test = sample_graph(df_test_full,sample_size*test_ratio,sampling,False,g=G)
+                print(len(df_train),len(df_test))
+                g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
         
 
         print('Negative Sampling')
@@ -265,22 +279,24 @@ def train_test_sampling(train_path, test_path, method='combined',sampling='node'
 
 if __name__ == "__main__":
     # logging.basicConfig(format="%(levelname)s - %(asctime)s: %(message)s", datefmt= '%H:%M:%S', level=logging.INFO)
-    # pandarallel.initialize(nb_workers=12)
     g = None
-    sample_sizes = [250000 + 100000*i for i in range(30)]
+    sample_sizes = [25000 + 50000*i for i in range(30)] # random wcc
     
     train_test_sampling(
         'clean/2008-07-28.txt.gz',
         'clean/2008-07-29.txt.gz',
         sample_sizes=sample_sizes,
-        sampling='random',
+        sampling='node',
+        wcc=False,
         paths={
-            'heuristic': 'results/random_wcc_sampling_heuristic.csv',
-            'node2vec': 'results/random_wcc_sampling_node2vec.csv',
-            'deepwalk': 'results/random_wcc_sampling_deepwalk.csv'
+            # 'heuristic': 'results/node_negsamp2_sampling_heuristic.csv',
+            # 'node2vec': 'results/node_negsamp2_sampling_node2vec.csv',
+            # 'deepwalk': 'results/node_negsamp2_sampling_deepwalk.csv'
         },
         print_result=False,
-        resume=False)
+        resume=False,
+        test_ratio=2,
+        method='combined')
 
 
     print('DONE')

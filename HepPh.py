@@ -4,8 +4,8 @@ from utils import create_train_test_split
 
 
 def read_file():
-    edges = pd.read_csv('cit-HepPh.txt',comment='#',sep='\t', names=['Source','Target'])
-    dates = pd.read_csv('cit-HepPh-dates.txt',comment='#',sep='\t', names=['Source','Date'],dtype={'Source':str})
+    edges = pd.read_csv('data/HepPh/cit-HepPh.txt',comment='#',sep='\t', names=['Source','Target'])
+    dates = pd.read_csv('data/HepPh/cit-HepPh-dates.txt',comment='#',sep='\t', names=['Source','Date'],dtype={'Source':str})
     dates['Source'] = dates.Source.apply(lambda i: i[2:] if len(i) > 7 else i)
     dates['Source'] = dates['Source'].astype(int)
     df = pd.merge(edges, dates, how='inner', on= 'Source')
@@ -33,5 +33,3 @@ if __name__ == "__main__":
             heuristic=True,
             node2vec=True,
             deepwalk=True)
-
-    # print(data)

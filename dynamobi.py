@@ -25,7 +25,7 @@ from sampling import random_walk_sample, node_sampling, bfs_sampling, dfs_sampli
 # from pandarallel import pandarallel
 
 
-def sample_graph(df, size, sampling, save, g=None):
+def sample_graph(df, size, sampling, g=None):
     if sampling == 'time':
         df = df.iloc[0:size]
     if sampling == 'rw':
@@ -44,9 +44,6 @@ def sample_graph(df, size, sampling, save, g=None):
     if sampling == 'random':
         df = shuffle(df)
         df = df.iloc[0:size]
-
-    if save:
-        df.to_csv(save, header=False)
 
     df = df.sort_values('Date')
     return df
@@ -110,7 +107,7 @@ def negative_edge_sampling(g, df_train, df_test):
     return df_train, df_test
 
 
-def test_features(train, test,max_depth=20, gamma=3, scale_pos_weight=2, min_child_weight=5):
+def test_features(train, test,max_depth=20, gamma=4, scale_pos_weight=1, min_child_weight=1, print_results=True):
 
     seed = 2
     # Traditional data
@@ -135,8 +132,8 @@ def test_features(train, test,max_depth=20, gamma=3, scale_pos_weight=2, min_chi
         seed=seed,
         predictor='gpu_predictor',nthread=12)
     rf = RandomForestClassifier(n_estimators= 13, max_depth=max_depth,n_jobs=-1)
-    xgb_results = run_model_test(xgb_model,X_train, Y_train, X_test, Y_test) 
-    rf_results = run_model_test(rf,X_train, Y_train, X_test, Y_test) 
+    xgb_results = run_model_test(xgb_model,X_train, Y_train, X_test, Y_test, print_results=print_results) 
+    rf_results = run_model_test(rf,X_train, Y_train, X_test, Y_test, print_results=print_results) 
     return len(X_train), xgb_results, rf_results
 
 def save_results(filename,model, size, results):
@@ -163,7 +160,7 @@ def create_file(filename):
 
 
 
-def test_multiple_features(g, df_train, df_test, print_result=False, paths={}, heuristic=True, node2vec=True, deepwalk=True):
+def test_multiple_features(g, df_train, df_test, print_results=False, paths={}, heuristic=True, node2vec=True, deepwalk=True):
     """
     Extract features and run classifiers
     """
@@ -173,19 +170,19 @@ def test_multiple_features(g, df_train, df_test, print_result=False, paths={}, h
     if heuristic:
         print('Heuristic Features')
         df_trad_train, df_trad_test = get_heuristics(g, df_train, df_test)
-        size, xgb_results_trad, rf_results_trad = test_features(df_trad_train, df_trad_test, max_depth=20, gamma=4, scale_pos_weight=1, min_child_weight=1)
+        size, xgb_results_trad, rf_results_trad = test_features(df_trad_train, df_trad_test, print_results=print_results)
         results['heuristic'] = (size, xgb_results_trad, rf_results_trad)
     
     if node2vec:
         print('Node2Vec Embeddings')
         df_node2vec_train, df_node2vec_test = get_node2vec(g, df_train, df_test, p=1, q=1)
-        size, xgb_results_n2v, rf_results_n2v = test_features(df_node2vec_train, df_node2vec_test, max_depth=20, gamma=4, scale_pos_weight=1, min_child_weight=1)
+        size, xgb_results_n2v, rf_results_n2v = test_features(df_node2vec_train, df_node2vec_test, print_results=print_results)
         results['node2vec'] = (size, xgb_results_n2v, rf_results_n2v)
 
     if deepwalk:
         print('Deepwalk Embeddings')
         df_deepwalk_train, df_deepwalk_test = get_deepwalk(g, df_train, df_test)
-        size, xgb_results_dw, rf_results_dw = test_features(df_deepwalk_train, df_deepwalk_test, max_depth=20, gamma=4, scale_pos_weight=1, min_child_weight=1)
+        size, xgb_results_dw, rf_results_dw = test_features(df_deepwalk_train, df_deepwalk_test, print_results=print_results)
         results['deepwalk'] = (size, xgb_results_dw, rf_results_dw)
 
     for method,data in results.items():
@@ -193,12 +190,11 @@ def test_multiple_features(g, df_train, df_test, print_result=False, paths={}, h
         if paths:
             save_results(paths[method],'xgb', size//2, xgb)
             save_results(paths[method],'rf', size//2, rf)
-        if print_result:
-            print(method)
-            print_results('xgb', size//2, xgb)
-            print_results('rf', size//2, rf)
 
 def create_train_graph(df_train, wcc=False):
+    """
+    Create train graph, and extracs wcc if needed
+    """
     g = nx.from_pandas_edgelist(df_train, source='Source', target='Target', create_using=nx.DiGraph()) 
     if wcc:
         wcc = max(nx.weakly_connected_components(g), key=len)
@@ -209,7 +205,10 @@ def create_train_graph(df_train, wcc=False):
     return g, df_train
 
 
-def filter_test(df_train, df_test, wcc=False):    
+def filter_test(df_train, df_test, wcc=False): 
+    """
+    Given a train set, extracts test samples usefull for training.
+    """   
     g, df_train = create_train_graph(df_train, wcc=wcc)
 
     # Remove unseen nodes from test
@@ -247,17 +246,17 @@ def train_test_sampling(train_path, test_path, method='combined',sampling='node'
 
     for sample_size in sample_sizes:
         if sampling == 'time':
-            df_train = sample_graph(df_train_full,sample_size,sampling,False)
-            df_test = sample_graph(df_test_full,sample_size,sampling,False)
+            df_train = sample_graph(df_train_full,sample_size,sampling)
+            df_test = sample_graph(df_test_full,sample_size,sampling)
         else:
             if method == 'combined':
-                df_sample = sample_graph(df_data,sample_size,sampling,False,g=G)
+                df_sample = sample_graph(df_data,sample_size,sampling,g=G)
                 df_train = df_sample[df_sample.Date.dt.day == train_day]
                 df_test = df_sample[df_sample.Date.dt.day == test_day]
                 g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
             elif method == 'separate':
-                df_train = sample_graph(df_train_full,sample_size,sampling,False,g=G)
-                df_test = sample_graph(df_test_full,sample_size*test_ratio,sampling,False,g=G)
+                df_train = sample_graph(df_train_full,sample_size,sampling,g=G)
+                df_test = sample_graph(df_test_full,sample_size*test_ratio,sampling,g=G)
                 print(len(df_train),len(df_test))
                 g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
         
@@ -269,9 +268,9 @@ def train_test_sampling(train_path, test_path, method='combined',sampling='node'
             df_train,
             df_test,
             paths=paths,
-            print_result=print_result,
+            print_results=print_results,
             heuristic=True,
-            node2vec=True,
+            node2vec=False,
             deepwalk=True)
             
 
@@ -283,8 +282,8 @@ if __name__ == "__main__":
     sample_sizes = [25000 + 50000*i for i in range(30)] # random wcc
     
     train_test_sampling(
-        'clean/2008-07-28.txt.gz',
-        'clean/2008-07-29.txt.gz',
+        'data/dynamobi/2008-07-28.txt.gz',
+        'data/dynamobi/2008-07-29.txt.gz',
         sample_sizes=sample_sizes,
         sampling='node',
         wcc=False,

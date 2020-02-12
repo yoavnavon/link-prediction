@@ -35,7 +35,7 @@ def run_model(model, x, y):
     print('auc = {} auc_std = {}'.format(auc.mean()*100.0, auc.std()*100.0))
 
     
-def run_model_test(model,train_x, train_y, test_x, test_y, class_weights=None):
+def run_model_test(model,train_x, train_y, test_x, test_y, print_results=False):
     
     modell= type(model).__name__
     print(modell)
@@ -53,6 +53,9 @@ def run_model_test(model,train_x, train_y, test_x, test_y, class_weights=None):
     # if modell == 'RandomForestClassifier':
     #     print(train_x.columns)
     #     print(model.feature_importances_)
+    if print_results:
+        print(f'ROC AUC: {roc_auc}')
+        print(f'Accuracy: {accuracy}')
     return precision, recall, roc_auc, accuracy, f1
 
 

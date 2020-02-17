@@ -24,15 +24,17 @@ def train_test(paths={}, resume=True, print_results=True, heuristic=True, node2v
     # print(df.groupby([df['Date'].dt.year, df['Date'].dt.month]).count())
 
     months = [i for i in range(5)]
-    m = 5
-    sample_sizes = [1000000 + 1000000*i for i in range(5)]
+    m = 0
+    # sample_sizes = [1000000 + 1000000*i for i in range(5)] # 1M
+    # sample_sizes = [50000 + 50000*i for i in range(40)]
+    sample_sizes = [100]
     df_train_full = df[(df.Date.dt.year == 2006) | (df.Date.dt.month <= m)]
     df_test_full = df[(df.Date.dt.year == 2007) & (df.Date.dt.month > m)]
     print(len(df_train_full),len(df_test_full))
     for size in sample_sizes:
     # for m in months:
         df_test = df_test_full
-        df_train = sample_graph(df_train_full, size, 'random')
+        df_train = df_train_full # sample_graph(df_train_full, size, 'random')
         g, df_train, df_test = filter_test(df_train, df_test, wcc=False)
         df_train, df_test = negative_edge_sampling(g, df_train, df_test)
         test_multiple_features(
@@ -49,9 +51,9 @@ def train_test(paths={}, resume=True, print_results=True, heuristic=True, node2v
 if __name__ == "__main__":
     train_test(
             paths={
-            'heuristic': 'results/youtube/14_1M_heuristic.csv',
-            'node2vec': 'results/youtube/14_1M_node2vec.csv',
-            'deepwalk': 'results/youtube/14_1M_deepwalk.csv'
+            'heuristic': 'results/youtube/15_fullmonth_heuristic.csv',
+            'node2vec': 'results/youtube/15_fullmonth_node2vec.csv',
+            'deepwalk': 'results/youtube/15_fullmonth_deepwalk.csv'
             },
             print_results=True,
             heuristic=True,

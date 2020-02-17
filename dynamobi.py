@@ -123,18 +123,20 @@ def test_features(train, test,max_depth=20, gamma=4, scale_pos_weight=1, min_chi
 
     
     # models 
-    xgb_model=XGBClassifier(
-        n_estimators=13, 
-        max_depth=max_depth,
-        gamma=gamma,
-        scale_pos_weight=scale_pos_weight,
-        min_child_weight= min_child_weight,
-        seed=seed,
-        predictor='gpu_predictor',nthread=12)
+    # xgb_model=XGBClassifier(
+    #     n_estimators=13, 
+    #     max_depth=max_depth,
+    #     gamma=gamma,
+    #     scale_pos_weight=scale_pos_weight,
+    #     min_child_weight= min_child_weight,
+    #     seed=seed,
+    #     # predictor='gpu_predictor',
+    #     # tree_method='gpu_hist',
+    #     nthread=12)
     rf = RandomForestClassifier(n_estimators= 13, max_depth=max_depth,n_jobs=-1)
-    xgb_results = run_model_test(xgb_model,X_train, Y_train, X_test, Y_test, print_results=print_results) 
+    # xgb_results = run_model_test(xgb_model,X_train, Y_train, X_test, Y_test, print_results=print_results) 
     rf_results = run_model_test(rf,X_train, Y_train, X_test, Y_test, print_results=print_results) 
-    return len(X_train), xgb_results, rf_results
+    return len(X_train), rf_results, rf_results
 
 def save_results(filename,model, size, results):
     results = tuple(map(lambda x: round(x,4),results))
@@ -216,7 +218,7 @@ def filter_test(df_train, df_test, wcc=False):
     df_test = df_test[mask]
     return g, df_train, df_test
 
-def train_test_sampling(train_path, test_path, method='combined',sampling='node', paths={}, print_results=False, sample_sizes=[], resume=False, wcc=False,test_ratio=1):
+def train_test_sampling(train_path, test_path, method='combined',sampling='node', paths={}, print_results=False, sample_sizes=[], resume=False, wcc=False):
     """
     Train and Test features on different data files.
     """
@@ -249,7 +251,7 @@ def train_test_sampling(train_path, test_path, method='combined',sampling='node'
             df_test = df_sample[df_sample.Date.dt.day == test_day]
             g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
         elif method == 'separated':
-            df_train = sample_graph(df_train_full,sample_size,sampling,g=G)
+            df_train = df_train_full # sample_graph(df_train_full,sample_size,sampling,g=G)
             df_test = df_test_full #sample_graph(df_test_full,sample_size*test_ratio,sampling,g=G)
             g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
         
@@ -272,22 +274,23 @@ def train_test_sampling(train_path, test_path, method='combined',sampling='node'
 if __name__ == "__main__":
     # logging.basicConfig(format="%(levelname)s - %(asctime)s: %(message)s", datefmt= '%H:%M:%S', level=logging.INFO)
     
-    sample_sizes = [1000000 + 1000000*i for i in range(6)] 
+    # sample_sizes = [1000000 + 1000000*i for i in range(10)] #1M
+    # sample_sizes = [50000 + 50000*i for i in range(30)] #random
+    sample_sizes = [100]
     
     train_test_sampling(
-        'data/dynamobi/2008-07-28.txt.gz',
-        'data/dynamobi/2008-07-29.txt.gz',
+        'data/dynamobi/2008-08-01.txt.gz',
+        'data/dynamobi/2008-08-02.txt.gz',
         sample_sizes=sample_sizes,
         sampling='random',
         wcc=False,
         paths={
-            'heuristic': 'results/dynamobi/14_1M_heuristic.csv',
-            'node2vec': 'results/dynamobi/14_1M_node2vec.csv',
-            'deepwalk': 'results/dynamobi/14_1M_deepwalk.csv'
+            'heuristic': 'results/dynamobi/15_fullday_heuristic.csv',
+            'node2vec': 'results/dynamobi/15_fullday_node2vec.csv',
+            'deepwalk': 'results/dynamobi/15_fullday_deepwalk.csv'
         },
         print_results=True,
         resume=False,
-        test_ratio=10,
         method='separated')
 
 

@@ -1,5 +1,5 @@
 import pandas as pd
-from dynamobi import sample_graph, negative_edge_sampling, create_train_graph, filter_test, test_multiple_features
+from dynamobi import sample_graph, negative_edge_sampling, create_train_graph, filter_test, test_multiple_features, create_file
 from utils import create_train_test_split
 
 
@@ -16,20 +16,40 @@ def read_file():
     df = df.sort_values('Date')
     return df
 
-if __name__ == "__main__":
+def train_test(paths={}, resume=True, print_results=True, heuristic=True, node2vec=True, deepwalk=True):
+    # Create Result Files
+    if paths and not resume:
+        print('Creating Results Files')
+        list(map(create_file,paths.values()))
+
     df_edges = read_file()
-    splits = [0.25, 0.5, 0.75]
+    splits = [0.1 * i for i in range(1,10)]
     for split in splits:
         df_train = df_edges[:int(len(df_edges)*split)]
         df_test = df_edges[int(len(df_edges)*split):]
-        g, df_train, df_test = filter_test(df_train, df_test, wcc=True)
+        print(len(df_train),len(df_test))
+        g, df_train, df_test = filter_test(df_train, df_test, wcc=False)
         df_train, df_test = negative_edge_sampling(g, df_train, df_test)
         test_multiple_features(
             g,
             df_train,
             df_test,
-            paths={},
-            print_result=False,
+            paths=paths,
+            print_results=print_results,
+            heuristic=heuristic,
+            node2vec=node2vec,
+            deepwalk=deepwalk)
+
+
+if __name__ == "__main__":
+    train_test(
+            paths={
+            'heuristic': 'results/hepph/15_time_heuristic.csv',
+            'node2vec': 'results/hepph/15_time_node2vec.csv',
+            'deepwalk': 'results/hepph/15_time_deepwalk.csv'
+            },
+            print_results=True,
             heuristic=True,
             node2vec=True,
-            deepwalk=True)
+            deepwalk=True,
+            resume=False)

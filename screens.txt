@@ -1,1 +1,9 @@
-- 26948: node_negsamp_sampling_X.csv
+- 18484: dynamobi/14_random (full test) [50000 + 50000*i for i in range(30)] 
+- 26951: dynamobi/14_time (full test) [50000 + 50000*i for i in range(30)] 
+- 15139: youtube/14_random (m>=3 test) [50000 + 50000*i for i in range(30)] 
+- 4002: youtube/14_random (m>=3 test) [50000 + 50000*i for i in range(30)] 
+- 31326: dynamobi/14_fullday
+- 15411: dynamobi/14_1M
+- 9063: youtube/14_fullmonth (m>=1 test)
+- 12309: youtube/14_1M (m>=6 test)
+

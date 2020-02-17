@@ -212,17 +212,15 @@ def filter_test(df_train, df_test, wcc=False):
     g, df_train = create_train_graph(df_train, wcc=wcc)
 
     # Remove unseen nodes from test
-    mask = df_test['Source'].apply(g.has_node) & df_test['Target'].apply(g.has_node)
+    mask = df_test.apply(lambda x: g.has_node(x['Source']) and g.has_node(x['Target']) and not g.has_edge(x['Source'],x['Target']),axis=1)
     df_test = df_test[mask]
     return g, df_train, df_test
 
-def train_test_sampling(train_path, test_path, method='combined',sampling='node', paths={}, print_result=False, sample_sizes=[], resume=False, wcc=False,test_ratio=1):
+def train_test_sampling(train_path, test_path, method='combined',sampling='node', paths={}, print_results=False, sample_sizes=[], resume=False, wcc=False,test_ratio=1):
     """
     Train and Test features on different data files.
     """
     
-    global g
-
     # Create Result Files
     if paths and not resume:
         print('Creating Results Files')
@@ -245,20 +243,15 @@ def train_test_sampling(train_path, test_path, method='combined',sampling='node'
     test_day = df_test_full.Date.dt.day[0]
 
     for sample_size in sample_sizes:
-        if sampling == 'time':
-            df_train = sample_graph(df_train_full,sample_size,sampling)
-            df_test = sample_graph(df_test_full,sample_size,sampling)
-        else:
-            if method == 'combined':
-                df_sample = sample_graph(df_data,sample_size,sampling,g=G)
-                df_train = df_sample[df_sample.Date.dt.day == train_day]
-                df_test = df_sample[df_sample.Date.dt.day == test_day]
-                g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
-            elif method == 'separate':
-                df_train = sample_graph(df_train_full,sample_size,sampling,g=G)
-                df_test = sample_graph(df_test_full,sample_size*test_ratio,sampling,g=G)
-                print(len(df_train),len(df_test))
-                g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
+        if method == 'combined':
+            df_sample = sample_graph(df_data,sample_size,sampling,g=G)
+            df_train = df_sample[df_sample.Date.dt.day == train_day]
+            df_test = df_sample[df_sample.Date.dt.day == test_day]
+            g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
+        elif method == 'separated':
+            df_train = sample_graph(df_train_full,sample_size,sampling,g=G)
+            df_test = df_test_full #sample_graph(df_test_full,sample_size*test_ratio,sampling,g=G)
+            g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
         
 
         print('Negative Sampling')
@@ -270,7 +263,7 @@ def train_test_sampling(train_path, test_path, method='combined',sampling='node'
             paths=paths,
             print_results=print_results,
             heuristic=True,
-            node2vec=False,
+            node2vec=True,
             deepwalk=True)
             
 
@@ -278,24 +271,24 @@ def train_test_sampling(train_path, test_path, method='combined',sampling='node'
 
 if __name__ == "__main__":
     # logging.basicConfig(format="%(levelname)s - %(asctime)s: %(message)s", datefmt= '%H:%M:%S', level=logging.INFO)
-    g = None
-    sample_sizes = [25000 + 50000*i for i in range(30)] # random wcc
+    
+    sample_sizes = [1000000 + 1000000*i for i in range(6)] 
     
     train_test_sampling(
         'data/dynamobi/2008-07-28.txt.gz',
         'data/dynamobi/2008-07-29.txt.gz',
         sample_sizes=sample_sizes,
-        sampling='node',
+        sampling='random',
         wcc=False,
         paths={
-            # 'heuristic': 'results/node_negsamp2_sampling_heuristic.csv',
-            # 'node2vec': 'results/node_negsamp2_sampling_node2vec.csv',
-            # 'deepwalk': 'results/node_negsamp2_sampling_deepwalk.csv'
+            'heuristic': 'results/dynamobi/14_1M_heuristic.csv',
+            'node2vec': 'results/dynamobi/14_1M_node2vec.csv',
+            'deepwalk': 'results/dynamobi/14_1M_deepwalk.csv'
         },
-        print_result=False,
+        print_results=True,
         resume=False,
-        test_ratio=2,
-        method='combined')
+        test_ratio=10,
+        method='separated')
 
 
     print('DONE')

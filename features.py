@@ -50,8 +50,8 @@ def get_heuristics(g, df_train, df_test):
     return df_trad_train, df_trad_test
 
 def get_node2vec(g, df_train, df_test, p=1, q=1):
-    node2vec = Node2Vec(g, walk_length=10, num_walks =100, p=p, q=q, workers=4)
-    node2vec.train(window = 4, iter = 4, workers = 4)
+    node2vec = Node2Vec(g, walk_length=10, num_walks=80, p=p, q=q, workers=5)
+    node2vec.train(window=4, iter=4, workers=5)
     emb = node2vec.get_embeddings()
 
     node2vec_hadd_train = df_train.apply(lambda x: manual_haddamard(x,emb), axis= 1)
@@ -65,8 +65,8 @@ def get_node2vec(g, df_train, df_test, p=1, q=1):
     return df_node2vec_train, df_node2vec_test
 
 def get_deepwalk(g, df_train, df_test):
-    model = DeepWalk(g, walk_length=10, num_walks=100, workers=4)
-    model.train(window_size=4, iter=4, workers=4)
+    model = DeepWalk(g, walk_length=10, num_walks=80, workers=5)
+    model.train(window_size=4, iter=4, workers=5)
     emb = model.get_embeddings()
 
     deepwalk_hadd_train = df_train.apply(lambda x: manual_haddamard(x,emb), axis= 1)

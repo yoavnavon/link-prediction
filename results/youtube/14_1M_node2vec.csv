@@ -1,0 +1,3 @@
+size,model,precision,recall,roc_auc,accuracy,f1_score
+999998,xgb,0.901,0.5704,0.7538,0.7538,0.6985
+999998,rf,0.927,0.544,0.7506,0.7506,0.6856

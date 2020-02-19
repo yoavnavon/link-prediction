@@ -27,7 +27,7 @@ def train_test(paths={}, resume=True, print_results=True, heuristic=True, node2v
     for split in splits:
         df_train = df_edges[:int(len(df_edges)*split)]
         df_test = df_edges[int(len(df_edges)*split):]
-        print(len(df_train),len(df_test))
+        print(split)
         g, df_train, df_test = filter_test(df_train, df_test, wcc=False)
         df_train, df_test = negative_edge_sampling(g, df_train, df_test)
         test_multiple_features(
@@ -44,9 +44,9 @@ def train_test(paths={}, resume=True, print_results=True, heuristic=True, node2v
 if __name__ == "__main__":
     train_test(
             paths={
-            'heuristic': 'results/hepph/15_time_heuristic.csv',
-            'node2vec': 'results/hepph/15_time_node2vec.csv',
-            'deepwalk': 'results/hepph/15_time_deepwalk.csv'
+            'heuristic': 'results/hepph/16_time_heuristic.csv',
+            'node2vec': 'results/hepph/16_time_node2vec.csv',
+            'deepwalk': 'results/hepph/16_time_deepwalk.csv'
             },
             print_results=True,
             heuristic=True,

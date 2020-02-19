@@ -49,6 +49,41 @@ def get_heuristics(g, df_train, df_test):
     df_trad_test = df_trad.iloc[len(df_trad_train):]
     return df_trad_train, df_trad_test
 
+
+def train_node2vec(g):
+    node2vec = Node2Vec(g, walk_length=10, num_walks=80, p=1, q=1, workers=5)
+    node2vec.train(window=4, iter=4, workers=5)
+    emb = node2vec.get_embeddings()
+    return emb
+
+def train_deepwalk(g):
+    model = DeepWalk(g, walk_length=10, num_walks=80, workers=5)
+    model.train(window_size=4, iter=4, workers=5)
+    emb = model.get_embeddings()
+    return emb
+
+def apply_heuristic(g,df):
+    d = nx.katz_centrality(g)
+    temp = pd.DataFrame.from_dict(d, orient='index', columns = ['katz']) #move dict of degrees to dataframe
+    temp['Source'] = temp.index #add index as source
+    df= pd.merge(df,temp, how='left', on= 'Source')  #merge frames
+    df['in_degree_i_to_j'] = df.Source.apply(g.in_degree) 
+    df['out_degree_i_to_j']= df.Source.apply(g.out_degree) 
+    df['in_degree_j_to_i']= df.Target.apply(g.in_degree) 
+    df['out_degree_j_to_i'] = df.Target.apply(g.out_degree) 
+    df['common_nbrs']= df.apply(lambda x: len(set(g.neighbors(x['Source'])).intersection(set(g.neighbors(x['Target'])))), axis=1) 
+    df['volume_i']= df.apply(lambda x: nx.volume(g, (x['Source'], x['Target'])), axis=1) 
+    df['volume_j']= df.apply(lambda x: nx.volume(g, (x['Target'], x['Source'])), axis=1) 
+    df['adamic_adar']= df.apply(lambda x: similarity(g, x['Source'], x['Target'], method = "adamic_adar"), axis=1) 
+    df['pref_attach']= df.apply(lambda x: similarity(g, x['Source'], x['Target'], method = "preferential_attachment"), axis=1) 
+    df['jaccards_coef']= df.apply(lambda x: similarity(g, x['Source'], x['Target'], method = "jaccard"), axis=1)
+    df = df.fillna(0)
+    feats = [
+        'in_degree_i_to_j','out_degree_i_to_j','in_degree_j_to_i','out_degree_j_to_i',
+        'common_nbrs','volume_i','volume_j','adamic_adar','pref_attach','jaccards_coef']
+    df = df[feats]
+    return df
+
 def get_node2vec(g, df_train, df_test, p=1, q=1):
     node2vec = Node2Vec(g, walk_length=10, num_walks=80, p=p, q=q, workers=5)
     node2vec.train(window=4, iter=4, workers=5)

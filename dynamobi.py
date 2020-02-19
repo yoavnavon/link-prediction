@@ -61,8 +61,7 @@ def read_file(path):
     df = df[['Date', 'Source', 'Target','Class']]
     return df
 
-
-def negative_edge_sampling(g, df_train, df_test):
+def negative_edge_sampling_train(g, df_train):
     # Sample negative edges
     nodes = list(g.nodes())
     # source = list(df_train.Source.values[:(len(df_train)//2)]) + random.choices(nodes, k=len(df_train)//2)
@@ -78,13 +77,21 @@ def negative_edge_sampling(g, df_train, df_test):
         if g.has_edge(s,t):
             continue
         train_non_edges.add((s,t))
+    
+    df_neg_train = pd.DataFrame(list(train_non_edges), columns=['Source', 'Target'])
+    df_neg_train['Class'] = 0
+    df_train = df_train.append(df_neg_train, sort=True)
+    df_train= df_train[['Date','Source', 'Target','Class']]
+    return df_train
 
+def negative_edge_sampling_test(g, df_train, df_test):
+    nodes = list(g.nodes())
     # source = list(df_test.Source.values[:(len(df_test)//2)]) + random.choices(nodes, k=len(df_test)//2)
     # target = random.choices(nodes, k=len(df_test)//2) + list(df_test.Target.values[:(len(df_test)//2)])
     source = random.choices(nodes, k=len(df_test))
     target = random.choices(nodes, k=len(df_test))
-
     test_non_edges = set()
+    train_non_edges = set(map(tuple,df_train[['Source','Target']].values))
     for s,t in zip(source,target):
         if s == t:
             continue
@@ -93,17 +100,17 @@ def negative_edge_sampling(g, df_train, df_test):
         if g.has_edge(s,t):
             continue
         test_non_edges.add((s,t))
-
-    df_neg_train = pd.DataFrame(list(train_non_edges), columns=['Source', 'Target'])
     df_neg_test = pd.DataFrame(list(test_non_edges), columns=['Source', 'Target'])
-    df_neg_train['Class'] = 0
     df_neg_test['Class'] = 0
-    df_train = df_train.append(df_neg_train, sort=True)
     df_test = df_test.append(df_neg_test, sort=True)
-    df_train= df_train[['Date','Source', 'Target','Class']]
     df_test= df_test[['Date','Source', 'Target','Class']]
-    print('size train:', len(df_train))
-    print('size test:', len(df_test))
+    return df_test
+
+def negative_edge_sampling(g, df_train, df_test):
+    df_train = negative_edge_sampling_train(g, df_train)
+    df_test = negative_edge_sampling_test(g, df_train, df_test)
+    print('size train:',len(df_train))
+    print('size test:',len(df_test))
     return df_train, df_test
 
 
@@ -192,6 +199,7 @@ def test_multiple_features(g, df_train, df_test, print_results=False, paths={}, 
         if paths:
             save_results(paths[method],'xgb', size//2, xgb)
             save_results(paths[method],'rf', size//2, rf)
+    return results
 
 def create_train_graph(df_train, wcc=False):
     """
@@ -217,6 +225,7 @@ def filter_test(df_train, df_test, wcc=False):
     mask = df_test.apply(lambda x: g.has_node(x['Source']) and g.has_node(x['Target']) and not g.has_edge(x['Source'],x['Target']),axis=1)
     df_test = df_test[mask]
     return g, df_train, df_test
+
 
 def train_test_sampling(train_path, test_path, method='combined',sampling='node', paths={}, print_results=False, sample_sizes=[], resume=False, wcc=False):
     """
@@ -268,6 +277,57 @@ def train_test_sampling(train_path, test_path, method='combined',sampling='node'
             node2vec=True,
             deepwalk=True)
             
+def train_model(X, y):
+    rf = RandomForestClassifier(n_estimators= 13, max_depth=20,n_jobs=-1)
+    rf.fit(X,y)
+    return rf
+
+
+def train_size_full_test(train_size, train_path, results_path):
+    with open(results_path,'w') as file:
+        file.write('day,model,method,precision,recall,roc_auc,accuracy,f1_score\n')
+    df_full = read_file(train_path)
+    df_train = sample_graph(df_full, train_size, 'random')
+    g = nx.from_pandas_edgelist(df_train, source='Source', target='Target', create_using=nx.DiGraph()) 
+    df_train = negative_edge_sampling_train(g, df_train)
+    
+    emb_node2vec = train_node2vec(g)
+    emb_deepwalk= train_deepwalk(g)
+
+    X_heuristic = apply_heuristic(g, df_train)
+    X_node2vec = df_train.apply(lambda x: manual_haddamard(x,emb_node2vec), axis= 1)
+    X_deepwalk = df_train.apply(lambda x: manual_haddamard(x,emb_deepwalk), axis= 1)
+    Y = df_train['Class']
+
+    rf_heuristic = train_model(X_heuristic,Y)
+    rf_node2vec = train_model(X_node2vec,Y)
+    rf_deepwalk = train_model(X_deepwalk,Y)
+
+    for test_path in glob('data/dynamobi/*.txt.gz'):
+        if test_path == train_path:
+            continue
+        df_test = read_file(test_path)
+        df_test = df_test[df_test.apply(lambda x: g.has_node(x['Source']) and g.has_node(x['Target']) and not g.has_edge(x['Source'],x['Target']),axis=1)]
+        df_test = negative_edge_sampling_test(g, df_train, df_test)
+        
+        results = {}
+        X_heuristic_test = apply_heuristic(g, df_test)
+        X_node2vec_test = df_test.apply(lambda x: manual_haddamard(x,emb_node2vec), axis= 1)
+        X_deepwalk_test = df_test.apply(lambda x: manual_haddamard(x,emb_deepwalk), axis= 1)
+        Y_test = df_test['Class'] 
+
+        results['heuristic'] = test_model(rf_heuristic, X_heuristic_test, Y_test)
+        results['node2vec'] = test_model(rf_node2vec, X_node2vec_test, Y_test)
+        results['deepwalk'] = test_model(rf_deepwalk, X_deepwalk_test, Y_test)
+        day = test_path[19:24]
+        save_full_test_result(results, day, results_path)
+
+def save_full_test_result(result, day, results_path):
+
+    with open(results_path,'a') as file:
+        for method, data in result.items():
+            precision, recall, roc_auc, accuracy, f1 = map(lambda x: round(x,4),data)
+            file.write(f'{day},rf,{method},{precision},{recall},{roc_auc},{accuracy},{f1}\n')
 
         
 
@@ -276,22 +336,22 @@ if __name__ == "__main__":
     
     # sample_sizes = [1000000 + 1000000*i for i in range(10)] #1M
     # sample_sizes = [50000 + 50000*i for i in range(30)] #random
-    sample_sizes = [100]
     
-    train_test_sampling(
-        'data/dynamobi/2008-08-01.txt.gz',
-        'data/dynamobi/2008-08-02.txt.gz',
-        sample_sizes=sample_sizes,
-        sampling='random',
-        wcc=False,
-        paths={
-            'heuristic': 'results/dynamobi/15_fullday_heuristic.csv',
-            'node2vec': 'results/dynamobi/15_fullday_node2vec.csv',
-            'deepwalk': 'results/dynamobi/15_fullday_deepwalk.csv'
-        },
-        print_results=True,
-        resume=False,
-        method='separated')
+    # train_test_sampling(
+    #     'data/dynamobi/2008-08-01.txt.gz',
+    #     'data/dynamobi/2008-08-02.txt.gz',
+    #     sample_sizes=sample_sizes,
+    #     sampling='random',
+    #     wcc=False,
+    #     paths={
+    #         'heuristic': 'results/dynamobi/15_fullday_heuristic.csv',
+    #         'node2vec': 'results/dynamobi/15_fullday_node2vec.csv',
+    #         'deepwalk': 'results/dynamobi/15_fullday_deepwalk.csv'
+    #     },
+    #     print_results=True,
+    #     resume=False,
+    #     method='separated')
+    train_size_full_test(600000,'data/dynamobi/2008-07-28.txt.gz','results/dynamobi/17_train0728_600k.csv')
 
 
     print('DONE')

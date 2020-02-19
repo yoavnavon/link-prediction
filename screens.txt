@@ -16,3 +16,11 @@
 - 6439: youtube/15_random (m=3 full test) [50000 + 50000*i for i in range(40)] 
 - 8846: youtube/15_fullmonth (m=0 full test)
 
+####
+
+- 27440: dynamobi/16_train0728_100k
+- 29786: dynamobi/16_train0728_250k
+- 3269: dynamobi/16_train0801_100k
+- 1112: dynamobi/16_train0801_250k
+- 5444: dynamobi/16_train0801_50k
+- 7867: dynamobi/16_train0728_50k

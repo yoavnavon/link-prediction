@@ -40,7 +40,13 @@ def run_model_test(model,train_x, train_y, test_x, test_y, print_results=False):
     modell= type(model).__name__
     print(modell)
     model.fit(train_x, train_y)
-    # scores = model.get_booster().get_score(importance_type="gain")
+    precision, recall, roc_auc, accuracy, f1 = test_model(model, test_x, test_y)
+    if print_results:
+        print(f'ROC AUC: {roc_auc}')
+        print(f'Accuracy: {accuracy}')
+    return precision, recall, roc_auc, accuracy, f1
+
+def test_model(model, test_x, test_y):
     predicted = model.predict(test_x)
     y_pred_prob = model.predict_proba(test_x)[:,1]
     matrix = confusion_matrix(test_y, predicted)
@@ -53,9 +59,7 @@ def run_model_test(model,train_x, train_y, test_x, test_y, print_results=False):
     # if modell == 'RandomForestClassifier':
     #     print(train_x.columns)
     #     print(model.feature_importances_)
-    if print_results:
-        print(f'ROC AUC: {roc_auc}')
-        print(f'Accuracy: {accuracy}')
+    
     return precision, recall, roc_auc, accuracy, f1
 
 
@@ -183,9 +187,7 @@ def run_node2vec_gridsearch(sample_size=20000,save=False, sampling='node'):
             print_results('xgb', size, xgb_results_n2v)
             print_results('rf', size, rf_results_n2v)
 
-def create_train_test_split(df_clean):
-    split = 0.5
-    
+def create_train_test_split(df_clean, split):    
     print('Spliting')
     df_train = df_clean.iloc[:int(len(df_clean)*split)]
     df_test = df_clean.iloc[int(len(df_clean)*split):]
@@ -194,6 +196,6 @@ def create_train_test_split(df_clean):
     print(nx.info(g))
     
     print('Removing Unseen Nodes from Test')
-    mask = df_test['Source'].apply(g.has_node) & df_test['Target'].apply(g.has_node)
+    mask = df_test.apply(lambda x: g.has_node(x['Source']) and g.has_node(x['Target']) and not g.has_edge(x['Source'],x['Target']),axis=1)
     df_test = df_test[mask]
     return g, df_train, df_test

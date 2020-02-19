@@ -1,18 +1,26 @@
 import numpy as np
 import pandas as pd
 import networkx as nx
-from dynamobi import sample_graph
+from dynamobi import sample_graph#, read_file
 from youtube import read_file
+# from HepPh import read_file
 import json
 
 def get_metrics(g):
+    print('degree')
     out_degree = [v for i,v in g.out_degree]
     in_degree = [v for i,v in g.in_degree]
-    betweeness =list(nx.betweenness_centrality(g,k=10).values())
-    closeness = list(nx.closeness_centrality(g).values())
+    # print('betweenness')
+    # betweeness =list(nx.betweenness_centrality(g,k=10).values())
+    # print('closeness')
+    # closeness = list(nx.closeness_centrality(g).values())
+    print('clustering')
     clustering = list(nx.clustering(g).values())
+    print('neighboor degree')
     n_degree = [v for v in nx.average_neighbor_degree(g).values()]
+    print('scc')
     scc = [len(s) for s in nx.strongly_connected_components(g)]
+    print('wcc')
     wcc = [len(s) for s in nx.weakly_connected_components(g)]
     
     metrics = {
@@ -26,15 +34,20 @@ def get_metrics(g):
         'avg-in-degree':np.mean(in_degree),
         'std-in-degree':np.std(in_degree),
         
-        'min-betweeness':min(betweeness),
-        'max-betweeness':max(betweeness),
-        'avg-betweeness':np.mean(betweeness),
-        'std-betweeness':np.std(betweeness),
+        # 'min-betweeness':min(betweeness),
+        # 'max-betweeness':max(betweeness),
+        # 'avg-betweeness':np.mean(betweeness),
+        # 'std-betweeness':np.std(betweeness),
+
+        'min-clustering':min(clustering),
+        'max-clustering':max(clustering),
+        'avg-clustering':np.mean(clustering),
+        'std-clustering':np.std(clustering),
         
-        'min-closeness':min(closeness),
-        'max-closeness':max(closeness),
-        'avg-closeness':np.mean(closeness),
-        'std-closeness':np.std(closeness),
+        # 'min-closeness':min(closeness),
+        # 'max-closeness':max(closeness),
+        # 'avg-closeness':np.mean(closeness),
+        # 'std-closeness':np.std(closeness),
         
         'min-neighboor-degree':min(n_degree),
         'max-neighboor-degree':max(n_degree),
@@ -56,9 +69,10 @@ def get_metrics(g):
     return metrics
 
 if __name__ == "__main__":
-    df = read_file()
+    # df_full = read_file('data/dynamobi/2008-08-01.txt.gz')
+    df_full = read_file()
     m = 3
-    df_full = df[(df.Date.dt.year == 2006) | (df.Date.dt.month <= m)]
+    df_full = df_full[(df_full.Date.dt.year == 2006) | (df_full.Date.dt.month <= m)]
 
     sample_sizes = [i*50000 for i in range(1,11)]
     metrics_results = {}
@@ -70,3 +84,5 @@ if __name__ == "__main__":
         metrics_results[size] = metrics
     with open('results/youtube/metrics.json','w') as file:
         json.dump(metrics_results, file)
+
+

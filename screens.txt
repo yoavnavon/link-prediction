@@ -24,3 +24,18 @@
 - 1112: dynamobi/16_train0801_250k
 - 5444: dynamobi/16_train0801_50k
 - 7867: dynamobi/16_train0728_50k
+
+#### 
+
+17 files, using default node2vec/deepwalk parameters
+
+
+####
+
+-  20326: dynamobi/20_train0728_100k
+-  24801: dynamobi/20_train0728_250k
+-  26667: dynamobi/20_train0728_400k
+-  27825: dynamobi/20_train0728_600k
+-  27725: dynamobi/20_metrics_walks
+-  8077: youtube/20_metrics_walks
+-  12707: hepph/20_metrics_walks

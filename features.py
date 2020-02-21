@@ -5,10 +5,6 @@ import random
 import math
 from datetime import datetime, timedelta
 from utils import move_class_col
-
-from node2vec import Node2Vec
-from gensim.models import Word2Vec
-from node2vec.edges import HadamardEmbedder
 import sys
 sys.path.append('./GraphEmbedding')
 from ge import Node2Vec, DeepWalk
@@ -51,13 +47,13 @@ def get_heuristics(g, df_train, df_test):
 
 
 def train_node2vec(g):
-    node2vec = Node2Vec(g, walk_length=10, num_walks=80, p=1, q=1, workers=5)
-    node2vec.train(window=4, iter=4, workers=5)
+    node2vec = Node2Vec(g, walk_length=80, num_walks=10, p=1, q=1, workers=5)
+    node2vec.train(window_size=4, iter=4, workers=5)
     emb = node2vec.get_embeddings()
     return emb
 
 def train_deepwalk(g):
-    model = DeepWalk(g, walk_length=10, num_walks=80, workers=5)
+    model = DeepWalk(g, walk_length=80, num_walks=10, workers=5)
     model.train(window_size=4, iter=4, workers=5)
     emb = model.get_embeddings()
     return emb
@@ -85,8 +81,8 @@ def apply_heuristic(g,df):
     return df
 
 def get_node2vec(g, df_train, df_test, p=1, q=1):
-    node2vec = Node2Vec(g, walk_length=10, num_walks=80, p=p, q=q, workers=5)
-    node2vec.train(window=4, iter=4, workers=5)
+    node2vec = Node2Vec(g, walk_length=80, num_walks=10, p=p, q=q, workers=5)
+    node2vec.train(window_size=4, iter=4, workers=5)
     emb = node2vec.get_embeddings()
 
     node2vec_hadd_train = df_train.apply(lambda x: manual_haddamard(x,emb), axis= 1)
@@ -100,7 +96,7 @@ def get_node2vec(g, df_train, df_test, p=1, q=1):
     return df_node2vec_train, df_node2vec_test
 
 def get_deepwalk(g, df_train, df_test):
-    model = DeepWalk(g, walk_length=10, num_walks=80, workers=5)
+    model = DeepWalk(g, walk_length=80, num_walks=10, workers=5)
     model.train(window_size=4, iter=4, workers=5)
     emb = model.get_embeddings()
 

@@ -1,12 +1,14 @@
 import pandas as pd
 from dynamobi import sample_graph, negative_edge_sampling, create_train_graph, filter_test, test_multiple_features, create_file
-from utils import create_train_test_split
-
+from utils import create_train_test_split, test_model
+from features import apply_heuristic, train_node2vec, train_deepwalk
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.utils import shuffle
 
 def read_file():
     edges = pd.read_csv('data/HepPh/cit-HepPh.txt',comment='#',sep='\t', names=['Source','Target'])
     dates = pd.read_csv('data/HepPh/cit-HepPh-dates.txt',comment='#',sep='\t', names=['Source','Date'],dtype={'Source':str})
-    dates['Source'] = dates.Source.apply(lambda i: i[2:] if len(i) > 7 else i)
+    # dates['Source'] = dates.Source.apply(lambda i: i[2:] if len(i) > 7 else i)
     dates['Source'] = dates['Source'].astype(int)
     df = pd.merge(edges, dates, how='inner', on= 'Source')
     df['Date']= df['Date'].astype('datetime64[ns]')
@@ -23,11 +25,13 @@ def train_test(paths={}, resume=True, print_results=True, heuristic=True, node2v
         list(map(create_file,paths.values()))
 
     df_edges = read_file()
+    df_edges = shuffle(df_edges)
     splits = [0.1 * i for i in range(1,10)]
+    # print(df_edges)
     for split in splits:
-        df_train = df_edges[:int(len(df_edges)*split)]
-        df_test = df_edges[int(len(df_edges)*split):]
         print(split)
+        df_train = df_edges.iloc[:int(len(df_edges)*split)]
+        df_test = df_edges.iloc[int(len(df_edges)*split):]
         g, df_train, df_test = filter_test(df_train, df_test, wcc=False)
         df_train, df_test = negative_edge_sampling(g, df_train, df_test)
         test_multiple_features(
@@ -44,9 +48,9 @@ def train_test(paths={}, resume=True, print_results=True, heuristic=True, node2v
 if __name__ == "__main__":
     train_test(
             paths={
-            'heuristic': 'results/hepph/16_time_heuristic.csv',
-            'node2vec': 'results/hepph/16_time_node2vec.csv',
-            'deepwalk': 'results/hepph/16_time_deepwalk.csv'
+            'heuristic': 'results/hepph/20_time_heuristic.csv',
+            'node2vec': 'results/hepph/20_time_node2vec.csv',
+            'deepwalk': 'results/hepph/20_time_deepwalk.csv'
             },
             print_results=True,
             heuristic=True,

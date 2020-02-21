@@ -260,7 +260,7 @@ def train_test_sampling(train_path, test_path, method='combined',sampling='node'
             df_test = df_sample[df_sample.Date.dt.day == test_day]
             g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
         elif method == 'separated':
-            df_train = df_train_full # sample_graph(df_train_full,sample_size,sampling,g=G)
+            df_train = sample_graph(df_train_full,sample_size,sampling,g=G)
             df_test = df_test_full #sample_graph(df_test_full,sample_size*test_ratio,sampling,g=G)
             g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
         
@@ -335,7 +335,7 @@ if __name__ == "__main__":
     # logging.basicConfig(format="%(levelname)s - %(asctime)s: %(message)s", datefmt= '%H:%M:%S', level=logging.INFO)
     
     # sample_sizes = [1000000 + 1000000*i for i in range(10)] #1M
-    # sample_sizes = [50000 + 50000*i for i in range(30)] #random
+    sample_sizes = [500000*i for i in range(1,40)] #random
     
     # train_test_sampling(
     #     'data/dynamobi/2008-08-01.txt.gz',
@@ -344,14 +344,15 @@ if __name__ == "__main__":
     #     sampling='random',
     #     wcc=False,
     #     paths={
-    #         'heuristic': 'results/dynamobi/15_fullday_heuristic.csv',
-    #         'node2vec': 'results/dynamobi/15_fullday_node2vec.csv',
-    #         'deepwalk': 'results/dynamobi/15_fullday_deepwalk.csv'
+    #         'heuristic': 'results/dynamobi/17_500k_heuristic.csv',
+    #         'node2vec': 'results/dynamobi/17_500k_node2vec.csv',
+    #         'deepwalk': 'results/dynamobi/17_500k_deepwalk.csv'
     #     },
     #     print_results=True,
     #     resume=False,
     #     method='separated')
-    train_size_full_test(600000,'data/dynamobi/2008-07-28.txt.gz','results/dynamobi/17_train0728_600k.csv')
+
+    train_size_full_test(600000,'data/dynamobi/2008-07-28.txt.gz','results/dynamobi/20_train0728_600k.csv')
 
 
     print('DONE')

@@ -29,11 +29,8 @@ def sample_graph(df, size, sampling, g=None):
     if sampling == 'time':
         df = df.iloc[0:size]
     if sampling == 'rw':
-        print('creating graph')
         g = nx.from_pandas_edgelist(df, source='Source', target='Target', edge_attr='Date', create_using=nx.DiGraph())
-        print('sampling')
         sample = random_walk_sample(g,size)
-        print('creating df')
         df = nx.to_pandas_edgelist(sample, source='Source', target='Target')
     if sampling == 'node':
         df = node_sampling(g, size)
@@ -61,7 +58,7 @@ def read_file(path):
     df = df[['Date', 'Source', 'Target','Class']]
     return df
 
-def negative_edge_sampling_train(g, df_train):
+def negative_edge_sampling_train(g, pos_edges, df_train):
     # Sample negative edges
     nodes = list(g.nodes())
     # source = list(df_train.Source.values[:(len(df_train)//2)]) + random.choices(nodes, k=len(df_train)//2)
@@ -72,9 +69,9 @@ def negative_edge_sampling_train(g, df_train):
     for s,t in zip(source,target):
         if s == t:
             continue
-        if (s,t) in train_non_edges:
+        if (s,t) in train_non_edges: # Repeated random edge
             continue
-        if g.has_edge(s,t):
+        if (s,t) in pos_edges: # If random edge is positive
             continue
         train_non_edges.add((s,t))
     
@@ -84,7 +81,7 @@ def negative_edge_sampling_train(g, df_train):
     df_train= df_train[['Date','Source', 'Target','Class']]
     return df_train
 
-def negative_edge_sampling_test(g, df_train, df_test):
+def negative_edge_sampling_test(g, pos_edges, df_train, df_test):
     nodes = list(g.nodes())
     # source = list(df_test.Source.values[:(len(df_test)//2)]) + random.choices(nodes, k=len(df_test)//2)
     # target = random.choices(nodes, k=len(df_test)//2) + list(df_test.Target.values[:(len(df_test)//2)])
@@ -95,9 +92,9 @@ def negative_edge_sampling_test(g, df_train, df_test):
     for s,t in zip(source,target):
         if s == t:
             continue
-        if (s,t) in test_non_edges or (s,t) in train_non_edges:
+        if (s,t) in test_non_edges or (s,t) in train_non_edges: # If random edge already in train or test
             continue
-        if g.has_edge(s,t):
+        if (s,t) in pos_edges: # If random edge is positive
             continue
         test_non_edges.add((s,t))
     df_neg_test = pd.DataFrame(list(test_non_edges), columns=['Source', 'Target'])
@@ -107,8 +104,12 @@ def negative_edge_sampling_test(g, df_train, df_test):
     return df_test
 
 def negative_edge_sampling(g, df_train, df_test):
-    df_train = negative_edge_sampling_train(g, df_train)
-    df_test = negative_edge_sampling_test(g, df_train, df_test)
+    df_combined = pd.concat([df_train,df_test])
+    print('pos edges')
+    pos_edges = set(map(tuple,df_combined[['Source','Target']].values))
+    print('sample negative')
+    df_train = negative_edge_sampling_train(g, pos_edges, df_train)
+    df_test = negative_edge_sampling_test(g, pos_edges, df_train, df_test)
     print('size train:',len(df_train))
     print('size test:',len(df_test))
     return df_train, df_test
@@ -260,8 +261,8 @@ def train_test_sampling(train_path, test_path, method='combined',sampling='node'
             df_test = df_sample[df_sample.Date.dt.day == test_day]
             g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
         elif method == 'separated':
-            df_train = sample_graph(df_train_full,sample_size,sampling,g=G)
-            df_test = df_test_full #sample_graph(df_test_full,sample_size*test_ratio,sampling,g=G)
+            df_train = df_train_full.iloc[:sample_size]#sample_graph(df_train_full,sample_size,sampling,g=G)
+            df_test = df_train_full.iloc[sample_size:] #df_test_full #sample_graph(df_test_full,sample_size*test_ratio,sampling,g=G)
             g, df_train, df_test = filter_test(df_train, df_test, wcc=wcc)
         
 
@@ -329,30 +330,32 @@ def save_full_test_result(result, day, results_path):
             precision, recall, roc_auc, accuracy, f1 = map(lambda x: round(x,4),data)
             file.write(f'{day},rf,{method},{precision},{recall},{roc_auc},{accuracy},{f1}\n')
 
-        
+
+def prediction_stats(train_size, train_path, test_path):
+    pass
 
 if __name__ == "__main__":
     # logging.basicConfig(format="%(levelname)s - %(asctime)s: %(message)s", datefmt= '%H:%M:%S', level=logging.INFO)
     
     # sample_sizes = [1000000 + 1000000*i for i in range(10)] #1M
-    sample_sizes = [500000*i for i in range(1,40)] #random
+    sample_sizes = [500000*i for i in range(1,50)] #random
     
-    # train_test_sampling(
-    #     'data/dynamobi/2008-08-01.txt.gz',
-    #     'data/dynamobi/2008-08-02.txt.gz',
-    #     sample_sizes=sample_sizes,
-    #     sampling='random',
-    #     wcc=False,
-    #     paths={
-    #         'heuristic': 'results/dynamobi/17_500k_heuristic.csv',
-    #         'node2vec': 'results/dynamobi/17_500k_node2vec.csv',
-    #         'deepwalk': 'results/dynamobi/17_500k_deepwalk.csv'
-    #     },
-    #     print_results=True,
-    #     resume=False,
-    #     method='separated')
+    train_test_sampling(
+        'data/dynamobi/2008-08-01.txt.gz',
+        'data/dynamobi/2008-08-02.txt.gz',
+        sample_sizes=sample_sizes,
+        sampling='random',
+        wcc=False,
+        paths={
+            'heuristic': 'results/dynamobi/24_time_500k_heuristic.csv',
+            'node2vec': 'results/dynamobi/24_time_500k_node2vec.csv',
+            'deepwalk': 'results/dynamobi/24_time_500k_deepwalk.csv'
+        },
+        print_results=True,
+        resume=False,
+        method='separated')
 
-    train_size_full_test(600000,'data/dynamobi/2008-07-28.txt.gz','results/dynamobi/20_train0728_600k.csv')
+    # train_size_full_test(600000,'data/dynamobi/2008-07-28.txt.gz','results/dynamobi/20_train0728_600k.csv')
 
 
     print('DONE')

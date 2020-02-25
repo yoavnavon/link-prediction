@@ -26,7 +26,7 @@ def train_test(paths={}, resume=True, print_results=True, heuristic=True, node2v
     months = [i for i in range(5)]
     m = 3
     # sample_sizes = [1000000 + 1000000*i for i in range(5)] # 1M
-    sample_sizes = [500000*i for i in range(1,40)]
+    sample_sizes = [20000 * i for i in range(1,40)]
     df_train_full = df[(df.Date.dt.year == 2006) | (df.Date.dt.month <= m)]
     df_test_full = df[(df.Date.dt.year == 2007) & (df.Date.dt.month > m)]
     print(len(df_train_full),len(df_test_full))
@@ -50,9 +50,9 @@ def train_test(paths={}, resume=True, print_results=True, heuristic=True, node2v
 if __name__ == "__main__":
     train_test(
             paths={
-            'heuristic': 'results/youtube/17_500k_heuristic.csv',
-            'node2vec': 'results/youtube/17_500k_node2vec.csv',
-            'deepwalk': 'results/youtube/17_500k_deepwalk.csv'
+            # 'heuristic': 'results/youtube/17_500k_heuristic.csv',
+            # 'node2vec': 'results/youtube/17_500k_node2vec.csv',
+            # 'deepwalk': 'results/youtube/17_500k_deepwalk.csv'
             },
             print_results=True,
             heuristic=True,

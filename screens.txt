@@ -32,10 +32,16 @@
 
 ####
 
--  20326: dynamobi/20_train0728_100k
--  24801: dynamobi/20_train0728_250k
--  26667: dynamobi/20_train0728_400k
--  27825: dynamobi/20_train0728_600k
--  27725: dynamobi/20_metrics_walks
--  8077: youtube/20_metrics_walks
--  12707: hepph/20_metrics_walks
+- 20326: dynamobi/20_train0728_100k
+- 24801: dynamobi/20_train0728_250k
+- 26667: dynamobi/20_train0728_400k
+- 27825: dynamobi/20_train0728_600k
+- 27725: dynamobi/20_metrics_walks
+- 8077: youtube/20_metrics_walks
+- 12707: hepph/20_metrics_walks
+
+
+####
+
+- 25033: dynamobi/24_time
+- 7654: dynamobi/24_time_500k

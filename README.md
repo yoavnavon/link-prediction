@@ -23,4 +23,12 @@
 ## Code Organization
 
 - Every Dataset (Dynamobi, Youtube, HepPh, Twitter) has it's own code file with
-the same name. Most of the training methods are in `dynamobi.py`
+the same name. Most of the training methods are in `dynamobi.py`.
+
+## Results and Notebooks Organization
+
+- All the results are in the folder `results/`. The ones with a number (e.g. 25_xx_.csv)
+denotes the day in February it was writen. The ones without a number where made before
+keeping track of the dates.
+
+- Latest performance visualizations are in the `vis2.ipynb`notebook.

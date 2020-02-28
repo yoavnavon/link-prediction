@@ -26,6 +26,9 @@ from sampling import random_walk_sample, node_sampling, bfs_sampling, dfs_sampli
 
 
 def sample_graph(df, size, sampling, g=None):
+    """
+    Sample nodes form edge list dataframe.
+    """
     if sampling == 'time':
         df = df.iloc[0:size]
     if sampling == 'rw':
@@ -41,7 +44,6 @@ def sample_graph(df, size, sampling, g=None):
     if sampling == 'random':
         df = shuffle(df)
         df = df.iloc[0:size]
-
     df = df.sort_values('Date')
     return df
 
@@ -59,6 +61,9 @@ def read_file(path):
     return df
 
 def negative_edge_sampling_train(g, pos_edges, df_train):
+    """
+    Draw random edges from train dataset
+    """
     # Sample negative edges
     nodes = list(g.nodes())
     # source = list(df_train.Source.values[:(len(df_train)//2)]) + random.choices(nodes, k=len(df_train)//2)
@@ -82,6 +87,9 @@ def negative_edge_sampling_train(g, pos_edges, df_train):
     return df_train
 
 def negative_edge_sampling_test(g, pos_edges, df_train, df_test):
+    """
+    Draw random samples from test dataset
+    """
     nodes = list(g.nodes())
     # source = list(df_test.Source.values[:(len(df_test)//2)]) + random.choices(nodes, k=len(df_test)//2)
     # target = random.choices(nodes, k=len(df_test)//2) + list(df_test.Target.values[:(len(df_test)//2)])
@@ -114,15 +122,22 @@ def negative_edge_sampling(g, df_train, df_test):
     print('size test:',len(df_test))
     return df_train, df_test
 
+def extract_X_Y(df):
+    """
+    Extracts features columns from dataframe, assuming the columns are [Source,
+    Target, Date, feat1, feat2, ..., featn, Class]
+    """
+    return (df.iloc[:, 3:len(df.columns)-1], df.iloc[:,len(df.columns)-1])
+
 
 def test_features(train, test,max_depth=20, gamma=4, scale_pos_weight=1, min_child_weight=1, print_results=True):
-
+    """
+    Train and test RF models. XGBoost usually crashes with over 1M edges.
+    """
     seed = 2
     # Traditional data
-    X_train = train.iloc[:, 3:len(train.columns)-1]
-    Y_train = train.iloc[:,len(train.columns)-1]
-    X_test = test.iloc[:, 3:len(test.columns)-1]
-    Y_test = test.iloc[:,len(test.columns)-1]
+    X_train, Y_train = extract_X_Y(train)
+    X_test, Y_test = extract_X_Y(test)
 
     Y_train= Y_train.astype(int)
     X_train = X_train.astype('float32')
@@ -146,7 +161,17 @@ def test_features(train, test,max_depth=20, gamma=4, scale_pos_weight=1, min_chi
     rf_results = run_model_test(rf,X_train, Y_train, X_test, Y_test, print_results=print_results) 
     return len(X_train), rf_results, rf_results
 
+def create_file(filename):
+    """
+    Create results file with expected headers.
+    """
+    with open(filename, 'w') as file:
+        file.write('size,model,precision,recall,roc_auc,accuracy,f1_score\n')
+
 def save_results(filename,model, size, results):
+    """
+    Save performance results in csv file
+    """
     results = tuple(map(lambda x: round(x,4),results))
     precision, recall, roc_auc, accuracy, f1 = results
     with open(filename,'a') as file:
@@ -164,15 +189,12 @@ def print_results(model, size, results):
     print(f'F1 Score: {f1}')
     print(f'Accuracy: {accuracy}')
 
-def create_file(filename):
-    with open(filename, 'w') as file:
-        file.write('size,model,precision,recall,roc_auc,accuracy,f1_score\n')
 
 
 
 def test_multiple_features(g, df_train, df_test, print_results=False, paths={}, heuristic=True, node2vec=True, deepwalk=True):
     """
-    Extract features and run classifiers
+    Extract features and test their perfomance.
     """
     
     results = {}
@@ -218,7 +240,7 @@ def create_train_graph(df_train, wcc=False):
 
 def filter_test(df_train, df_test, wcc=False): 
     """
-    Given a train set, extracts test samples usefull for training.
+    Given a train set, filters test samples useful for training.
     """   
     g, df_train = create_train_graph(df_train, wcc=wcc)
 
@@ -228,9 +250,10 @@ def filter_test(df_train, df_test, wcc=False):
     return g, df_train, df_test
 
 
-def train_test_sampling(train_path, test_path, method='combined',sampling='node', paths={}, print_results=False, sample_sizes=[], resume=False, wcc=False):
+def train_test_sampling(train_path, test_path, method='separated', sampling='random', paths={}, print_results=False, sample_sizes=[], resume=False, wcc=False):
     """
-    Train and Test features on different data files.
+    Train and Test features on different data files (Dynamobi). If paths parameter
+    is not supplied, it won't write any files.
     """
     
     # Create Result Files
@@ -285,6 +308,11 @@ def train_model(X, y):
 
 
 def train_size_full_test(train_size, train_path, results_path):
+    """
+    Train model in 1 day of sampled dynamobi with given size, and test performance
+    on all the other days in the dataset.
+    """
+
     with open(results_path,'w') as file:
         file.write('day,model,method,precision,recall,roc_auc,accuracy,f1_score\n')
     df_full = read_file(train_path)
@@ -324,38 +352,144 @@ def train_size_full_test(train_size, train_path, results_path):
         save_full_test_result(results, day, results_path)
 
 def save_full_test_result(result, day, results_path):
-
+    """
+    Save results for train_size_full_test function.
+    """
     with open(results_path,'a') as file:
         for method, data in result.items():
             precision, recall, roc_auc, accuracy, f1 = map(lambda x: round(x,4),data)
             file.write(f'{day},rf,{method},{precision},{recall},{roc_auc},{accuracy},{f1}\n')
 
 
-def prediction_stats(train_size, train_path, test_path):
-    pass
+def train_models(heuristic_train, node2vec_train, deepwalk_train):
+    """
+    Train RF models with extracted features. 
+    """
+    heuristic_rf = train_model(*extract_X_Y(heuristic_train))
+    node2vec_rf = train_model(*extract_X_Y(node2vec_train))
+    deepwalk_rf = train_model(*extract_X_Y(deepwalk_train))
+    return heuristic_rf, node2vec_rf, deepwalk_rf
+
+
+
+
+def get_links_stats(g, heuristic_test, node2vec_test, deepwalk_test):
+    """
+    Compute some edge specific stats for edge prediction quality.
+    """
+
+    heuristic_test['Hub'] = heuristic_test.Target.apply(g.in_degree)
+    node2vec_test['Hub'] = node2vec_test.Target.apply(g.in_degree)
+    deepwalk_test['Hub'] = deepwalk_test.Target.apply(g.in_degree)
+    common = lambda x: len(set(g.neighbors(x['Source'])).intersection(set(g.neighbors(x['Target']))))
+    heuristic_test['Common'] = heuristic_test.apply(common, axis=1) 
+    node2vec_test['Common'] = node2vec_test.apply(common, axis=1) 
+    deepwalk_test['Common'] = deepwalk_test.apply(common, axis=1) 
+
+    return heuristic_test, node2vec_test, deepwalk_test
+
+def get_avg_link_stats(*dfs):
+    """
+    Agregate link stats, returns:
+    - Mean number of common neighbors between nodes in edge.
+    - Mean in-degree of the target node to detect Hubs.
+    - Percentage of edges sharing 0 common neighbors.
+    - Number of different target nodes in the prediction.
+    """
+
+    for df in dfs:
+        yield (
+            df['Common'].mean(),
+            df['Hub'].mean(),
+            100*len(df[df['Common'] == 0])/len(df),
+            df['Target'].nunique()
+            )
+
+def split_predictions(df):
+    """
+    Split True Positive, True Negative, False Positive, False Negative, Predicted
+    Positives and Predicted Negatives.
+    """
+
+    tp = df[(df['Predicted'] == df['Class'])&(df['Predicted']== 1)]
+    tn = df[(df['Predicted'] == df['Class'])&(df['Predicted']== 0)]
+    fp = df[(df['Predicted'] != df['Class'])&(df['Predicted']== 1)]
+    fn = df[(df['Predicted'] != df['Class'])&(df['Predicted']== 0)]
+    pos_pred = df[df['Predicted']== 1]
+    neg_pred = df[df['Predicted']== 0]
+    return tp, tn, fp, fn, pos_pred, neg_pred
+
+def prediction_stats_size(sizes,df_train_full, df_test_full, results_path):
+    """
+    Compute edge prediction stats for an arange of sample sizes.
+    """
+    
+    with open(results_path,'w') as file:
+        file.write('Size,Method,Split,Common,Hub,%Common,NUnique\n')
+
+    for size in sizes:
+        prediction_stats(size, df_train_full, df_test_full, results_path)
+
+
+def prediction_stats(train_size, df_train_full, df_test_full, results_path):
+    """
+    Compute edge prediction stats for a certain size.
+    """
+
+    df_train = sample_graph(df_train_full,train_size,'random')
+    df_test = df_test_full #sample_graph(df_test_full,sample_size*test_ratio,sampling,g=G)
+    g, df_train, df_test = filter_test(df_train, df_test, wcc=False)
+    df_train, df_test = negative_edge_sampling(g, df_train, df_test)
+
+    heuristic_train, heuristic_test = get_heuristics(g, df_train, df_test)
+    node2vec_train, node2vec_test = get_node2vec(g, df_train, df_test, p=1, q=1)
+    deepwalk_train, deepwalk_test = get_deepwalk(g, df_train, df_test)
+    
+    heuristic_rf, node2vec_rf, deepwalk_rf = train_models(heuristic_train, node2vec_train, deepwalk_train)
+    heuristic_test['Predicted'] = heuristic_rf.predict(extract_X_Y(heuristic_test)[0])
+    node2vec_test['Predicted'] = node2vec_rf.predict(extract_X_Y(node2vec_test)[0])
+    deepwalk_test['Predicted'] = deepwalk_rf.predict(extract_X_Y(deepwalk_test)[0])
+    heuristic_test, node2vec_test, deepwalk_test = get_links_stats(g, heuristic_test, node2vec_test, deepwalk_test)
+    
+    order = ['TP', 'TN', 'FP', 'FN', 'POS', 'NEG']
+    with open(results_path,'a') as file:
+        for o,stat in zip(order,get_avg_link_stats(*split_predictions(heuristic_test))):
+            common, hub, per_common, nunique =  map(lambda x: round(x,4),stat)
+            file.write(f'{train_size},heuristic,{o},{common},{hub},{per_common},{nunique}\n')
+        for o,stat in zip(order,get_avg_link_stats(*split_predictions(node2vec_test))):
+            common, hub, per_common, nunique  =  map(lambda x: round(x,4),stat)
+            file.write(f'{train_size},node2vec,{o},{common},{hub},{per_common},{nunique}\n')
+        for o,stat in zip(order,get_avg_link_stats(*split_predictions(deepwalk_test))):
+            common, hub, per_common, nunique  =  map(lambda x: round(x,4),stat)
+            file.write(f'{train_size},deepwalk,{o},{common},{hub},{per_common},{nunique}\n')
+
+    
 
 if __name__ == "__main__":
     # logging.basicConfig(format="%(levelname)s - %(asctime)s: %(message)s", datefmt= '%H:%M:%S', level=logging.INFO)
     
     # sample_sizes = [1000000 + 1000000*i for i in range(10)] #1M
-    sample_sizes = [500000*i for i in range(1,50)] #random
+    sample_sizes = [100000*i for i in range(1,50)] #random
     
-    train_test_sampling(
-        'data/dynamobi/2008-08-01.txt.gz',
-        'data/dynamobi/2008-08-02.txt.gz',
-        sample_sizes=sample_sizes,
-        sampling='random',
-        wcc=False,
-        paths={
-            'heuristic': 'results/dynamobi/24_time_500k_heuristic.csv',
-            'node2vec': 'results/dynamobi/24_time_500k_node2vec.csv',
-            'deepwalk': 'results/dynamobi/24_time_500k_deepwalk.csv'
-        },
-        print_results=True,
-        resume=False,
-        method='separated')
+    # train_test_sampling(
+    #     'data/dynamobi/2008-08-01.txt.gz',
+    #     'data/dynamobi/2008-08-02.txt.gz',
+    #     sample_sizes=sample_sizes,
+    #     sampling='random',
+    #     wcc=False,
+    #     paths={
+    #         'heuristic': 'results/dynamobi/24_time_500k_heuristic.csv',
+    #         'node2vec': 'results/dynamobi/24_time_500k_node2vec.csv',
+    #         'deepwalk': 'results/dynamobi/24_time_500k_deepwalk.csv'
+    #     },
+    #     print_results=True,
+    #     resume=False,
+    #     method='separated')
 
     # train_size_full_test(600000,'data/dynamobi/2008-07-28.txt.gz','results/dynamobi/20_train0728_600k.csv')
 
+    df_train_full = read_file('data/dynamobi/2008-08-01.txt.gz')
+    df_test_full = read_file('data/dynamobi/2008-08-02.txt.gz')
+    prediction_stats_size(sample_sizes, df_train_full, df_test_full,'results/dynamobi/28_prediction-stats.csv')
 
     print('DONE')

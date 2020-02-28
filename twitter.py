@@ -1,5 +1,5 @@
 import pandas as pd
-from dynamobi import sample_graph, negative_edge_sampling, create_train_graph, filter_test, test_multiple_features, create_file
+from dynamobi import *
 from utils import create_train_test_split, test_model
 from features import apply_heuristic, train_node2vec, train_deepwalk
 from sklearn.ensemble import RandomForestClassifier
@@ -12,6 +12,7 @@ def read_file():
     df['Target'] = df['Target'].astype(str)
     df['Date'] = 1
     df = df.drop_duplicates(subset=['Source','Target'])
+    df = shuffle(df)
     return df
 
 def train_test(paths={}, resume=True, print_results=True, heuristic=True, node2vec=True, deepwalk=True):
@@ -42,14 +43,24 @@ def train_test(paths={}, resume=True, print_results=True, heuristic=True, node2v
 
 
 if __name__ == "__main__":
-    train_test(
-            paths={
-            'heuristic': 'results/twitter/21_random_heuristic.csv',
-            'node2vec': 'results/twitter/21_random_node2vec.csv',
-            'deepwalk': 'results/twitter/21_random_deepwalk.csv'
-            },
-            print_results=True,
-            heuristic=True,
-            node2vec=True,
-            deepwalk=True,
-            resume=False)
+    # train_test(
+    #         paths={
+    #         'heuristic': 'results/twitter/21_random_heuristic.csv',
+    #         'node2vec': 'results/twitter/21_random_node2vec.csv',
+    #         'deepwalk': 'results/twitter/21_random_deepwalk.csv'
+    #         },
+    #         print_results=True,
+    #         heuristic=True,
+    #         node2vec=True,
+    #         deepwalk=True,
+    #         resume=False)
+
+    df = read_file()
+    df = shuffle(df)
+    results_path = 'results/twitter/26_prediction-stats.csv'
+    with open(results_path,'w') as file:
+        file.write('Size,Method,Split,Common,Hub,%Common\n')
+    for size in [100000 * i for i in range(1,50)]:
+        df_train_full = df.iloc[:size]
+        df_test_full = df.iloc[size:size+500000]
+        prediction_stats(size, df_train_full, df_test_full,results_path)

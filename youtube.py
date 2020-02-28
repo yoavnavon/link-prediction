@@ -1,5 +1,5 @@
 import pandas as pd
-from dynamobi import sample_graph, negative_edge_sampling, create_train_graph, filter_test, test_multiple_features, create_file
+from dynamobi import *
 from utils import create_train_test_split
 
 
@@ -48,15 +48,21 @@ def train_test(paths={}, resume=True, print_results=True, heuristic=True, node2v
 
 
 if __name__ == "__main__":
-    train_test(
-            paths={
-            # 'heuristic': 'results/youtube/17_500k_heuristic.csv',
-            # 'node2vec': 'results/youtube/17_500k_node2vec.csv',
-            # 'deepwalk': 'results/youtube/17_500k_deepwalk.csv'
-            },
-            print_results=True,
-            heuristic=True,
-            node2vec=True,
-            deepwalk=True,
-            resume=False)
+    # train_test(
+    #         paths={
+    #         # 'heuristic': 'results/youtube/17_500k_heuristic.csv',
+    #         # 'node2vec': 'results/youtube/17_500k_node2vec.csv',
+    #         # 'deepwalk': 'results/youtube/17_500k_deepwalk.csv'
+    #         },
+    #         print_results=True,
+    #         heuristic=True,
+    #         node2vec=True,
+    #         deepwalk=True,
+    #         resume=False)
     
+    df = read_file()
+    m = 3
+    df_train_full = df[(df.Date.dt.year == 2006) | (df.Date.dt.month <= m)]
+    df_test_full = df[(df.Date.dt.year == 2007) & (df.Date.dt.month > m)]
+    sample_sizes = [100000*i for i in range(1,50)]
+    prediction_stats_size(sample_sizes, df_train_full, df_test_full,'results/youtube/26_prediction-stats.csv')

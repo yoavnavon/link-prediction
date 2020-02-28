@@ -3,8 +3,9 @@ import pandas as pd
 import networkx as nx
 from collections import defaultdict
 from dynamobi import sample_graph#, read_file
-from youtube import read_file
+# from youtube import read_file
 # from HepPh import read_file
+from twitter import read_file
 import json
 import sys
 sys.path.append('./GraphEmbedding')
@@ -85,15 +86,15 @@ def get_walks_avg_len(walks):
 if __name__ == "__main__":
     # df_full = read_file('data/dynamobi/2008-08-01.txt.gz')
     df_full = read_file()
-    m = 3
-    df_full = df_full[(df_full.Date.dt.year == 2006) | (df_full.Date.dt.month <= m)]
+    # m = 3
+    # df_full = df_full[(df_full.Date.dt.year == 2006) | (df_full.Date.dt.month <= m)]
 
     sample_sizes = [i*100000 for i in range(1,10)]
     metrics_results = {}
     for size in sample_sizes:
         print(size)
         df_sample = sample_graph(df_full,size,'random')
-        g = nx.from_pandas_edgelist(df_sample, source='Source', target='Target', create_using=nx.Graph()) 
+        g = nx.from_pandas_edgelist(df_sample, source='Source', target='Target', create_using=nx.DiGraph()) 
         node2vec = Node2Vec(g, walk_length=80, num_walks=10, p=1, q=1, workers=5)
         deepwalk = DeepWalk(g, walk_length=80, num_walks=10, workers=5)
         node2vec_avg = get_walks_avg_len(node2vec.sentences)
@@ -102,7 +103,7 @@ if __name__ == "__main__":
         metrics_results[size] = (node2vec_avg, deepwalk_avg)
         # metrics = get_metrics(g)
         # metrics_results[size] = metrics
-    # with open('results/hepph/20_metrics_walks.json','w') as file:
-    #     json.dump(metrics_results, file)
+    with open('results/twitter/25_metrics_walks.json','w') as file:
+        json.dump(metrics_results, file)
 
 

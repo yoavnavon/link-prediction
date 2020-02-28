@@ -187,3 +187,4 @@ def manual_haddamard(x,emb):
     Computed haddamard between two embeddings.
     """
     return pd.Series(emb[x['Source']]*emb[x['Target']])
+
